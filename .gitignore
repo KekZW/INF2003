@@ -483,8 +483,11 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
+# bin and obj folders
 obj/
 bin/
+RentingSystemMVC/bin/
+RentingSystemMVC/obj/
 
 # JetBrains Rider
 .idea/
