@@ -1,15 +1,21 @@
-﻿namespace RentingSystemMVC.Models
+namespace RentingSystemMVC.Models
 {
-    public class Vehicles
+    public class Vehicle
     {
         public int VehicleID { get; set; }
-        public string VehicleName { get; set; }
-        public string Description { get; set; }
         public string LicensePlate { get; set; }
-        public string FuelType { get; set; }
-        public float FuelTankCapacity { get; set; }
-        public float FuelLevel { get; set; }
         public string LicenseToOperate { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public string Type { get; set; }
+        public int Seats { get; set; }
+        public decimal FuelCapacity { get; set; }
+        public string FuelType { get; set; }
+        public string TruckSpace { get; set; }
+        public decimal RentalCostPerDay { get; set; }
     }
 }
+
+
+
 
