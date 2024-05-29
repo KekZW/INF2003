@@ -1,18 +1,41 @@
-﻿@model List<RentingSystem.Controllers.Vehicle>
+@model List<RentingSystemMVC.Models.Vehicle>
 
 <h1>Available Vehicles</h1>
+
+<form method="get" asp-action="Index">
+    <label for="filterColumn">Filter By:</label>
+    <select id="filterColumn" name="filterColumn">
+        <option value="Brand">Brand</option>
+        <option value="Model">Model</option>
+        <option value="Type">Type</option>
+        <option value="FuelType">Fuel Type</option>
+        <option value="FuelCapacity">Fuel Capacity</option>
+        <option value="Seats">Seats</option>
+        <option value="TrunkSpace">Trunk Space</option>
+        <option value="RentalCostPerDay">Rental Cost Per Day</option>
+        
+    </select>
+
+    <label for="filterValue">Value:</label>
+    <input type="text" id="filterValue" name="filterValue" />
+
+    <button type="submit">Filter</button>
+</form>
 
 <table>
     <thead>
         <tr>
             <th>Vehicle ID</th>
-            <th>Vehicle Name</th>
-            <th>Description</th>
             <th>License Plate</th>
-            <th>Fuel Type</th>
-            <th>Fuel Tank Capacity</th>
-            <th>Fuel Level</th>
             <th>License To Operate</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Type</th>
+            <th>Seats</th>
+            <th>Fuel Capacity</th>
+            <th>Fuel Type</th>
+            <th>Truck Space</th>
+            <th>Rental Cost Per Day</th>
         </tr>
     </thead>
     <tbody>
@@ -20,14 +43,18 @@
         {
             <tr>
                 <td>@vehicle.VehicleID</td>
-                <td>@vehicle.VehicleName</td>
-                <td>@vehicle.Description</td>
                 <td>@vehicle.LicensePlate</td>
-                <td>@vehicle.FuelType</td>
-                <td>@vehicle.FuelTankCapacity</td>
-                <td>@vehicle.FuelLevel</td>
                 <td>@vehicle.LicenseToOperate</td>
+                <td>@vehicle.Brand</td>
+                <td>@vehicle.Model</td>
+                <td>@vehicle.Type</td>
+                <td>@vehicle.Seats</td>
+                <td>@vehicle.FuelCapacity</td>
+                <td>@vehicle.FuelType</td>
+                <td>@vehicle.TruckSpace</td>
+                <td>@vehicle.RentalCostPerDay</td>
             </tr>
         }
     </tbody>
 </table>
+
