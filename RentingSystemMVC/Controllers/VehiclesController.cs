@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Windows.Input;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using RentingSystemMVC.Models;
@@ -10,7 +11,7 @@ namespace RentingSystem.Controllers
         private readonly string _connectionString = "Server=localhost;Database=vehicleDB;Uid=root;Pwd=;";
 
         // GET: Vehicles/Index
-        public IActionResult Index(string filterColumn, string filterValue)
+        public IActionResult Index(DateTime? selectedDate, string filterColumn, string filterValue)
         {
             List<Vehicle> vehicles = new List<Vehicle>();
 
@@ -34,8 +35,15 @@ namespace RentingSystem.Controllers
 
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@todayDate", DateTime.Today);
-                    
+                   
+                    if (selectedDate.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@todayDate", selectedDate);
+                    }
+                    else {
+                        command.Parameters.AddWithValue("@todayDate", DateTime.Today);
+                    }
+
                     if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
                     {
                         command.Parameters.AddWithValue("@filterValue", "%" + filterValue + "%");
