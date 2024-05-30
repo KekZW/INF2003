@@ -50,7 +50,7 @@ namespace RentingSystem.Controllers
                                 Seats = reader.GetInt32("seats"),
                                 FuelCapacity = reader.GetDecimal("fuelCapacity"),
                                 FuelType = reader.GetString("fuelType"),
-                                TruckSpace = reader.GetString("truckSpace"),
+                                TruckSpace = reader.GetDecimal("truckSpace"),
                                 RentalCostPerDay = reader.GetDecimal("rentalCostPerDay")
                             };
 
