@@ -29,7 +29,7 @@ namespace RentingSystem.Controllers
 
                 if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
                 {
-                    query += " WHERE " + filterColumn + " LIKE @filterValue";
+                    query += " AND " + filterColumn + " LIKE @filterValue";
                 }
 
                 using (var command = new MySqlCommand(query, connection))
