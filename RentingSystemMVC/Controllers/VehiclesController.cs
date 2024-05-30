@@ -18,9 +18,14 @@ namespace RentingSystem.Controllers
             {
                 connection.Open();
 
-                string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type," +
-                               " vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay FROM vehicle v " +
-                               "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID";
+                string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
+                       "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                       "FROM vehicle v " +
+                       "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
+                       "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
+                       "AND r.startRentalDate <= @todayDate " +
+                       "AND r.endRentalDate >= @todayDate " +
+                       "WHERE r.vehicleID IS NULL";
 
                 if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
                 {
@@ -29,6 +34,8 @@ namespace RentingSystem.Controllers
 
                 using (var command = new MySqlCommand(query, connection))
                 {
+                    cmd.Parameters.AddWithValue("@todayDate", DateTime.Today);
+                    
                     if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
                     {
                         command.Parameters.AddWithValue("@filterValue", "%" + filterValue + "%");
