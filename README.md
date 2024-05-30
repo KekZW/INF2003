@@ -3,7 +3,7 @@ download:
 pip install mysql-connector-python
 pip install pandas 
 
-run insert_into_database.py first
+run insert_into_database.py first,
 then run generate_vehicles.py
 
 Use mySQL workbench
