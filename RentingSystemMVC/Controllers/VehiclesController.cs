@@ -34,7 +34,7 @@ namespace RentingSystem.Controllers
 
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@todayDate", DateTime.Today);
+                    command.Parameters.AddWithValue("@todayDate", DateTime.Today);
                     
                     if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
                     {
