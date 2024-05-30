@@ -1,3 +1,8 @@
+To use the python scripts, to insert data
+download:
+pip install mysql-connector-python
+pip install pandas 
+
 Use mySQL workbench
 Download: https://dev.mysql.com/downloads/connector/net/
 Under "Manage NuGet Package" Download "MySql.Data"
