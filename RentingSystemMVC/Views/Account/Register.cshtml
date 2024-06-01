@@ -1,0 +1,67 @@
+<div class="container login row">
+    @if (!ViewData.ModelState.IsValid)
+    {
+    <div class="alert alert-danger">
+        @ViewData.ModelState[string.Empty].Errors[0].ErrorMessage
+    </div>
+    }
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-8 text-center">
+        <h1> Register </h1>
+        <p> Alerady have an account? <a href="Login">Click here</a> to login </p>
+        <form method="post">
+            <div class="form-group text-start row" style="padding: 10px 0;">
+                <div class="col-sm-6">
+                    <label for="firstName"> First Name </label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="lastName"> Last Name </label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" required>
+                </div>
+            </div>
+            <div class="form-group text-start" style="padding: 10px 0;">
+                <label for="username"> Username </label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+            </div>
+            <div class="form-group text-start row" style="padding: 10px 0;">
+                <div class="col-sm-6">
+                    <label for="email"> Email </label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="phoneNumber"> Phone Number </label>
+                    <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number" required>
+                </div>
+            </div>
+            <div class="form-group text-start" style="padding: 10px 0;">
+                <label for="address"> Address </label>
+                <textarea rows="3" class="form-control" id="address" name="address" placeholder="Enter address" required></textarea>
+            </div>
+            <div class="form-group text-start row" style="padding: 10px 0;">
+                <div class="col-sm-6">
+                    <label for="licenseClass">License Class</label>
+                    <input type="text" class="form-control" id="licenseClass" name="licenseClass" placeholder="Enter License Class" required/>
+                </div>
+                <div class="col-sm-6">
+                    <label for="licenseDate">License Acquire Date</label>
+                    <input type="date" class="form-control" id="licenseDate" name="licenseDate" placeholder="Enter License Acquire Date" required/>
+                </div>
+            </div>
+            <div class="form-group text-start" style="padding: 10px 0;">
+                <label for="password"> Password </label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-group text-start" style="padding: 10px 0;">
+                <label for="confirmPassword"> Confirm Password </label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <div style="padding: 10px 0;">
+                <button type="submit" class="btn btn-primary"> Login </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-2"></div>
+</div>

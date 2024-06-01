@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS license (
-licenseID INT PRIMARY KEY,
+licenseID INT PRIMARY KEY AUTO_INCREMENT,
 acquireDate date,
-liceseClass VARCHAR(20));
+licenseClass VARCHAR(20),
+userID INT,
+FOREIGN KEY (userID) REFERENCES user(userID);
 
 CREATE TABLE IF NOT EXISTS vehicleType(
 vehicleTypeID INT PRIMARY KEY,
@@ -32,7 +34,7 @@ LastMaintDate DATE);
 CREATE TABLE IF NOT EXISTS user (
 userID INT PRIMARY KEY AUTO_INCREMENT, 
 username VARCHAR(30),
-userPassword VARCHAR(100),
+userPassword NVARCHAR(200),
 name VARCHAR(50),
 address VARCHAR(256),
 licenseID INT,
