@@ -35,6 +35,7 @@ namespace RentingSystemMVC.Controllers
             // 2. If user exists, retrieve respective password (done)
             // 3. Compare hash inputted password with retrieved hashed password from database (done)
             // 4. If correct, redirect to Home/Index, create authentication cookie
+
             string query = "SELECT * FROM user WHERE emailAddress = {0}";
 
             var user = _context.User.FromSqlRaw(query, email).FirstOrDefault();

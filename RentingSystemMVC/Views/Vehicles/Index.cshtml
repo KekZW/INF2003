@@ -62,9 +62,113 @@
                 <td>@vehicle.FuelType</td>
                 <td>@vehicle.TruckSpace</td>
                 <td>@vehicle.RentalCostPerDay</td>
-                <td><button type="button" class="btn btn-primary">Rent</button></td>
+                <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button type="button" class="btn btn-primary" onclick="openRentModal(@vehicle.VehicleID, @vehicle.RentalCostPerDay)">Rent</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-primary" disabled>Rent</button>
+                    }
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
+<!-- Rent Modal -->
+<div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rentModalLabel">Rent Vehicle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="rentForm">
+                    <input type="hidden" id="vehicleID" name="vehicleID" />
+                    <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay" />
+                    <div class="form-group">
+                        <label for="startRentalDate">Start Date</label>
+                        <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="endRentalDate">End Date</label>
+                        <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="rentalAddress">Rental Address</label>
+                        <input type="text" class="form-control" id="rentalAddress" name="rentalAddress" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="rentalLot">Rental Lot</label>
+                        <input type="number" class="form-control" id="rentalLot" name="rentalLot" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="rentalAmount">Rental Amount</label>
+                        <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Rent</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function openRentModal(vehicleID, rentalCostPerDay) {
+            $('#vehicleID').val(vehicleID);
+            $('#rentalCostPerDay').val(rentalCostPerDay);
+            $('#rentModal').modal('show');
+        }
+
+        $(document).ready(function () {
+            $('#rentForm').on('submit', function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '@Url.Action("CheckAvailability", "Vehicles")',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.available) {
+                            $.ajax({
+                                url: '@Url.Action("RentVehicle", "Vehicles")',
+                                type: 'POST',
+                                data: formData,
+                                success: function () {
+                                    alert('Vehicle rented successfully!');
+                                    $('#rentModal').modal('hide');
+                                    location.reload(); 
+                                }
+                            });
+                        } else {
+                            alert('The vehicle is not available for the selected dates.');
+                        }
+                    }
+                });
+            });
+
+            $('#startRentalDate, #endRentalDate').on('change', function () {
+                var startDate = new Date($('#startRentalDate').val());
+                var endDate = new Date($('#endRentalDate').val());
+                var rentalCostPerDay = parseFloat($('#rentalCostPerDay').val());
+
+                if (startDate && endDate && startDate <= endDate && !isNaN(rentalCostPerDay)) {
+                    var timeDiff = endDate.getTime() - startDate.getTime();
+                    var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    var rentalAmount = daysDiff * rentalCostPerDay;
+                    $('#rentalAmount').val(rentalAmount.toFixed(2));
+                } else {
+                    $('#rentalAmount').val('');
+                }
+            });
+        });
+    </script>
+}
