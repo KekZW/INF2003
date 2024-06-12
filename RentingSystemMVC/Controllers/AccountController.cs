@@ -111,10 +111,17 @@ namespace RentingSystemMVC.Controllers
                 ModelState.AddModelError(string.Empty, "Passwords do not match.");
                 return View();
             }
+          
+            var License =  new License { 
+                AcquireDate = licenseDate,
+                LicenseClass = licenseClass
+                
+            };
 
-            string licenseQuery =
-                "INSERT INTO license (acquireDate, licenseClass) VALUES({0}, {1});";
-            var licenseId = _context.Database.ExecuteSqlRaw(licenseQuery, licenseDate, licenseClass);
+            _context.License.Add(License);
+            _context.SaveChanges();
+            
+            int licenseId = License.LicenseID;
 
 
             byte[] salt = new byte[0];
@@ -127,9 +134,21 @@ namespace RentingSystemMVC.Controllers
                 numBytesRequested: 256 / 8
             ));
 
-            string userQuery =
-                "INSERT INTO user(username, userPassword, name, address, licenseID, emailAddress, phoneNo) VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6});";
-            decimal userId = _context.Database.ExecuteSqlRaw(userQuery, username, hashed_pass, firstName + " " + lastName, address, licenseId, email, phoneNumber);
+
+            var User = new User {
+                Username = username,
+                UserPassword = hashed_pass,
+                Name = firstName + " " + lastName,
+                Address = address,
+                LicenseID  = licenseId,
+                EmailAddress = email,
+                PhoneNo = phoneNumber 
+            };
+
+            _context.User.Add(User);
+            _context.SaveChanges();
+
+            int userId = User.UserID;
             
             string updateLicenseQuery = "UPDATE license SET userID = @p0 WHERE licenseID = @p1";
             int rowsAffected = _context.Database.ExecuteSqlRaw(updateLicenseQuery, userId, licenseId);
