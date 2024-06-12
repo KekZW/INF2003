@@ -28,9 +28,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index">View Vehicles</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Rental" asp-action="Index">View Rental History</a>
-                        </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item position-relative">
@@ -40,6 +37,12 @@
                                     Welcome, @Context.User.Identity.Name!
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-light">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="" asp-controller="UserProfile" asp-action="Index">User Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="" asp-controller="Rental" asp-action="Index">View Rental</a>
+                                    </li>
                                     <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a></li>
                                 </ul>
                             }

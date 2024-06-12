@@ -4,7 +4,7 @@ namespace RentingSystemMVC.Models
     {
         public int VehicleID { get; set; }
         public string WorkshopStatus { get; set; }
-	      public date FinishMaintDate { get; set; }
-	      public date LastMaintDate { get; set; }
+        public DateOnly FinishMaintDate { get; set; }
+        public DateOnly LastMaintDate { get; set; }
     }
 }
