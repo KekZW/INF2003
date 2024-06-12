@@ -145,7 +145,7 @@
                                 success: function () {
                                     alert('Vehicle rented successfully!');
                                     $('#rentModal').modal('hide');
-                                    location.reload(); 
+                                    window.location.href = '@Url.Action("Index", "Rental")';
                                 },
                                 error: function () {
                                     alert('Error occurred while renting the vehicle.');
