@@ -63,7 +63,7 @@
                 <td>@vehicle.TruckSpace</td>
                 <td>@vehicle.RentalCostPerDay</td>
                 <td>
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated && vehicle.IsUserAuthorized == true)
                     {
                         <button type="button" class="btn btn-primary" onclick="openRentModal(@vehicle.VehicleID, @vehicle.RentalCostPerDay)">Rent</button>
                     }
@@ -111,6 +111,7 @@
                         <label for="rentalAmount">Rental Amount</label>
                         <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly />
                     </div>
+                    
                     <button type="submit" class="btn btn-primary">Rent</button>
                 </form>
             </div>
@@ -131,12 +132,14 @@
                 event.preventDefault();
                 var formData = $(this).serialize();
 
+                // Check availability first
                 $.ajax({
                     url: '@Url.Action("CheckAvailability", "Vehicles")',
                     type: 'POST',
                     data: formData,
                     success: function (response) {
                         if (response.available) {
+                            // Proceed with rental if available
                             $.ajax({
                                 url: '@Url.Action("RentVehicle", "Vehicles")',
                                 type: 'POST',
@@ -145,11 +148,17 @@
                                     alert('Vehicle rented successfully!');
                                     $('#rentModal').modal('hide');
                                     location.reload(); 
+                                },
+                                error: function () {
+                                    alert('Error occurred while renting the vehicle.');
                                 }
                             });
                         } else {
                             alert('The vehicle is not available for the selected dates.');
                         }
+                    },
+                    error: function () {
+                        alert('Error occurred while checking availability.');
                     }
                 });
             });
@@ -172,3 +181,4 @@
         });
     </script>
 }
+
