@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace RentingSystemMVC.Controllers
 {
     public class AccountController : Controller
@@ -113,8 +114,9 @@ namespace RentingSystemMVC.Controllers
 
             string licenseQuery =
                 "INSERT INTO license (acquireDate, licenseClass) VALUES({0}, {1});";
-            int licenseId = _context.Database.ExecuteSqlRaw(licenseQuery, licenseDate, licenseClass);
-            
+            var licenseId = _context.Database.ExecuteSqlRaw(licenseQuery, licenseDate, licenseClass);
+
+
             byte[] salt = new byte[0];
             
             string hashed_pass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -129,7 +131,7 @@ namespace RentingSystemMVC.Controllers
                 "INSERT INTO user(username, userPassword, name, address, licenseID, emailAddress, phoneNo) VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6});";
             decimal userId = _context.Database.ExecuteSqlRaw(userQuery, username, hashed_pass, firstName + " " + lastName, address, licenseId, email, phoneNumber);
             
-            string updateLicenseQuery = "UPDATE license SET userID = {0} WHERE licenseID = {1}";
+            string updateLicenseQuery = "UPDATE license SET userID = @p0 WHERE licenseID = @p1";
             int rowsAffected = _context.Database.ExecuteSqlRaw(updateLicenseQuery, userId, licenseId);
             
             if (rowsAffected <= 0)
@@ -137,8 +139,9 @@ namespace RentingSystemMVC.Controllers
                 ModelState.AddModelError(string.Empty, "Failed to register user. Please try again.");
                 return View();
             }
-            
-            return RedirectToAction("Login");
+           
+
+           return RedirectToAction("Login");
         }
 
         public async Task<IActionResult> Logout()
