@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Claims;
 using System.Windows.Input;
 using Microsoft.AspNetCore.Mvc;
@@ -73,8 +74,11 @@ namespace RentingSystem.Controllers
                                 FuelCapacity = reader.GetDecimal("fuelCapacity"),
                                 FuelType = reader.GetString("fuelType"),
                                 TruckSpace = reader.GetDecimal("truckSpace"),
-                                RentalCostPerDay = reader.GetDecimal("rentalCostPerDay")
+                                RentalCostPerDay = reader.GetDecimal("rentalCostPerDay"),
+
                             };
+
+                            vehicle.IsUserAuthorized = ableToOperate(vehicle.LicenseToOperate);
 
                             vehicles.Add(vehicle);
                         }
@@ -82,8 +86,11 @@ namespace RentingSystem.Controllers
                 }
             }
 
+
+
             return View(vehicles);
         }
+
         [HttpPost]
         public JsonResult CheckAvailability(int vehicleID, DateTime startRentalDate, DateTime endRentalDate)
         {
@@ -138,14 +145,17 @@ namespace RentingSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult RentVehicle(int vehicleID, DateTime startRentalDate, DateTime endRentalDate, string rentalAddress, int rentalLot, decimal rentalAmount)
+        public IActionResult RentVehicle(int vehicleID, string licenseToOperate, DateTime startRentalDate, DateTime endRentalDate, string rentalAddress,
+            int rentalLot, decimal rentalAmount)
         {
+
+
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
 
                 string query = "INSERT INTO rental (userID, vehicleID, startRentalDate, endRentalDate, rentalAmount, rentalAddress, rentalLot) " +
-                               "VALUES (@userID, @vehicleID, @startRentalDate, @endRentalDate, @rentalAmount, @rentalAddress, @rentalLot)";
+                                "VALUES (@userID, @vehicleID, @startRentalDate, @endRentalDate, @rentalAmount, @rentalAddress, @rentalLot)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -169,43 +179,78 @@ namespace RentingSystem.Controllers
         private int GetCurrentUserID()
         {
             var emailClaim = User.FindFirst(ClaimTypes.Email);
+            string email = null;
+
             if (emailClaim == null)
-            {
-                throw new Exception("User email claim not found.");
-            }
+                return -1;
+            else
+                email = emailClaim.Value;
+                int userID = -1;
 
-            string email = emailClaim.Value;
-            int userID = -1;
-
-            using (var connection = new MySqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT userID FROM user WHERE emailAddress = @Email";
-
-                using (var command = new MySqlCommand(query, connection))
+                using (var connection = new MySqlConnection(_connectionString))
                 {
-                    command.Parameters.AddWithValue("@Email", email);
+                    connection.Open();
 
-                    using (var reader = command.ExecuteReader())
+                    string query = "SELECT userID FROM user WHERE emailAddress = @Email";
+
+                    using (var command = new MySqlCommand(query, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@Email", email);
+
+                        using (var reader = command.ExecuteReader())
                         {
-                            userID = reader.GetInt32("userID");
+                            if (reader.Read())
+                            {
+                                userID = reader.GetInt32("userID");
+                            }
                         }
                     }
                 }
-            }
-
-            if (userID == -1)
-            {
-                throw new Exception("User ID not found.");
-            }
-
-            return userID;
+                return userID;
+        }
+        public bool ableToOperate(string licenseToOperate)
+        {
+            String userlicenseToOperate = GetCurrentUserlicenseToOperate();
+            return userlicenseToOperate == licenseToOperate;
         }
 
+        private string GetCurrentUserlicenseToOperate()
+        {
+            int userID = GetCurrentUserID();
+            String licenseToOperate = null;
+
+            if (userID > 0)
+            {
+
+                using (var connection = new MySqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT licenseClass FROM license WHERE userID = @userID";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@userID", userID);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                licenseToOperate = reader.GetString("licenseClass");
+                            }
+                        }
+                    }
+                    return licenseToOperate;
+                }
+            }
+            else
+            {
+                return null;
+            }
+            }
+
+        }
     }
-}
+
 
 
