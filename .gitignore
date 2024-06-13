@@ -492,3 +492,8 @@ RentingSystemMVC/obj/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+venv
+.venv
+virtualenv
+.virtualenv
