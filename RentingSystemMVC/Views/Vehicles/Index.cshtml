@@ -91,7 +91,7 @@
                     <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay" />
                     <div class="form-group">
                         <label for="startRentalDate">Start Date</label>
-                        <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" required />
+                        <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
                     </div>
                     <div class="form-group">
                         <label for="endRentalDate">End Date</label>
