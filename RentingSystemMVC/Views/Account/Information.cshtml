@@ -11,56 +11,62 @@
 
 <style>
     .container {
-        width:100%;
-        height:100%;
-        text-align:center;
+        width: 100%;
+        height: 100%;
+        text-align: center;
     }
 
-
-    .second-container{
-        margin-top:40px;
+    .second-container {
+        margin-top: 40px;
     }
 
-    .mini-gap{
-        margin-top:10px;
+    .mini-gap {
+        margin-top: 10px;
+        display: block;
     }
 
-    .user-info{
-        font-size:20px;
+    .user-info {
+        font-size: 20px;
     }
 </style>
 
+<div class="container">
+    @if (ViewData["Message"] != null)
+    {
+        <div class="alert alert-info">
+            @ViewData["Message"]
+        </div>
+    }
 
-<div class="container" >
-    
-    <!--- Typical User Information --> 
+    <!-- Typical User Information -->
     <div class="second-container">
-            <i class="fa-solid fa-circle-user fa-10x" ></i>
-        <div class ="user-info"> 
-            <div>Name :  @givenName</div>
+        <i class="fa-solid fa-circle-user fa-10x"></i>
+        <div class="user-info">
+            <div>Name: @givenName</div>
             <div>Email: @email</div>
         </div>
     </div>
 
-    <!--- Here put the changing part (Update password (or not?))-->
+    <!-- Here put the changing part (Update password (or not?)) -->
     <div class="second-container">
         <h3>
-        Do you want to update your password? 
+            Do you want to update your password?
         </h3>
-        <form>
-            <!-- c  compare with current with inputted--> 
-            <div class="mini-gap"> 
-                <h4>Enter your current password</h4>
-                <input type="password">
-            </div> 
-            <!--Chang password area --> 
+        <form method="post">
+            <!-- Compare with current with inputted -->
             <div class="mini-gap">
-                <h4>Enter your new password</h4>
-                <input type="password">
+                <label style="display: block;" for="oldPass">Enter Your Current Password</label>
+                <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="oldPass" name="oldPass" placeholder="Enter your old password" required>
+            </div>
+            <!-- Change password area -->
+            <div class="form-group" style="margin-top: 10px;">
+                <label style="display: block;" for="newPass">Enter your new password</label>
+                <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="newPass" name="newPass" placeholder="Enter your new password" required>
+                <small style="display: block; font-size: 8px;">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</small>
             </div>
 
             <div class="mini-gap">
-                <button type="button" class="btn btn-warning"> Update Password </button>
+                <button type="submit" class="btn btn-warning">Update Password</button>
             </div>
         </form>
     </div>

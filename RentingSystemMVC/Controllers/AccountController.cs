@@ -182,13 +182,16 @@ namespace RentingSystemMVC.Controllers
             return View();
         }
 
-        [HttpPut]
-        public IActionResult changePassword(String oldPass, String newPass)
+        [HttpPost]
+        public IActionResult Information(String oldPass, String newPass)
         {
             int userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             byte[] salt = new byte[0];
 
-            if (oldPass == newPass) return View();
+            if (oldPass == newPass){
+                ViewData["Message"] = "Password cannot be same.";
+                return View();
+            }
 
             string hashed_old_pass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: oldPass,
@@ -198,17 +201,15 @@ namespace RentingSystemMVC.Controllers
                 numBytesRequested: 256 / 8
             ));
 
-            String hashed_database_old_pass;
+            String hashed_database_old_pass = _context.User.Where(x => x.UserID == userId)
+                .Select(x => x.UserPassword)
+                .FirstOrDefault();
 
-            using (var context = _context)
-            {
-                hashed_database_old_pass = context.User.Where(x => x.UserID == userId)
-                    .Select(x => x.UserPassword)
-                    .FirstOrDefault();
+
+            if (hashed_old_pass != hashed_database_old_pass){
+                ViewData["Message"] = "Password does not match";
+                return View();
             }
-
-
-            if (hashed_old_pass != hashed_database_old_pass) return View();
 
             string hashed_new_pass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: newPass,
@@ -218,14 +219,12 @@ namespace RentingSystemMVC.Controllers
                 numBytesRequested: 256 / 8
             ));
 
+            var user = _context.User.FirstOrDefault(x => x.UserID == userId);
+            user.UserPassword = hashed_new_pass;
+            _context.SaveChanges();
 
-            using (var context = _context)
-            {
-                var user = context.User.First(x => x.UserID == userId);
-                user.UserPassword = hashed_new_pass;
-                context.SaveChanges();
-            }
-
+           
+            ViewData["Message"] = "Successfully updated password" + userId;
             return View();
         }
     }
