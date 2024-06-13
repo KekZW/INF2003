@@ -14,6 +14,9 @@ namespace RentingSystemMVC.Models
         public decimal TruckSpace { get; set; }
         public decimal RentalCostPerDay { get; set; }
         public bool IsUserAuthorized { get; set; }
+        
+        // Navigation Property
+        public VehicleType VehicleType { get; set; }
     }
 }
 
