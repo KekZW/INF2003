@@ -13,4 +13,14 @@ ADD FOREIGN KEY (userID) REFERENCES user(userID);
 
 ALTER TABLE license
 MODIFY COLUMN licenseID INT auto_increment;
+
+RENAME TABLE maintenanace TO maintenance;
+
+ALTER TABLE maintenance
+    RENAME COLUMN maintainanceID TO maintenanceID;
+
+ALTER TABLE maintenance
+    ADD FOREIGN KEY (vehicleID) REFERENCES vehicle(vehicleID);
+
 SET FOREIGN_KEY_CHECKS = 1;
+    

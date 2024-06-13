@@ -22,13 +22,14 @@ licenseToOperate VARCHAR(30),
 vehicleTypeID INT,
 FOREIGN KEY (vehicleTypeID) REFERENCES vehicleType(vehicleTypeID));
 
-CREATE TABLE IF NOT EXISTS maintenanace(
-maintainanceID INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS maintenance(
+maintenanceID INT PRIMARY KEY AUTO_INCREMENT,
 vehicleID INT,
 workshopStatus VARCHAR(256),
 finishMaintDate DATE,
-LastMaintDate DATE);
-
+LastMaintDate DATE,
+FOREIGN KEY (vehicleID) REFERENCES vehicle(vehicleID)  
+);
 
 CREATE TABLE IF NOT EXISTS user (
 userID INT PRIMARY KEY AUTO_INCREMENT, 
