@@ -28,10 +28,11 @@ namespace RentingSystem.Controllers
                        "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
                        "AND r.startRentalDate <= @todayDate " +
                        "AND r.endRentalDate >= @todayDate " +
-                       "LEFT JOIN maintenanace m ON v.vehicleID = m.vehicleID " +
+                       "LEFT JOIN maintenance m ON v.vehicleID = m.vehicleID " +
                        "AND m.finishMaintDate <= @todayDate " +
                        "AND m.workshopStatus != 'Completed' " +
-                       "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN (SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
+                       "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
+                       "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
 
                 //Need change maintenanace workshopStatus value
 
@@ -121,7 +122,7 @@ namespace RentingSystem.Controllers
 
                 if (available)
                 {
-                    query = "SELECT COUNT(*) FROM maintenanace " +
+                    query = "SELECT COUNT(*) FROM maintenance " +
                             "WHERE vehicleID = @vehicleID " +
                             "AND (finishMaintDate > @endRentalDate AND finishMaintDate > @startRentalDate) " +
                             "AND workshopStatus != 'Completed'";
