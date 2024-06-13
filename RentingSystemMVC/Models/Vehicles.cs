@@ -13,6 +13,7 @@ namespace RentingSystemMVC.Models
         public string FuelType { get; set; }
         public decimal TruckSpace { get; set; }
         public decimal RentalCostPerDay { get; set; }
+        public bool IsUserAuthorized { get; set; }
     }
 }
 

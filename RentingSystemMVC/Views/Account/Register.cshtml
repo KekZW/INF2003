@@ -1,0 +1,85 @@
+<div class="container login row">
+    @if (!ViewData.ModelState.IsValid)
+    {
+    <div class="alert alert-danger">
+        @ViewData.ModelState[string.Empty].Errors[0].ErrorMessage
+    </div>
+    }
+
+    <div class="col-sm-2"></div>
+
+
+    <div class="col-sm-8 text-center">
+        <h1> Register </h1>
+        <p> Alerady have an account? <a href="Login">Click here</a> to login </p>
+        <form method="post">
+            <div class="form-group text-start row" style="padding: 10px 0;">
+                <div class="col-sm-6">
+                    <label for="firstName"> First Name </label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="lastName"> Last Name </label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" required>
+                </div>
+            </div>
+            <div class="form-group text-start" style="padding: 10px 0;">
+                <label for="username"> Username </label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+            </div>
+            <div class="form-group text-start row" style="padding: 10px 0;">
+                <div class="col-sm-6">
+                    <label for="email"> Email </label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="phoneNumber"> Phone Number </label>
+                    <input type="tel" pattern="[0-9]{8}" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number" required>
+                </div>
+            </div>
+            <div class="form-group text-start" style="padding: 10px 0;">
+                <label for="address"> Address </label>
+                <textarea rows="3" class="form-control" id="address" name="address" placeholder="Enter address" required></textarea>
+            </div>
+            <div class="form-group text-start row" style="padding: 10px 0;">
+                <div class="col-sm-6">
+                    <label for="licenseClass">License Class</label>
+                    <select class="form-select" aria-label="Default select example" id="licenseClass" name="licenseClass" placeholder="Enter license class" required/>
+                        <option selected value="2B">2B</option>
+                        <option value="2A">2A</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="3A">3A</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="licenseDate">License Acquire Date</label>
+                    <input type="date" class="form-control" id="licenseDate" name="licenseDate" placeholder="Enter License Acquire Date" required/>
+                </div>
+            </div>
+            <div class="form-group text-start" style="padding: 10px 0;">
+                <label for="password"> Password </label>
+                <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="password" name="password" placeholder="Password" required>
+                <small style="font-size: 10px;"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters </small>
+            </div>
+            <div class="form-group text-start" style="padding: 10px 0;">
+                <label for="confirmPassword"> Confirm Password </label>
+                <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <div style="padding: 10px 0;">
+                <button type="submit" class="btn btn-primary"> Register </button>
+            </div>
+        </form>
+    </div>
+
+
+
+    <div class="col-sm-2"></div>
+</div>
+
+
+<script>
+    licenseDate.max = new Date().toISOString().split("T")[0];
+    licenseDate.value = new Date().toISOString().split("T")[0];
+
+</script>   

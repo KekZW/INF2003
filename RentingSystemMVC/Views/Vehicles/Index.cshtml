@@ -18,24 +18,22 @@
     </div>
 
     <div class="col-sm-4">
-        <label for="selectedDate">Date:</label>
-        <input type="date" id="selectedDate" name="selectedDate" class="form-control" />
-    </div>
-
-    <div class="col-sm-4">
         <label for="filterValue">Value:</label>
         <input type="text" id="filterValue" name="filterValue" class="form-control"/>
     </div>
 
-    <button type="submit" class="btn btn-secondary col-sm-1">Filter</button>
+    <div class="col-sm-4">
+        <label for="selectedDate">Date:</label>
+        <input type="date" id="selectedDate" name="selectedDate" class="form-control" />
+    </div>
 
+    <button type="submit" class="btn btn-secondary col-sm-1">Filter</button>
 
 </form>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Vehicle ID</th>
             <th>License Plate</th>
             <th>License To Operate</th>
             <th>Brand</th>
@@ -52,7 +50,6 @@
         @foreach (var vehicle in Model)
         {
             <tr>
-                <td>@vehicle.VehicleID</td>
                 <td>@vehicle.LicensePlate</td>
                 <td>@vehicle.LicenseToOperate</td>
                 <td>@vehicle.Brand</td>
@@ -63,9 +60,151 @@
                 <td>@vehicle.FuelType</td>
                 <td>@vehicle.TruckSpace</td>
                 <td>@vehicle.RentalCostPerDay</td>
-                <td><button type="button" class="btn btn-primary">Rent</button></td>
+                <td>
+                    @if (User.Identity.IsAuthenticated && vehicle.IsUserAuthorized == true)
+                    {
+                        <button type="button" class="btn btn-primary" onclick="openRentModal(@vehicle.VehicleID, @vehicle.RentalCostPerDay)">Rent</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-primary" disabled>Rent</button>
+                    }
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Rent Modal -->
+<div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rentModalLabel">Rent Vehicle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="rentForm">
+                    <input type="hidden" id="vehicleID" name="vehicleID" />
+                    <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay" />
+                    <div class="form-group">
+                        <label for="startRentalDate">Start Date</label>
+                        <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="endRentalDate">End Date</label>
+                        <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="rentalAddress">Rental Address</label>
+                        <input type="text" class="form-control" id="rentalAddress" name="rentalAddress" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="rentalLot">Rental Lot</label>
+                        <input type="number" class="form-control" id="rentalLot" name="rentalLot" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="rentalAmount">Rental Amount</label>
+                        <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly />
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Rent</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+         document.addEventListener('DOMContentLoaded', (event) => {
+            const startRentalDate = document.getElementById('startRentalDate');
+            const endRentalDate = document.getElementById('endRentalDate');
+
+            startRentalDate.addEventListener('change', () => {
+                let startDate = new Date(startRentalDate.value);
+                let minEndDate = new Date(startDate);
+                minEndDate.setDate(minEndDate.getDate() + 1);
+
+                let minEndDateString = minEndDate.toISOString().split('T')[0];
+                endRentalDate.min = minEndDateString;
+                
+                if (new Date(endRentalDate.value) <= startDate) {
+                    endRentalDate.value = minEndDateString;
+                }
+            });
+
+            endRentalDate.addEventListener('change', () => {
+                let startDate = new Date(startRentalDate.value);
+                let endDate = new Date(endRentalDate.value);
+
+                if (endDate <= startDate) {
+                    endRentalDate.value = '';
+                }
+            });
+        });
+
+
+        function openRentModal(vehicleID, rentalCostPerDay) {
+            $('#vehicleID').val(vehicleID);
+            $('#rentalCostPerDay').val(rentalCostPerDay);
+            $('#rentModal').modal('show');
+        }
+
+        $(document).ready(function () {
+            $('#rentForm').on('submit', function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+
+                // Check availability first
+                $.ajax({
+                    url: '@Url.Action("CheckAvailability", "Vehicles")',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.available) {
+                            // Proceed with rental if available
+                            $.ajax({
+                                url: '@Url.Action("RentVehicle", "Vehicles")',
+                                type: 'POST',
+                                data: formData,
+                                success: function () {
+                                    alert('Vehicle rented successfully!');
+                                    $('#rentModal').modal('hide');
+                                    window.location.href = '@Url.Action("Index", "Rental")';
+                                },
+                                error: function () {
+                                    alert('Error occurred while renting the vehicle.');
+                                }
+                            });
+                        } else {
+                            alert('The vehicle is not available for the selected dates.');
+                        }
+                    },
+                    error: function () {
+                        alert('Error occurred while checking availability.');
+                    }
+                });
+            });
+
+            $('#startRentalDate, #endRentalDate').on('change', function () {
+                var startDate = new Date($('#startRentalDate').val());
+                var endDate = new Date($('#endRentalDate').val());
+                var rentalCostPerDay = parseFloat($('#rentalCostPerDay').val());
+
+                if (startDate && endDate && startDate <= endDate && !isNaN(rentalCostPerDay)) {
+                    var timeDiff = endDate.getTime() - startDate.getTime();
+                    var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    var rentalAmount = daysDiff * rentalCostPerDay;
+                    $('#rentalAmount').val(rentalAmount.toFixed(2));
+                } else {
+                    $('#rentalAmount').val('');
+                }
+            });
+        });
+    </script>
+}
 

@@ -1,0 +1,167 @@
+﻿@model List<RentingSystemMVC.Models.Rental>
+
+<h1>Rental History</h1>
+
+
+@if (Model.Count == 0)
+{
+    <p>No rentals found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>License Plate</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Rental Amount</th>
+                <th>Rental Address</th>
+                <th>Rental Lot</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rental in Model)
+            {
+                <tr>
+                    <td>@rental.LicensePlate</td>
+                    <td>@rental.startRentalDate.ToShortDateString()</td>
+                    <td>@rental.endRentalDate.ToShortDateString()</td>
+                    <td>@rental.rentalAmount</td>
+                    <td>@rental.rentalAddress</td>
+                    <td>@rental.rentalLot</td>
+                    <td>
+                        @if (DateTime.Today > rental.startRentalDate)
+                        {
+                            <button type="button" class="btn btn-primary" disabled>Edit</button>
+                            <button type="button" class="btn btn-danger" disabled>Delete</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-primary" onclick="openEditModal('@rental.rentalID', '@rental.startRentalDate', '@rental.endRentalDate')">Edit</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteRental('@rental.rentalID')">Delete</button>
+                        }
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    }
+<div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rentModalLabel">Edit Rental Dates</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editRentalForm">
+                    <input type="hidden" id="rentalID" name="rentalID" />
+
+                    <div class="form-group">
+                        <label for="startRentalDate">Start Date</label>
+                        <input type="date" class="form-control" id="startRentalDate"  name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endRentalDate">End Date</label>
+                        <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+          document.addEventListener('DOMContentLoaded', (event) => {
+            const startRentalDate = document.getElementById('startRentalDate');
+            const endRentalDate = document.getElementById('endRentalDate');
+
+            startRentalDate.addEventListener('change', () => {
+                let startDate = new Date(startRentalDate.value);
+                let minEndDate = new Date(startDate);
+                minEndDate.setDate(minEndDate.getDate() + 1);
+
+                let minEndDateString = minEndDate.toISOString().split('T')[0];
+                endRentalDate.min = minEndDateString;
+                
+                if (new Date(endRentalDate.value) <= startDate) {
+                    endRentalDate.value = minEndDateString;
+                }
+            });
+
+            endRentalDate.addEventListener('change', () => {
+                let startDate = new Date(startRentalDate.value);
+                let endDate = new Date(endRentalDate.value);
+
+                if (endDate <= startDate) {
+                    endRentalDate.value = '';
+                }
+            });
+        });
+    
+
+
+        function openEditModal(rentalID, startRentalDate, endRentalDate) {
+            $('#rentalID').val(rentalID);
+            $('#startRentalDate').val(startRentalDate);
+            $('#endRentalDate').val(endRentalDate);
+            $('#rentModal').modal('show');
+        }
+
+        function deleteRental(rentalID) {
+            if (confirm('Are you sure you want to delete this rental?')) {
+                $.ajax({
+                    url: '@Url.Action("DeleteRental", "Rental")',
+                    type: 'POST',
+                    data: { rentalID: rentalID },
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Rental deleted successfully!');
+                            location.reload(); // Refresh page or update UI as needed
+                        } else {
+                            alert('Failed to delete rental.');
+                        }
+                    },
+                    error: function () {
+                        alert('Error occurred while deleting rental.');
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            $('#editRentalForm').on('submit', function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '@Url.Action("EditRental", "Rental")',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Rental dates updated successfully!');
+                            $('#rentModal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('Failed to update rental dates.');
+                        }
+                    },
+                    error: function () {
+                        alert('Error occurred while updating rental dates.');
+                    }
+                });
+            });
+        });
+    </script>
+}

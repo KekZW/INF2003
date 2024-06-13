@@ -11,7 +11,7 @@ type VARCHAR(20),
 seats INT,
 fuelCapacity DECIMAL(6,2),
 fuelType VARCHAR(20),
-truckSpace DECIMAL(6,2),
+truckSpace VARCHAR(20),
 rentalCostPerDay DECIMAL(6,2));
 
 
@@ -28,6 +28,7 @@ vehicleID INT,
 workshopStatus VARCHAR(256),
 finishMaintDate DATE,
 LastMaintDate DATE);
+
 
 CREATE TABLE IF NOT EXISTS user (
 userID INT PRIMARY KEY AUTO_INCREMENT, 
