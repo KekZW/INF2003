@@ -12,8 +12,6 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Rental ID</th>
-                <th>Vehicle ID</th>
                 <th>License Plate</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -26,8 +24,6 @@ else
             @foreach (var rental in Model)
             {
                 <tr>
-                    <td>@rental.rentalID</td>
-                    <td>@rental.vehicleID</td>
                     <td>@rental.LicensePlate</td>
                     <td>@rental.startRentalDate.ToShortDateString()</td>
                     <td>@rental.endRentalDate.ToShortDateString()</td>
@@ -68,12 +64,12 @@ else
 
                     <div class="form-group">
                         <label for="startRentalDate">Start Date</label>
-                        <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" required />
+                        <input type="date" class="form-control" id="startRentalDate"  name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
                     </div>
 
                     <div class="form-group">
                         <label for="endRentalDate">End Date</label>
-                        <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" required />
+                        <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -85,6 +81,36 @@ else
 
 @section Scripts {
     <script>
+
+          document.addEventListener('DOMContentLoaded', (event) => {
+            const startRentalDate = document.getElementById('startRentalDate');
+            const endRentalDate = document.getElementById('endRentalDate');
+
+            startRentalDate.addEventListener('change', () => {
+                let startDate = new Date(startRentalDate.value);
+                let minEndDate = new Date(startDate);
+                minEndDate.setDate(minEndDate.getDate() + 1);
+
+                let minEndDateString = minEndDate.toISOString().split('T')[0];
+                endRentalDate.min = minEndDateString;
+                
+                if (new Date(endRentalDate.value) <= startDate) {
+                    endRentalDate.value = minEndDateString;
+                }
+            });
+
+            endRentalDate.addEventListener('change', () => {
+                let startDate = new Date(startRentalDate.value);
+                let endDate = new Date(endRentalDate.value);
+
+                if (endDate <= startDate) {
+                    endRentalDate.value = '';
+                }
+            });
+        });
+    
+
+
         function openEditModal(rentalID, startRentalDate, endRentalDate) {
             $('#rentalID').val(rentalID);
             $('#startRentalDate').val(startRentalDate);

@@ -27,6 +27,11 @@ namespace RentingSystemMVC.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult UserProfile(){
+            return View("UserProfile.cshtml");
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
@@ -37,7 +42,7 @@ namespace RentingSystemMVC.Controllers
             // 3. Compare hash inputted password with retrieved hashed password from database (done)
             // 4. If correct, redirect to Home/Index, create authentication cookie
 
-            string query = "SELECT * FROM user WHERE emailAddress = {0}";
+            string query = "SELECT * FROM user WHERE emailAddress = @p0";
 
             var user = _context.User.FromSqlRaw(query, email).FirstOrDefault();
 
