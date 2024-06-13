@@ -16,18 +16,18 @@ namespace RentingSystemMVC.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _context;
-        
+
         public AccountController(ApplicationDbContext context)
         {
             _context = context;
         }
-        
+
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
-   
+
 
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
@@ -45,7 +45,7 @@ namespace RentingSystemMVC.Controllers
             if (user != null)
             {
                 byte[] salt = new byte[0];
-                
+
                 string hashed_pass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                     password: password,
                     salt: salt,
@@ -67,17 +67,17 @@ namespace RentingSystemMVC.Controllers
                         claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                     var authProperties = new AuthenticationProperties();
-                    
+
                     await HttpContext.SignInAsync(
-                        CookieAuthenticationDefaults.AuthenticationScheme, 
-                        new ClaimsPrincipal(claimsIdentity), 
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity),
                         authProperties);
-                    
+
                     // Redirect back home
                     return RedirectToAction("Index", "Vehicles");
                 }
             }
-            
+
             return View();
         }
 
@@ -89,17 +89,17 @@ namespace RentingSystemMVC.Controllers
 
         [HttpPost]
         public IActionResult Register(
-            string firstName, 
-            string lastName, 
+            string firstName,
+            string lastName,
             string username,
-            string email, 
+            string email,
             string phoneNumber,
             string address,
             string licenseClass,
             DateTime licenseDate,
-            string password, 
+            string password,
             string confirmPassword
-            )
+        )
         {
             var emailAttribute = new EmailAddressAttribute();
             if (!emailAttribute.IsValid(email))
@@ -107,26 +107,28 @@ namespace RentingSystemMVC.Controllers
                 ModelState.AddModelError("email", "Invalid email format.");
                 return View();
             }
+
             if (password != confirmPassword)
             {
                 ModelState.AddModelError(string.Empty, "Passwords do not match.");
                 return View();
             }
-          
-            var License =  new License { 
-                AcquireDate = licenseDate,
-                LicenseClass = licenseClass
-                
-            };
 
+            var License = new License
+            {
+                AcquireDate = licenseDate,
+                LicenseClass = licenseClass,
+                UserID = null
+            };
+            
             _context.License.Add(License);
             _context.SaveChanges();
-            
+
             int licenseId = License.LicenseID;
 
 
             byte[] salt = new byte[0];
-            
+
             string hashed_pass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,
@@ -136,32 +138,33 @@ namespace RentingSystemMVC.Controllers
             ));
 
 
-            var User = new User {
+            var User = new User
+            {
                 Username = username,
                 UserPassword = hashed_pass,
                 Name = firstName + " " + lastName,
                 Address = address,
-                LicenseID  = licenseId,
+                LicenseID = licenseId,
                 EmailAddress = email,
-                PhoneNo = phoneNumber 
+                PhoneNo = phoneNumber
             };
 
             _context.User.Add(User);
             _context.SaveChanges();
 
             int userId = User.UserID;
-            
+
             string updateLicenseQuery = "UPDATE license SET userID = @p0 WHERE licenseID = @p1";
             int rowsAffected = _context.Database.ExecuteSqlRaw(updateLicenseQuery, userId, licenseId);
-            
+
             if (rowsAffected <= 0)
             {
                 ModelState.AddModelError(string.Empty, "Failed to register user. Please try again.");
                 return View();
             }
-           
 
-           return RedirectToAction("Login");
+
+            return RedirectToAction("Login");
         }
 
         public async Task<IActionResult> Logout()
@@ -174,17 +177,19 @@ namespace RentingSystemMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Information(){
+        public IActionResult Information()
+        {
             return View();
         }
 
         [HttpPut]
-        public IActionResult changePassword(String oldPass, String newPass){
+        public IActionResult changePassword(String oldPass, String newPass)
+        {
             int userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             byte[] salt = new byte[0];
-                        
+
             if (oldPass == newPass) return View();
-            
+
             string hashed_old_pass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: oldPass,
                 salt: salt,
@@ -194,16 +199,17 @@ namespace RentingSystemMVC.Controllers
             ));
 
             String hashed_database_old_pass;
-        
-            using (var context = _context){
+
+            using (var context = _context)
+            {
                 hashed_database_old_pass = context.User.Where(x => x.UserID == userId)
-                            .Select(x => x.UserPassword)
-                            .FirstOrDefault();
+                    .Select(x => x.UserPassword)
+                    .FirstOrDefault();
             }
-        
+
 
             if (hashed_old_pass != hashed_database_old_pass) return View();
-            
+
             string hashed_new_pass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: newPass,
                 salt: salt,
@@ -211,16 +217,16 @@ namespace RentingSystemMVC.Controllers
                 iterationCount: 100000,
                 numBytesRequested: 256 / 8
             ));
-            
 
-            using (var context = _context){
+
+            using (var context = _context)
+            {
                 var user = context.User.First(x => x.UserID == userId);
                 user.UserPassword = hashed_new_pass;
                 context.SaveChanges();
             }
 
             return View();
-
         }
     }
 }
