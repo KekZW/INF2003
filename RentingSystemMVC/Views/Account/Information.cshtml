@@ -1,0 +1,67 @@
+@using System.Security.Claims
+
+@{
+    var email = User.FindFirst(ClaimTypes.Email)?.Value;
+    var givenName = User.FindFirst(ClaimTypes.GivenName)?.Value;
+}
+
+<head>
+    <script src="https://kit.fontawesome.com/b9c4551277.js" crossorigin="anonymous"></script>
+</head>
+
+<style>
+    .container {
+        width:100%;
+        height:100%;
+        text-align:center;
+    }
+
+
+    .second-container{
+        margin-top:40px;
+    }
+
+    .mini-gap{
+        margin-top:10px;
+    }
+
+    .user-info{
+        font-size:20px;
+    }
+</style>
+
+
+<div class="container" >
+    
+    <!--- Typical User Information --> 
+    <div class="second-container">
+            <i class="fa-solid fa-circle-user fa-10x" ></i>
+        <div class ="user-info"> 
+            <div>Name :  @givenName</div>
+            <div>Email: @email</div>
+        </div>
+    </div>
+
+    <!--- Here put the changing part (Update password (or not?))-->
+    <div class="second-container">
+        <h3>
+        Do you want to update your password? 
+        </h3>
+        <form>
+            <!-- c  compare with current with inputted--> 
+            <div class="mini-gap"> 
+                <h4>Enter your current password</h4>
+                <input type="password">
+            </div> 
+            <!--Chang password area --> 
+            <div class="mini-gap">
+                <h4>Enter your new password</h4>
+                <input type="password">
+            </div>
+
+            <div class="mini-gap">
+                <button type="button" class="btn btn-warning"> Update Password </button>
+            </div>
+        </form>
+    </div>
+</div>
