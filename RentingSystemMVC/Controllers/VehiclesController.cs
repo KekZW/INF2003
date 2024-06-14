@@ -34,7 +34,7 @@ namespace RentingSystem.Controllers
 
 
                 string query =
-                    "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, v.status, vt.brand, vt.model, vt.type, " +
+                    "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
                     "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
                     "FROM vehicle v " +
                     "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +

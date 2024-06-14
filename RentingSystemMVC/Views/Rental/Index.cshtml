@@ -1,16 +1,17 @@
 ﻿@model List<RentingSystemMVC.Models.Rental>
 
-<h1>Rental History</h1>
+<div class="container">
+    <h1>Rental History</h1>
 
 
-@if (Model.Count == 0)
-{
-    <p>No rentals found.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
+    @if (Model.Count == 0)
+    {
+        <p>No rentals found.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
             <tr>
                 <th>License Plate</th>
                 <th>Start Date</th>
@@ -20,8 +21,8 @@ else
                 <th>Rental Lot</th>
                 <th> Actions</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach (var rental in Model)
             {
                 <tr>
@@ -43,45 +44,44 @@ else
                             <button type="button" class="btn btn-danger" onclick="deleteRental('@rental.rentalID')">Delete</button>
                         }
                     </td>
-                   
+
                 </tr>
             }
-        </tbody>
-    </table>
-
+            </tbody>
+        </table>
     }
-<div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="rentModalLabel">Edit Rental Dates</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editRentalForm">
-                    <input type="hidden" id="rentalID" name="rentalID" />
+    <div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rentModalLabel">Edit Rental Dates</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editRentalForm">
+                        <input type="hidden" id="rentalID" name="rentalID"/>
 
-                    <div class="form-group">
-                        <label for="startRentalDate">Start Date</label>
-                        <input type="date" class="form-control" id="startRentalDate"  name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
-                    </div>
+                        <div class="form-group">
+                            <label for="startRentalDate">Start Date</label>
+                            <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="endRentalDate">End Date</label>
-                        <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
-                    </div>
+                        <div class="form-group">
+                            <label for="endRentalDate">End Date</label>
+                            <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required/>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    <script>
+    @section Scripts {
+        <script>
 
           document.addEventListener('DOMContentLoaded', (event) => {
             const startRentalDate = document.getElementById('startRentalDate');
@@ -165,4 +165,6 @@ else
             });
         });
     </script>
-}
+    }
+
+</div>
