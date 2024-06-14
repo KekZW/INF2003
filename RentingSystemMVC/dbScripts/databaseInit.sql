@@ -20,6 +20,7 @@ vehicleID INT PRIMARY KEY AUTO_INCREMENT,
 licensePlate VARCHAR(10),
 licenseToOperate VARCHAR(30),
 vehicleTypeID INT,
+status VARCHAR(64),
 FOREIGN KEY (vehicleTypeID) REFERENCES vehicleType(vehicleTypeID));
 
 CREATE TABLE IF NOT EXISTS maintenance(

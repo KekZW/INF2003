@@ -22,5 +22,17 @@ ALTER TABLE maintenance
 ALTER TABLE maintenance
     ADD FOREIGN KEY (vehicleID) REFERENCES vehicle(vehicleID);
 
+ALTER TABLE vehicle
+    ADD COLUMN status varchar(64);
+
+-- 14/06/2024
+SET SQL_SAFE_UPDATES = 0;
+    
+UPDATE vehicle
+SET status="available";
+
+SET SQL_SAFE_UPDATES = 1;
+
+
 SET FOREIGN_KEY_CHECKS = 1;
     
