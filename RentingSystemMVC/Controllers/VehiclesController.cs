@@ -35,7 +35,7 @@ namespace RentingSystem.Controllers
 
                 string query =
                     "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
-                    "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                    "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay, COUNT(r.vehicleID) AS timesRented " +
                     "FROM vehicle v " +
                     "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
                     "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
@@ -45,7 +45,9 @@ namespace RentingSystem.Controllers
                     "AND m.finishMaintDate <= @todayDate " +
                     "AND m.workshopStatus != 'Completed' " +
                     "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
-                    "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
+                    "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)" +
+                    "GROUP BY v.vehicleID " +                           
+                    "ORDER BY COUNT(r.vehicleID) DESC";
 
                 //Need change maintenanace workshopStatus value
 
