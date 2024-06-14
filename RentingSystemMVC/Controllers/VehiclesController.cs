@@ -32,32 +32,6 @@ namespace RentingSystem.Controllers
             {
                 connection.Open();
 
-                // Update vehicle status to 'available'
-                string updateQuery = @"
-                    UPDATE vehicle 
-                    SET status = 'available' 
-                    WHERE vehicleID IN (
-                        SELECT v.vehicleID 
-                        FROM vehicle v 
-                        LEFT JOIN (
-                            SELECT vehicleID, MAX(endRentalDate) AS latestEndRentalDate 
-                            FROM rental 
-                            GROUP BY vehicleID
-                        ) r ON v.vehicleID = r.vehicleID 
-                        LEFT JOIN (
-                            SELECT vehicleID, MAX(finishMaintDate) AS latestFinishMaintDate 
-                            FROM maintenance 
-                            GROUP BY vehicleID
-                        ) m ON v.vehicleID = m.vehicleID 
-                        WHERE (r.latestEndRentalDate IS NULL OR r.latestEndRentalDate <= @todaydate)
-                        AND (m.latestFinishMaintDate IS NULL OR m.latestFinishMaintDate <= @todaydate)
-                    );";
-
-                using (var updateCommand = new MySqlCommand(updateQuery, connection))
-                {
-                    updateCommand.Parameters.AddWithValue("@todaydate", DateTime.Today);
-                    updateCommand.ExecuteNonQuery();
-                }
 
 
                 string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, v.status, vt.brand, vt.model, vt.type, " +
@@ -113,7 +87,6 @@ namespace RentingSystem.Controllers
                                 FuelType = reader.GetString("fuelType"),
                                 TruckSpace = reader.GetDecimal("truckSpace"),
                                 RentalCostPerDay = reader.GetDecimal("rentalCostPerDay"),
-                                Status = reader.GetString("Status")
                             };
 
                             vehicle.IsUserAuthorized = ableToOperate(vehicle.LicenseToOperate);
@@ -206,13 +179,6 @@ namespace RentingSystem.Controllers
                     command.Parameters.AddWithValue("@rentalAddress", rentalAddress);
                     command.Parameters.AddWithValue("@rentalLot", rentalLot);
 
-                    command.ExecuteNonQuery();
-                }
-
-                query = "UPDATE vehicle SET status= 'rented' WHERE vehicleID = @vehicleID";
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@vehicleID", vehicleID);
                     command.ExecuteNonQuery();
                 }
 
