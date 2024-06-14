@@ -1,39 +1,40 @@
 @model List<RentingSystemMVC.Models.AuthorisedVehicleView>
 
-<h1> Rent a vehicle</h1>
-<h3>Available Vehicles</h3>
+<div class="container">
+    <h1> Rent a vehicle</h1>
+    <h3>Available Vehicles</h3>
 
-<form method="get" asp-action="Index" class="container row" style="margin: 0; padding: 0;">
-    <div class="col-sm-4" style="margin-left: 0; padding-left: 0;">
-        <label for="filterColumn">Filter By:</label>
-        <select id="filterColumn" name="filterColumn" class="form-select">
-            <option value="Brand">Brand</option>
-            <option value="Model">Model</option>
-            <option value="Type">Type</option>
-            <option value="FuelType">Fuel Type</option>
-            <option value="FuelCapacity">Fuel Capacity</option>
-            <option value="Seats">Seats</option>
-            <option value="TrunkSpace">Trunk Space</option>
-            <option value="RentalCostPerDay">Rental Cost Per Day</option>
-        </select>
-    </div>
+    <form method="get" asp-action="Index" class="container row" style="margin: 0; padding: 0;">
+        <div class="col-sm-4" style="margin-left: 0; padding-left: 0;">
+            <label for="filterColumn">Filter By:</label>
+            <select id="filterColumn" name="filterColumn" class="form-select">
+                <option value="Brand">Brand</option>
+                <option value="Model">Model</option>
+                <option value="Type">Type</option>
+                <option value="FuelType">Fuel Type</option>
+                <option value="FuelCapacity">Fuel Capacity</option>
+                <option value="Seats">Seats</option>
+                <option value="TrunkSpace">Trunk Space</option>
+                <option value="RentalCostPerDay">Rental Cost Per Day</option>
+            </select>
+        </div>
 
-    <div class="col-sm-4">
-        <label for="filterValue">Value:</label>
-        <input type="text" id="filterValue" name="filterValue" class="form-control"/>
-    </div>
+        <div class="col-sm-4">
+            <label for="filterValue">Value:</label>
+            <input type="text" id="filterValue" name="filterValue" class="form-control"/>
+        </div>
 
-    <div class="col-sm-4">
-        <label for="selectedDate">Date:</label>
-        <input type="date" id="selectedDate" name="selectedDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
-    </div>
+        <div class="col-sm-4">
+            <label for="selectedDate">Date:</label>
+            <input type="date" id="selectedDate" name="selectedDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control"/>
+        </div>
 
-    <button type="submit" class="btn btn-secondary col-sm-1">Filter</button>
+        <button type="submit" class="btn btn-secondary col-sm-1">Filter</button>
 
-</form>
+    </form>
 
-<table class="table">
-    <thead>
+    <table class="table">
+        <thead>
         <tr>
             <th>License Plate</th>
             <th>License To Operate</th>
@@ -46,8 +47,8 @@
             <th>Truck Space</th>
             <th>Rental Cost Per Day</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         @foreach (var vehicle in Model)
         {
             <tr>
@@ -73,53 +74,53 @@
                 </td>
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-<!-- Rent Modal -->
-<div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="rentModalLabel">Rent Vehicle</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="rentForm">
-                    <input type="hidden" id="vehicleID" name="vehicleID" />
-                    <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay" />
-                    <div class="form-group">
-                        <label for="startRentalDate">Start Date</label>
-                        <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="endRentalDate">End Date</label>
-                        <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="rentalAddress">Rental Address</label>
-                        <input type="text" class="form-control" id="rentalAddress" name="rentalAddress" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="rentalLot">Rental Lot</label>
-                        <input type="number" class="form-control" id="rentalLot" name="rentalLot" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="rentalAmount">Rental Amount</label>
-                        <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly />
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">Rent</button>
-                </form>
+    <!-- Rent Modal -->
+    <div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rentModalLabel">Rent Vehicle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="rentForm">
+                        <input type="hidden" id="vehicleID" name="vehicleID"/>
+                        <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay"/>
+                        <div class="form-group">
+                            <label for="startRentalDate">Start Date</label>
+                            <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="endRentalDate">End Date</label>
+                            <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="rentalAddress">Rental Address</label>
+                            <input type="text" class="form-control" id="rentalAddress" name="rentalAddress" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="rentalLot">Rental Lot</label>
+                            <input type="number" class="form-control" id="rentalLot" name="rentalLot" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="rentalAmount">Rental Amount</label>
+                            <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Rent</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    <script>
+    @section Scripts {
+        <script>
          document.addEventListener('DOMContentLoaded', (event) => {
             const startRentalDate = document.getElementById('startRentalDate');
             const endRentalDate = document.getElementById('endRentalDate');
@@ -207,5 +208,6 @@
             });
         });
     </script>
-}
+    }
 
+</div>

@@ -33,19 +33,19 @@ namespace RentingSystem.Controllers
                 connection.Open();
 
 
-
-                string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, v.status, vt.brand, vt.model, vt.type, " +
-                            "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
-                            "FROM vehicle v " +
-                            "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
-                            "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
-                            "AND r.startRentalDate <= @todayDate " +
-                            "AND r.endRentalDate >= @todayDate " +
-                            "LEFT JOIN maintenance m ON v.vehicleID = m.vehicleID " +
-                            "AND m.finishMaintDate <= @todayDate " +
-                            "AND m.workshopStatus != 'Completed' " +
-                            "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
-                            "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
+                string query =
+                    "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, v.status, vt.brand, vt.model, vt.type, " +
+                    "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                    "FROM vehicle v " +
+                    "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
+                    "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
+                    "AND r.startRentalDate <= @todayDate " +
+                    "AND r.endRentalDate >= @todayDate " +
+                    "LEFT JOIN maintenance m ON v.vehicleID = m.vehicleID " +
+                    "AND m.finishMaintDate <= @todayDate " +
+                    "AND m.workshopStatus != 'Completed' " +
+                    "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
+                    "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
 
                 //Need change maintenanace workshopStatus value
 
@@ -181,7 +181,6 @@ namespace RentingSystem.Controllers
 
                     command.ExecuteNonQuery();
                 }
-
             }
 
             return Json(new { success = true });
@@ -268,18 +267,23 @@ namespace RentingSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Manage()
+        public IActionResult Manage(string searchTerm)
         {
             string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
                            "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
                            "FROM vehicle v " +
                            "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
-                           "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
-                           "GROUP BY v.vehicleID " +
-                           "ORDER BY COUNT(r.vehicleID) DESC";
+                           "LEFT JOIN rental r ON v.vehicleID = r.vehicleID ";
+                           // "GROUP BY v.vehicleID " +
+                           // "ORDER BY COUNT(r.vehicleID) DESC";
 
-            List<VehicleViewModel> vehicleList = _context.VehicleViewModel.FromSqlRaw(query).ToList();
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query +=
+                    " WHERE (v.licensePlate LIKE {0} OR vt.brand LIKE {0} OR vt.model LIKE {0} OR CONCAT(vt.brand, ' ', vt.model) LIKE {0})";
+            }
 
+            List<VehicleViewModel> vehicleList = _context.VehicleViewModel.FromSqlRaw(query, "%" + searchTerm + "%").ToList();
             return View(vehicleList);
         }
 
@@ -305,12 +309,12 @@ namespace RentingSystem.Controllers
             VehicleViewModel vehicle = _context.VehicleViewModel
                 .FromSqlRaw(vehQuery, id)
                 .FirstOrDefault();
-            
+
             Console.WriteLine(maintenanceLogs);
 
-            VehicleDetailModel vehicleDetail = new VehicleDetailModel{Maintenances = maintenanceLogs, Vehicle = vehicle};
+            VehicleDetailModel vehicleDetail = new VehicleDetailModel
+                { Maintenances = maintenanceLogs, Vehicle = vehicle };
             return View(vehicleDetail);
         }
-
     }
 }
