@@ -74,6 +74,14 @@ namespace RentingSystemMVC.Controllers
                         command.Parameters.AddWithValue("@rentalID", rentalID);
                         command.ExecuteNonQuery();
                     }
+
+                    query = "UPDATE vehicle SET status= 'avaliable' WHERE vehicleID = (SELECT vehicleID WHERE rentalID = @rentalID)";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@rentalID", rentalID);
+                        command.ExecuteNonQuery();
+                    }
                 }
 
                 return Json(new { success = true });

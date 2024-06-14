@@ -15,6 +15,7 @@
             <option value="Seats">Seats</option>
             <option value="TrunkSpace">Trunk Space</option>
             <option value="RentalCostPerDay">Rental Cost Per Day</option>
+            <option value="Status">Status</option>
         </select>
     </div>
 
@@ -45,6 +46,7 @@
             <th>Fuel Type</th>
             <th>Truck Space</th>
             <th>Rental Cost Per Day</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -61,8 +63,9 @@
                 <td>@vehicle.FuelType</td>
                 <td>@vehicle.TruckSpace</td>
                 <td>@vehicle.RentalCostPerDay</td>
+                <td>@vehicle.Status</td>
                 <td>
-                    @if (User.Identity.IsAuthenticated && vehicle.IsUserAuthorized == true)
+                    @if (User.Identity.IsAuthenticated && vehicle.IsUserAuthorized == true && vehicle.Status == "available")
                     {
                         <button type="button" class="btn btn-primary" onclick="openRentModal(@vehicle.VehicleID, @vehicle.RentalCostPerDay)">Rent</button>
                     }

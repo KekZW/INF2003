@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace RentingSystem.Controllers
 {
@@ -31,18 +32,46 @@ namespace RentingSystem.Controllers
             {
                 connection.Open();
 
-                string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
-                               "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
-                               "FROM vehicle v " +
-                               "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
-                               "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
-                               "AND r.startRentalDate <= @todayDate " +
-                               "AND r.endRentalDate >= @todayDate " +
-                               "LEFT JOIN maintenance m ON v.vehicleID = m.vehicleID " +
-                               "AND m.finishMaintDate <= @todayDate " +
-                               "AND m.workshopStatus != 'Completed' " +
-                               "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
-                               "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
+                // Update vehicle status to 'available'
+                string updateQuery = @"
+                    UPDATE vehicle 
+                    SET status = 'available' 
+                    WHERE vehicleID IN (
+                        SELECT v.vehicleID 
+                        FROM vehicle v 
+                        LEFT JOIN (
+                            SELECT vehicleID, MAX(endRentalDate) AS latestEndRentalDate 
+                            FROM rental 
+                            GROUP BY vehicleID
+                        ) r ON v.vehicleID = r.vehicleID 
+                        LEFT JOIN (
+                            SELECT vehicleID, MAX(finishMaintDate) AS latestFinishMaintDate 
+                            FROM maintenance 
+                            GROUP BY vehicleID
+                        ) m ON v.vehicleID = m.vehicleID 
+                        WHERE (r.latestEndRentalDate IS NULL OR r.latestEndRentalDate <= @todaydate)
+                        AND (m.latestFinishMaintDate IS NULL OR m.latestFinishMaintDate <= @todaydate)
+                    );";
+
+                using (var updateCommand = new MySqlCommand(updateQuery, connection))
+                {
+                    updateCommand.Parameters.AddWithValue("@todaydate", DateTime.Today);
+                    updateCommand.ExecuteNonQuery();
+                }
+
+
+                string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, v.status, vt.brand, vt.model, vt.type, " +
+                            "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                            "FROM vehicle v " +
+                            "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
+                            "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
+                            "AND r.startRentalDate <= @todayDate " +
+                            "AND r.endRentalDate >= @todayDate " +
+                            "LEFT JOIN maintenance m ON v.vehicleID = m.vehicleID " +
+                            "AND m.finishMaintDate <= @todayDate " +
+                            "AND m.workshopStatus != 'Completed' " +
+                            "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
+                            "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
 
                 //Need change maintenanace workshopStatus value
 
@@ -84,6 +113,7 @@ namespace RentingSystem.Controllers
                                 FuelType = reader.GetString("fuelType"),
                                 TruckSpace = reader.GetDecimal("truckSpace"),
                                 RentalCostPerDay = reader.GetDecimal("rentalCostPerDay"),
+                                Status = reader.GetString("Status")
                             };
 
                             vehicle.IsUserAuthorized = ableToOperate(vehicle.LicenseToOperate);
@@ -178,6 +208,14 @@ namespace RentingSystem.Controllers
 
                     command.ExecuteNonQuery();
                 }
+
+                query = "UPDATE vehicle SET status= 'rented' WHERE vehicleID = @vehicleID";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@vehicleID", vehicleID);
+                    command.ExecuteNonQuery();
+                }
+
             }
 
             return Json(new { success = true });
@@ -307,5 +345,6 @@ namespace RentingSystem.Controllers
             VehicleDetailModel vehicleDetail = new VehicleDetailModel{Maintenances = maintenanceLogs, Vehicle = vehicle};
             return View(vehicleDetail);
         }
+
     }
 }
