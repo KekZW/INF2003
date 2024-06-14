@@ -1,23 +1,30 @@
-<div class="container login row">
-    <div class="col"></div>
 
-    <div class="col text-center">
-        <h1> Login </h1>
-        <p> Not a user? <a href="Register">Click here</a> to register </p>
-        <form method="post" asp-action="Login">
-            <div class="form-group text-start" style="padding: 10px 0;">
-                <label for="email"> Email </label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
-            </div>
-            <div class="form-group text-start" style="padding: 10px 0;">
-                <label for="password"> Password </label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-            </div>
-            <div style="padding: 10px 0;">
-                <button type="submit" class="btn btn-primary"> Login </button>
-            </div>
-        </form>
+<head>
+    <link rel="stylesheet" href="css/site.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<div class="container">
+    <div class="container login row">
+        <div class="col"></div>
+
+        <div class="col text-center">
+            <h1> Login </h1>
+            <p> Not a user? <a href="Register">Click here</a> to register </p>
+            <form method="post" asp-action="Login">
+                <div class="form-group text-start" style="padding: 10px 0;">
+                    <label for="email"> Email </label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group text-start" style="padding: 10px 0;">
+                    <label for="password"> Password </label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div style="padding: 10px 0;">
+                    <button type="submit" class="btn btn-primary"> Login </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col"></div>
     </div>
-    
-    <div class="col"></div>
 </div>

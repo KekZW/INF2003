@@ -2,7 +2,143 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <img src="images/indexcar.jpg" alt="indexcar" class="small-image"/>
+    <div class="overlay">
+        <h1 class="display-4">Welcome, @Context.User.Identity.Name. Drive a <br>car of ours.</h1>
+
+    </div>
 </div>
+
+<div class="container mt-3 ">
+    <div class="rent-text-0">
+        <span class="display-4 rent-text-1">Rent. </span><span class="display-4 rent-text-2">The world is yours.</span>
+    </div>
+
+    <div id="carouselExampleControls" class="carousel mt-3">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="card">
+                    <div class="card-body card-body-background">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5 class="card-title">Nissan GTR</h5>
+                                <p class="card-text">
+                                    High-performance, twin-turbo sports car known for its advanced technology, speed, and precise handling.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <a href="#" class="btn btn-outline-dark d-block mt-3 mt-md-0">Rent</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="images/18tdigb-helios307.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-body card-body-background">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5 class="card-title">Honda Amaze</h5>
+                                <p class="card-text">
+                                    Compact sedan known for its fuel efficiency, spacious interior, and reliable performance in urban settings.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <a href="#" class="btn btn-outline-dark d-block mt-3 mt-md-0">Rent</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="images/hondaamaze Background Removed.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-body card-body-background">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5 class="card-title">Kia Kiger</h5>
+                                <p class="card-text">
+                                    Subcompact SUV offering modern design, practical features, and efficient performance tailored for urban lifestyles.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <a href="#" class="btn btn-outline-dark d-block mt-3 mt-md-0">Rent</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="images/kiakiger.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-body card-body-background">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5 class="card-title">Toyota Cruiser</h5>
+                                <p class="card-text">
+                                    Legendary full-size SUV recognized for rugged off-road capability, luxurious comfort, and enduring reliability worldwide.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <a href="#" class="btn btn-outline-dark d-block mt-3 mt-md-0">Rent</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="images/toyotacruiser.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="..." class="d-block w-100" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title 5</h5>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of the
+                            card's content.
+                        </p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="..." class="d-block w-100" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title 6</h5>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of the
+                            card's content.
+                        </p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+</div>
+
+<script src="js/site.js"></script>
