@@ -3,7 +3,9 @@ using System.Diagnostics.Eventing.Reader;
 using System.Security.Claims;
 using System.Windows.Input;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
 
 namespace RentingSystem.Controllers
@@ -12,27 +14,35 @@ namespace RentingSystem.Controllers
     {
         private readonly string _connectionString = "Server=localhost;Database=vehicleDB;Uid=root;Pwd=;";
 
+        private readonly ApplicationDbContext _context;
+
+        public VehiclesController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
         // GET: Vehicles/Index
         public IActionResult Index(DateTime? selectedDate, string filterColumn, string filterValue)
         {
-            List<Vehicle> vehicles = new List<Vehicle>();
+            List<AuthorisedVehicleView> vehicles = new List<AuthorisedVehicleView>();
 
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
 
                 string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
-                       "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
-                       "FROM vehicle v " +
-                       "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
-                       "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
-                       "AND r.startRentalDate <= @todayDate " +
-                       "AND r.endRentalDate >= @todayDate " +
-                       "LEFT JOIN maintenance m ON v.vehicleID = m.vehicleID " +
-                       "AND m.finishMaintDate <= @todayDate " +
-                       "AND m.workshopStatus != 'Completed' " +
-                       "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
-                       "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
+                               "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                               "FROM vehicle v " +
+                               "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
+                               "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
+                               "AND r.startRentalDate <= @todayDate " +
+                               "AND r.endRentalDate >= @todayDate " +
+                               "LEFT JOIN maintenance m ON v.vehicleID = m.vehicleID " +
+                               "AND m.finishMaintDate <= @todayDate " +
+                               "AND m.workshopStatus != 'Completed' " +
+                               "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
+                               "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
 
                 //Need change maintenanace workshopStatus value
 
@@ -43,7 +53,6 @@ namespace RentingSystem.Controllers
 
                 using (var command = new MySqlCommand(query, connection))
                 {
-
                     if (selectedDate.HasValue)
                     {
                         command.Parameters.AddWithValue("@todayDate", selectedDate);
@@ -62,8 +71,7 @@ namespace RentingSystem.Controllers
                     {
                         while (reader.Read())
                         {
-
-                            Vehicle vehicle = new Vehicle
+                            AuthorisedVehicleView vehicle = new AuthorisedVehicleView()
                             {
                                 VehicleID = reader.GetInt32("vehicleID"),
                                 LicensePlate = reader.GetString("licensePlate"),
@@ -76,7 +84,6 @@ namespace RentingSystem.Controllers
                                 FuelType = reader.GetString("fuelType"),
                                 TruckSpace = reader.GetDecimal("truckSpace"),
                                 RentalCostPerDay = reader.GetDecimal("rentalCostPerDay"),
-
                             };
 
                             vehicle.IsUserAuthorized = ableToOperate(vehicle.LicenseToOperate);
@@ -86,7 +93,6 @@ namespace RentingSystem.Controllers
                     }
                 }
             }
-
 
 
             return View(vehicles);
@@ -146,17 +152,17 @@ namespace RentingSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult RentVehicle(int vehicleID, string licenseToOperate, DateTime startRentalDate, DateTime endRentalDate, string rentalAddress,
+        public IActionResult RentVehicle(int vehicleID, string licenseToOperate, DateTime startRentalDate,
+            DateTime endRentalDate, string rentalAddress,
             int rentalLot, decimal rentalAmount)
         {
-
-
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
 
-                string query = "INSERT INTO rental (userID, vehicleID, startRentalDate, endRentalDate, rentalAmount, rentalAddress, rentalLot) " +
-                                "VALUES (@userID, @vehicleID, @startRentalDate, @endRentalDate, @rentalAmount, @rentalAddress, @rentalLot)";
+                string query =
+                    "INSERT INTO rental (userID, vehicleID, startRentalDate, endRentalDate, rentalAmount, rentalAddress, rentalLot) " +
+                    "VALUES (@userID, @vehicleID, @startRentalDate, @endRentalDate, @rentalAmount, @rentalAddress, @rentalLot)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -186,32 +192,39 @@ namespace RentingSystem.Controllers
                 return -1;
             else
                 email = emailClaim.Value;
-                int userID = -1;
+            int userID = -1;
 
-                using (var connection = new MySqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT userID FROM user WHERE emailAddress = @Email";
+
+                using (var command = new MySqlCommand(query, connection))
                 {
-                    connection.Open();
+                    command.Parameters.AddWithValue("@Email", email);
 
-                    string query = "SELECT userID FROM user WHERE emailAddress = @Email";
-
-                    using (var command = new MySqlCommand(query, connection))
+                    using (var reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@Email", email);
-
-                        using (var reader = command.ExecuteReader())
+                        if (reader.Read())
                         {
-                            if (reader.Read())
-                            {
-                                userID = reader.GetInt32("userID");
-                            }
+                            userID = reader.GetInt32("userID");
                         }
                     }
                 }
-                return userID;
+            }
+
+            return userID;
         }
+
         public bool ableToOperate(string licenseToOperate)
         {
             String userlicenseToOperate = GetCurrentUserlicenseToOperate();
+            if (licenseToOperate == "3A" && userlicenseToOperate == "3")
+            {
+                return true;
+            }
+
             return userlicenseToOperate == licenseToOperate;
         }
 
@@ -222,7 +235,6 @@ namespace RentingSystem.Controllers
 
             if (userID > 0)
             {
-
                 using (var connection = new MySqlConnection(_connectionString))
                 {
                     connection.Open();
@@ -241,6 +253,7 @@ namespace RentingSystem.Controllers
                             }
                         }
                     }
+
                     return licenseToOperate;
                 }
             }
@@ -248,10 +261,51 @@ namespace RentingSystem.Controllers
             {
                 return null;
             }
+        }
+
+        [HttpGet]
+        public IActionResult Manage()
+        {
+            string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
+                           "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                           "FROM vehicle v " +
+                           "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
+                           "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
+                           "GROUP BY v.vehicleID " +
+                           "ORDER BY COUNT(r.vehicleID) DESC";
+
+            List<VehicleViewModel> vehicleList = _context.VehicleViewModel.FromSqlRaw(query).ToList();
+
+            return View(vehicleList);
+        }
+
+        public IActionResult Details(int id)
+        {
+            Console.WriteLine(id);
+            // TODO: Retrieve maintenance logs for the vehicle, combine with vehicleViewModel 
+            string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
+
+            List<Maintenance> maintenanceLogs = null;
+
+            if (_context.Maintenance != null)
+            {
+                maintenanceLogs = _context.Maintenance.FromSqlRaw(maintenanceQuery, id).ToList();
             }
 
+            string vehQuery = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
+                              "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                              "FROM vehicle v " +
+                              "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
+                              "WHERE v.vehicleID = @p0";
+
+            VehicleViewModel vehicle = _context.VehicleViewModel
+                .FromSqlRaw(vehQuery, id)
+                .FirstOrDefault();
+            
+            Console.WriteLine(maintenanceLogs);
+
+            VehicleDetailModel vehicleDetail = new VehicleDetailModel{Maintenances = maintenanceLogs, Vehicle = vehicle};
+            return View(vehicleDetail);
         }
     }
-
-
-
+}

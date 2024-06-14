@@ -1,0 +1,54 @@
+@model List<RentingSystemMVC.Models.VehicleViewModel>
+<div class="container">
+    <h1> Manage Vehicles </h1>
+    <div class="row">
+        <div class="col-4">
+            @* TODO: Functionality for search *@
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+            </div>
+        </div>
+        <div class="col-8 text-end">
+            @* TODO: Add new vehicle (CJ) *@
+            <a class="btn btn-primary">Add new vehicle</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>License Plate</th>
+            <th>License To Operate</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Type</th>
+            <th>Seats</th>
+            <th>Fuel Capacity</th>
+            <th>Fuel Type</th>
+            <th>Truck Space</th>
+            <th>Rental Cost Per Day</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle.LicensePlate</td>
+                <td>@vehicle.LicenseToOperate</td>
+                <td>@vehicle.Brand</td>
+                <td>@vehicle.Model</td>
+                <td>@vehicle.Type</td>
+                <td>@vehicle.Seats</td>
+                <td>@vehicle.FuelCapacity</td>
+                <td>@vehicle.FuelType</td>
+                <td>@vehicle.TruckSpace</td>
+                <td>@vehicle.RentalCostPerDay</td>
+                <td>
+                    <a asp-controller="Vehicles" asp-action="Details" asp-route-id="@vehicle.VehicleID" class="btn btn-primary">View</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

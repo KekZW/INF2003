@@ -1,0 +1,62 @@
+@model RentingSystemMVC.Models.VehicleDetailModel
+
+<div class="container gy-2">
+    <div class="row">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1> Details for @Model.Vehicle.Brand @Model.Vehicle.Model</h1>
+            @* TODO: Open up a modal to edit the vehicle details (CJ) *@
+            <div>
+                <a class="btn btn-primary"> Edit </a>
+            </div>
+        </div>
+        <h4> License Number: @Model.Vehicle.LicensePlate </h4>
+        @if (Model.Vehicle.LicenseToOperate == "3A")
+        {
+            <p> License To Operate: 3/3A </p>
+        }
+        else
+        {
+            <p> License To Operate: @Model.Vehicle.LicenseToOperate </p>
+        }
+        <p> Number of Seats: @Model.Vehicle.Seats </p>
+        <p> Type: @Model.Vehicle.Type </p>
+        <p> Fuel: @(Model.Vehicle.FuelCapacity)L @Model.Vehicle.FuelType </p>
+        <p> Trunk Space: @Model.Vehicle.TruckSpace </p>
+        <p> Rental Cost: @(Model.Vehicle.RentalCostPerDay)/day </p>
+    </div>
+    <div class="row">
+        <div class="d-flex justify-content-between">
+            <h3> Maintenance Details </h3>
+            @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
+            <a class="btn btn-primary"> New Maintenance </a>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th> Status </th>
+                <th> Start Date </th>
+                <th> End Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model.Maintenances.Count == 0)
+            {
+                <tr>
+                    <td colspan="3"> No maintenance records found </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var maintenance in Model.Maintenances)
+                {
+                    <tr>
+                        <td> @maintenance.WorkshopStatus </td>
+                        <td> @maintenance.FinishMaintDate </td>
+                        <td> @maintenance.LastMaintDate </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
