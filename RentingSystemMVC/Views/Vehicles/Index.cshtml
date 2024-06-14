@@ -1,11 +1,22 @@
 @model List<RentingSystemMVC.Models.AuthorisedVehicleView>
 
-<div class="container">
-    <h1> Rent a vehicle</h1>
+@functions {
+
+    public string GetImagePath(string model)
+    {
+        return $"/images/{model}.png";
+    }
+
+}
+
+<div class="text-center vehicle-intro pt-5 pb-5">
+    <h1 class="vehicle-intro-text">The world is yours.</h1>
+</div>
+<div class="container mt-5">
     <h3>Available Vehicles</h3>
 
-    <form method="get" asp-action="Index" class="container row" style="margin: 0; padding: 0;">
-        <div class="col-sm-4" style="margin-left: 0; padding-left: 0;">
+    <form method="get" asp-action="Index" class="container d-flex justify-content-between" style="margin: 0; padding: 0;">
+        <div class="col-sm-3" style="margin-left: 0; padding-left: 0;">
             <label for="filterColumn">Filter By:</label>
             <select id="filterColumn" name="filterColumn" class="form-select">
                 <option value="Brand">Brand</option>
@@ -19,63 +30,89 @@
             </select>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <label for="filterValue">Value:</label>
             <input type="text" id="filterValue" name="filterValue" class="form-control"/>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <label for="selectedDate">Date:</label>
             <input type="date" id="selectedDate" name="selectedDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control"/>
         </div>
 
-        <button type="submit" class="btn btn-secondary col-sm-1">Filter</button>
+        <button type="submit" class="btn btn-primary col-sm-1 filter-button">Filter</button>
+
 
     </form>
+    
+    @foreach (var vehiclecard in Model)
+    {
+        <div class="card card-rent mt-4">
+        <div class="d-flex">
+            <img src="@GetImagePath(vehiclecard.Model)" class="col-sm-2" alt="car">
+            <div class="col-sm-2 d-flex flex-column justify-content-evenly" style="padding-left: 10px">
+                <div class="brand-name">
+                    <span class="card-label">Name: </span>
+                    <p>@vehiclecard.Brand @vehiclecard.Model</p>
+                </div>
+                <div class="license-plate">
+                    <span class="card-label">License Number:</span>
+                    <p>@vehiclecard.LicensePlate</p>
+                </div>
+            </div>
+            <div class="col-sm-2 d-flex flex-column justify-content-evenly ">
+                <div class="license-to-operate">
+                    <span class="card-label">License to Operate: </span>
+                    <p>@vehiclecard.LicenseToOperate</p>
+                </div>
+                <div class="car-type">
+                    <span class="card-label">Type:</span>
+                    <p>@vehiclecard.Type</p>
+                </div>
+            </div>
+            <div class="col-sm-2 d-flex flex-column justify-content-evenly ">
+                <div class="fuel-capacity">
+                    <span class="card-label">Fuel Capacity: </span>
+                    <p>@vehiclecard.FuelCapacity</p>
+                </div>
+                <div class="fuel-type">
+                    <span class="card-label">Fuel Type:</span>
+                    <p>@vehiclecard.FuelType</p>
+                </div>
+            </div>
+            <div class="col-sm-2 d-flex flex-column justify-content-evenly ">
+                <div class="trunk-space">
+                    <span class="card-label">Trunk Space:</span>
+                    <p>@vehiclecard.TruckSpace</p>
+                </div>
+                <div class="seat-no">
+                    <span class="card-label">Seats:</span>
+                    <p>@vehiclecard.Seats</p>
+                </div>
+            </div>
+            <div class="col-sm-1 d-flex flex-column justify-content-center">
+                <div class="cost">
+                    <p>
+                        <span>@vehiclecard.RentalCostPerDay</span>
+                    </p>
+                </div>
+            </div>
+            @if (User.Identity.IsAuthenticated && vehiclecard.IsUserAuthorized == true)
+            {
+                <button type="button" class="btn btn-dark col-sm-1" onclick="openRentModal(@vehiclecard.VehicleID, @vehiclecard.RentalCostPerDay)">Rent</button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-dark col-sm-1" disabled>Rent</button>
+            }
+            
+                
+            </div>
+        </div>
+    }
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>License Plate</th>
-            <th>License To Operate</th>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Type</th>
-            <th>Seats</th>
-            <th>Fuel Capacity</th>
-            <th>Fuel Type</th>
-            <th>Truck Space</th>
-            <th>Rental Cost Per Day</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var vehicle in Model)
-        {
-            <tr>
-                <td>@vehicle.LicensePlate</td>
-                <td>@vehicle.LicenseToOperate</td>
-                <td>@vehicle.Brand</td>
-                <td>@vehicle.Model</td>
-                <td>@vehicle.Type</td>
-                <td>@vehicle.Seats</td>
-                <td>@vehicle.FuelCapacity</td>
-                <td>@vehicle.FuelType</td>
-                <td>@vehicle.TruckSpace</td>
-                <td>@vehicle.RentalCostPerDay</td>
-                <td>
-                    @if (User.Identity.IsAuthenticated && vehicle.IsUserAuthorized == true)
-                    {
-                        <button type="button" class="btn btn-primary" onclick="openRentModal(@vehicle.VehicleID, @vehicle.RentalCostPerDay)">Rent</button>
-                    }
-                    else
-                    {
-                        <button type="button" class="btn btn-primary" disabled>Rent</button>
-                    }
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    
+    
 
     <!-- Rent Modal -->
     <div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
@@ -121,7 +158,7 @@
 
     @section Scripts {
         <script>
-         document.addEventListener('DOMContentLoaded', (event) => {
+        document.addEventListener('DOMContentLoaded', (event) => {
             const startRentalDate = document.getElementById('startRentalDate');
             const endRentalDate = document.getElementById('endRentalDate');
 
@@ -132,7 +169,7 @@
 
                 let minEndDateString = minEndDate.toISOString().split('T')[0];
                 endRentalDate.min = minEndDateString;
-                
+
                 if (new Date(endRentalDate.value) <= startDate) {
                     endRentalDate.value = minEndDateString;
                 }
