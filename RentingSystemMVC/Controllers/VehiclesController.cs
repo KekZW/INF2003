@@ -39,16 +39,12 @@ namespace RentingSystem.Controllers
                     "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay, COUNT(r.vehicleID) AS timesRented " +
                     "FROM vehicle v " +
                     "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
-                    "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
-                    "AND r.startRentalDate <= @todayDate " +
-                    "AND r.endRentalDate >= @todayDate " +
-                    "LEFT JOIN maintenance m ON v.vehicleID = m.vehicleID " +
-                    "AND m.finishMaintDate <= @todayDate " +
-                    "AND m.workshopStatus != 'Completed' " +
-                    "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
-                    "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
-
-                //Need change maintenanace workshopStatus value
+                    "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " + 
+                    "WHERE v.vehicleID NOT IN" +
+                    "(SELECT DISTINCT r.vehicleID FROM rental r WHERE @todayDate BETWEEN r.startRentalDate AND r.endRentalDate)"+
+                    "AND v.vehicleID NOT IN" +
+                    "(SELECT DISTINCT m.vehicleID FROM maintenance m WHERE m.finishMaintDate <= @todayDate AND m.workshopStatus != 'Completed')";
+                    
 
                 if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
                 {
