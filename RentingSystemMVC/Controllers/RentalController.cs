@@ -5,12 +5,14 @@ using System.Windows.Input;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using RentingSystemMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RentingSystemMVC.Controllers
 {
     public class RentalController : Controller
     {
         private readonly string _connectionString = "Server=localhost;Database=vehicleDB;Uid=root;Pwd=;";
+        [Authorize(Roles="User")]
         public IActionResult Index()
         {
             List<Rental> rentals = new List<Rental>();
