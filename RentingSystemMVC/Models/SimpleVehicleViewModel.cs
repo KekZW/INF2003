@@ -1,6 +1,6 @@
 namespace RentingSystemMVC.Models;
 
-public class VehicleViewModel
+public class SimpleVehicleViewModel
 {
     public int VehicleID { get; set; }
     public string LicensePlate { get; set; }
@@ -13,5 +13,7 @@ public class VehicleViewModel
     public string FuelType { get; set; }
     public decimal TruckSpace { get; set; }
     public decimal RentalCostPerDay { get; set; }
+    
+    public int TimesRented { get; set; }
 
 }

@@ -26,7 +26,7 @@ namespace RentingSystemMVC.Controllers
         {
             
             
-            List<VehicleViewModel> vehicles = new List<VehicleViewModel>();
+            List<SimpleVehicleViewModel> vehicles = new List<SimpleVehicleViewModel>();
             
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -47,7 +47,7 @@ namespace RentingSystemMVC.Controllers
                     {
                         while (reader.Read())
                         {
-                            VehicleViewModel vehicle = new VehicleViewModel()
+                            SimpleVehicleViewModel vehicle = new SimpleVehicleViewModel()
                             {
                                 VehicleID = reader.GetInt32("vehicleID"),
                                 LicensePlate = reader.GetString("licensePlate"),
