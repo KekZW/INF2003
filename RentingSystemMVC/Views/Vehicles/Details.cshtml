@@ -59,4 +59,86 @@
             </tbody>
         </table>
     </div>
+    <!-- Add Maintenance Record -->
+    <div class="modal fade" id="maintenanceModal" tabindex="-1" role="dialog" aria-labelledby="maintenanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="maintenanceModalLabel">New Maintenance Record</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="maintenanceForm">
+                        <input type="hidden" id="vehicleID" name="vehicleID"/>
+                        <div class="form-group">
+                            <label for="startMaintenanceDate">Start Date</label>
+                            <input type="date" class="form-control" id="startMaintenanceDate" name="startMaintenanceDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="endMaintenanceDate">End Date</label>
+                            <input type="date" class="form-control" id="endMaintenanceDate" name="endMaintenanceDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="workshopStatus">Description</label>
+                            <input type="text" class="form-control" id="workshopStatus" name="workshopStatus" required/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-2">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts
+    {
+        <script>
+            
+            let startMaintenanceDate;
+            let endMaintenanceDate;
+            let workshopStatus;
+
+            document.addEventListener('DOMContentLoaded', (event) => {
+                startMaintenanceDate = document.getElementById('startMaintenanceDate');
+                endMaintenanceDate = document.getElementById('endMaintenanceDate');
+                workshopStatus = document.getElementById('workshopStatus');
+            });
+
+            function openMaintenanceModal(vehicleID) {
+                $('#vehicleID').val(vehicleID);
+                $('#maintenanceModal').modal('show');
+            }
+
+            $(document).ready(function () {
+                $('#maintenanceForm').on('submit', function (event) {
+                    event.preventDefault();
+                    var formData = $(this).serialize();
+
+                    if (startMaintenanceDate.value && endMaintenanceDate.value && workshopStatus.value) {
+                        $.ajax({
+                            url: '@Url.Action("AddMaintenance", "Vehicles")',
+                            type: 'POST',
+                            data: formData,
+                            success: function () {
+                                alert('New maintenance record added!');
+                                $('#rentModal').modal('hide');
+
+                                window.location.href = '@Url.Action("Details", "Vehicles")';
+                            },
+                            error: function() {
+                                alert('Error occurred while adding maintenance record.');
+                            }
+                        });
+                    } else {
+                        alert('All fields must be filled before submitting');
+                    }
+
+                    
+                });
+                
+            });
+        </script>
+    }
 </div>
