@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -24,14 +25,13 @@ namespace RentingSystem.Controllers
 
 
         // GET: Vehicles/Index
-        public IActionResult Index(DateTime? selectedDate, string filterColumn, string filterValue)
+        public IActionResult Index(DateTime? selectedDate, string? filterColumn, string? filterValue)
         {
             List<AuthorisedVehicleView> vehicles = new List<AuthorisedVehicleView>();
 
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-
 
                 string query =
                     "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
@@ -45,16 +45,16 @@ namespace RentingSystem.Controllers
                     "AND m.finishMaintDate <= @todayDate " +
                     "AND m.workshopStatus != 'Completed' " +
                     "WHERE r.vehicleID IS NULL AND m.vehicleID IS NULL AND v.vehicleID NOT IN " +
-                    "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)" +
-                    "GROUP BY v.vehicleID " +                           
-                    "ORDER BY COUNT(r.vehicleID) DESC";
+                    "(SELECT v.vehicleID FROM vehicle v, rental r WHERE r.vehicleID = v.vehicleID AND r.startRentalDate = @todayDate)";
 
                 //Need change maintenanace workshopStatus value
 
                 if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
                 {
-                    query += " AND " + filterColumn + " LIKE @filterValue";
+                    query += " AND vt." + filterColumn + " LIKE @filterValue";
                 }
+
+                query += " GROUP BY v.vehicleID ORDER BY COUNT(r.vehicleID) DESC";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -72,6 +72,7 @@ namespace RentingSystem.Controllers
                         command.Parameters.AddWithValue("@filterValue", "%" + filterValue + "%");
                     }
 
+                   
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
