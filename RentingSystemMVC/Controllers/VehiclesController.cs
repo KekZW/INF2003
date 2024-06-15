@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Claims;
 using System.Windows.Input;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
@@ -272,6 +273,11 @@ namespace RentingSystem.Controllers
         [HttpGet]
         public IActionResult Manage(string searchTerm)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+            
             string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
                            "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
                            "FROM vehicle v " +
@@ -293,7 +299,11 @@ namespace RentingSystem.Controllers
 
         public IActionResult Details(int id)
         {
-            Console.WriteLine(id);
+            if (!User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
+            
             // TODO: Retrieve maintenance logs for the vehicle, combine with vehicleViewModel 
             string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
 
