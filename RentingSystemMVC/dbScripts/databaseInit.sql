@@ -34,13 +34,13 @@ FOREIGN KEY (vehicleID) REFERENCES vehicle(vehicleID)
 
 CREATE TABLE IF NOT EXISTS user (
 userID INT PRIMARY KEY AUTO_INCREMENT, 
-username VARCHAR(30),
 userPassword VARCHAR(100),
 name VARCHAR(50),
 address VARCHAR(256),
 licenseID INT,
 emailAddress VARCHAR(50),
 phoneNo VARCHAR(20),
+role VARCHAR(5),
 FOREIGN KEY (licenseID) REFERENCES license(licenseID));
 
 CREATE TABLE IF NOT EXISTS rental (

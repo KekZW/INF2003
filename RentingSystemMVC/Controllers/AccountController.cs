@@ -57,10 +57,10 @@ namespace RentingSystemMVC.Controllers
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, user.Username),
                         new Claim(ClaimTypes.Email, user.EmailAddress),
                         new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
-                        new Claim(ClaimTypes.GivenName, user.Name)
+                        new Claim(ClaimTypes.GivenName, user.Name),
+                        new Claim(ClaimTypes.Role, user.Role)
                     };
 
                     var claimsIdentity = new ClaimsIdentity(
@@ -140,13 +140,13 @@ namespace RentingSystemMVC.Controllers
 
             var User = new User
             {
-                Username = username,
                 UserPassword = hashed_pass,
                 Name = firstName + " " + lastName,
                 Address = address,
                 LicenseID = licenseId,
                 EmailAddress = email,
-                PhoneNo = phoneNumber
+                PhoneNo = phoneNumber,
+                Role = "User"
             };
 
             _context.User.Add(User);
