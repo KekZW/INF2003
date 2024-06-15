@@ -162,3 +162,7 @@ body {
 p{
   margin:auto;
 }
+
+.rent-button{
+  border-radius: 0 .25rem .25rem 0;
+}
