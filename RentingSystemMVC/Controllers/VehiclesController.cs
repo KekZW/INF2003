@@ -326,5 +326,28 @@ namespace RentingSystem.Controllers
                 { Maintenances = maintenanceLogs, Vehicle = vehicle };
             return View(vehicleDetail);
         }
+
+        public IActionResult AddMaintenance(int vehicleID, DateTime startDate, DateTime endDate, string description)
+        {
+            using(var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "INSERT INTO maintenance (vehicleID, workshopStatus, finishMaintDate, LastMaintDate) "
+                + "VALUES (@vehicleID, @description, @startDate, @endDate)";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@vehicleID", vehicleID);
+                    command.Parameters.AddWithValue("@description", description);
+                    command.Parameters.AddWithValue("@startDate", startDate);
+                    command.Parameters.AddWithValue("@endDate", endDate);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            
+            return Json(new { success = true });
+        }
     }
 }
