@@ -22,7 +22,7 @@ namespace RentingSystemMVC.Controllers
                 string query = "SELECT r.rentalID, r.userID, r.vehicleID, v.licensePlate, " +
                                 "r.startRentalDate, r.endRentalDate, r.rentalAmount, r.rentalAddress, r.rentalLot " +
                                 "FROM rental r LEFT JOIN vehicle v ON r.vehicleID = v.vehicleID " +
-                                "WHERE  r.userID = @userID";
+                                "WHERE r.userID = @userID";
 
                 int userID = GetCurrentUserID();
 
@@ -75,13 +75,6 @@ namespace RentingSystemMVC.Controllers
                         command.ExecuteNonQuery();
                     }
 
-                    query = "UPDATE vehicle SET status= 'avaliable' WHERE vehicleID = (SELECT vehicleID WHERE rentalID = @rentalID)";
-
-                    using (var command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@rentalID", rentalID);
-                        command.ExecuteNonQuery();
-                    }
                 }
 
                 return Json(new { success = true });
@@ -101,7 +94,8 @@ namespace RentingSystemMVC.Controllers
                 {
                     connection.Open();
 
-                    string query = "UPDATE rental SET startRentalDate = @startRentalDate, endRentalDate = @endRentalDate WHERE rentalID = @rentalID";
+                    string query = "UPDATE rental SET startRentalDate = @startRentalDate, " +
+                        "endRentalDate = @endRentalDate WHERE rentalID = @rentalID";
 
                     using (var command = new MySqlCommand(query, connection))
                     {
