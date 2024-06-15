@@ -39,7 +39,7 @@ namespace RentingSystemMVC.Controllers
                     "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
                     "GROUP BY v.vehicleID " +
                     "ORDER BY timesRented DESC " +
-                    "LIMIT 6";
+                    "LIMIT 8";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
