@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+
 
 
 namespace RentingSystemMVC.Controllers
@@ -54,12 +57,13 @@ namespace RentingSystemMVC.Controllers
                     numBytesRequested: 256 / 8
                 ));
                 if (user.UserPassword == hashed_pass)
-                {
+                {   
+                    Debug.WriteLine("Index action has been called.",user.name);
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, user.EmailAddress),
                         new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
-                        new Claim(ClaimTypes.GivenName, user.Name),
+                        new Claim(ClaimTypes.Name, user.name),
                         new Claim(ClaimTypes.Role, user.Role)
                     };
 
@@ -141,7 +145,7 @@ namespace RentingSystemMVC.Controllers
             var User = new User
             {
                 UserPassword = hashed_pass,
-                Name = firstName + " " + lastName,
+                name = firstName + " " + lastName,
                 Address = address,
                 LicenseID = licenseId,
                 EmailAddress = email,
@@ -166,7 +170,8 @@ namespace RentingSystemMVC.Controllers
 
             return RedirectToAction("Login");
         }
-
+        
+        [Authorize(Roles="Admin,User")]
         public async Task<IActionResult> Logout()
         {
             // Clear the existing external cookie
@@ -175,7 +180,7 @@ namespace RentingSystemMVC.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
+        [Authorize(Roles="Admin,User")]
         [HttpGet]
         public IActionResult Information()
         {
