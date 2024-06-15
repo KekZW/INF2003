@@ -122,14 +122,12 @@ namespace RentingSystemMVC.Controllers
             {
                 AcquireDate = licenseDate,
                 LicenseClass = licenseClass,
-                UserID = null
             };
             
             _context.License.Add(License);
             _context.SaveChanges();
 
             int licenseId = License.LicenseID;
-
 
             byte[] salt = new byte[0];
 
@@ -155,18 +153,6 @@ namespace RentingSystemMVC.Controllers
 
             _context.User.Add(User);
             _context.SaveChanges();
-
-            int userId = User.UserID;
-
-            string updateLicenseQuery = "UPDATE license SET userID = @p0 WHERE licenseID = @p1";
-            int rowsAffected = _context.Database.ExecuteSqlRaw(updateLicenseQuery, userId, licenseId);
-
-            if (rowsAffected <= 0)
-            {
-                ModelState.AddModelError(string.Empty, "Failed to register user. Please try again.");
-                return View();
-            }
-
 
             return RedirectToAction("Login");
         }

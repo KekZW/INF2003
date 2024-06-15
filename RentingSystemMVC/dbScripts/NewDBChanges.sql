@@ -42,4 +42,21 @@ DROP COLUMN username;
 
 ALTER TABLE USER
 ADD COLUMN role VARCHAR(5);
-    
+
+-- 16/06/2024
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `user_AFTER_INSERT` AFTER INSERT ON `user` FOR EACH ROW BEGIN
+
+-- Retrieve last inserted userID
+DECLARE new_user_id INT;
+
+SET new_user_id = New.UserID;
+
+-- Updates the last inserted based on the values
+UPDATE license SET userID = new_user_id WHERE licenseID = (SELECT licenseID from user WHERE UserID = new_user_id);
+
+END
+
+ALTER TABLE `vehicledb`.`user` 
+ADD UNIQUE INDEX `emailAddress_UNIQUE` (`emailAddress` ASC) VISIBLE;
+;

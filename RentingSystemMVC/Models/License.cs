@@ -6,8 +6,4 @@ public class License
     public DateTime AcquireDate { get; set; }
     public string LicenseClass { get; set; }
     public int? UserID { get; set; } 
-
-    public License (){
-        UserID = 1;
-    }
 }
