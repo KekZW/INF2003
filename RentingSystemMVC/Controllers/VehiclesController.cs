@@ -277,8 +277,6 @@ namespace RentingSystem.Controllers
                            "FROM vehicle v " +
                            "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
                            "LEFT JOIN rental r ON v.vehicleID = r.vehicleID ";
-                           // "GROUP BY v.vehicleID " +
-                           // "ORDER BY COUNT(r.vehicleID) DESC";
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
@@ -286,7 +284,10 @@ namespace RentingSystem.Controllers
                     " WHERE (v.licensePlate LIKE {0} OR vt.brand LIKE {0} OR vt.model LIKE {0} OR CONCAT(vt.brand, ' ', vt.model) LIKE {0})";
             }
 
-            List<VehicleViewModel> vehicleList = _context.VehicleViewModel.FromSqlRaw(query, "%" + searchTerm + "%").ToList();
+            query += "GROUP BY v.vehicleID";
+
+
+            List < VehicleViewModel> vehicleList = _context.VehicleViewModel.FromSqlRaw(query, "%" + searchTerm + "%").ToList();
             return View(vehicleList);
         }
 
