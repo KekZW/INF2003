@@ -72,3 +72,37 @@ WHERE CURRENT_DATE() BETWEEN startRentalDate AND endRentalDate);
 CREATE VIEW MaintenanceInProgress
 AS
 (SELECT DISTINCT m.vehicleID FROM maintenance m WHERE m.finishMaintDate <= CURRENT_DATE() AND m.workshopStatus != 'Completed');
+
+ALTER TABLE `vehicledb`.`user` 
+CHANGE COLUMN `role` `role` ENUM('Admin', 'User', 'cls') NULL DEFAULT NULL COMMENT 'ENUM' ;
+
+DROP TRIGGER IF EXISTS `vehicledb`.`rental_BEFORE_INSERT`;
+
+DELIMITER $$
+USE `vehicledb`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `rental_BEFORE_INSERT` BEFORE INSERT ON `rental` FOR EACH ROW BEGIN
+    Declare rentalID INT;
+
+    IF (NEW.startRentalDate < CURRENT_DATE() OR NEW.endRentalDate < DATE_ADD(CURRENT_DATE(), INTERVAL 1 DAY)) 
+    OR (NEW.endRentalDate < NEW.startRentalDate) THEN 
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Error';
+	END IF;
+    
+      -- Check if there is corresponding item between the dates 
+    SELECT COUNT(r.rentalID) into rentalID FROM rental r 
+    WHERE r.userID = NEW.userID AND
+    ((NEW.startRentalDate BETWEEN r.startRentalDate AND r.endRentalDate)
+    OR
+    (NEW.endRentalDate BETWEEN r.startRentalDate AND r.endRentalDate));
+    
+    -- Correspond with an error so user cannot have the same dates
+	IF rentalID > 0 THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Error';
+	END IF;
+		
+    
+END$$
+DELIMITER ;
+
