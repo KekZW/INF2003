@@ -106,3 +106,6 @@ CREATE DEFINER=`root`@`localhost` TRIGGER `rental_BEFORE_INSERT` BEFORE INSERT O
 END$$
 DELIMITER ;
 
+ALTER TABLE `vehicledb`.`vehicle` 
+ADD UNIQUE INDEX `licensePlate_UNIQUE` (`licensePlate` ASC) VISIBLE;
+;
