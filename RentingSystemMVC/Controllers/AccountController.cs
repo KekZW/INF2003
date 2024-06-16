@@ -41,7 +41,7 @@ namespace RentingSystemMVC.Controllers
             // 3. Compare hash inputted password with retrieved hashed password from database (done)
             // 4. If correct, redirect to Home/Index, create authentication cookie
 
-            string query = "SELECT * FROM user WHERE emailAddress = @p0";
+            string query = "SELECT * FROM user WHERE emailAddress = @p0 AND role IN ('User','Admin')";
 
             var user = _context.User.FromSqlRaw(query, email).FirstOrDefault();
 
@@ -223,6 +223,29 @@ namespace RentingSystemMVC.Controllers
            
             ViewData["Message"] = "Successfully updated password" + userId;
             return View();
+        }
+
+        [Authorize (Roles = "User")]
+        [HttpPost]
+        public IActionResult closeAccount(){
+
+            int userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            int? rentalID = _context.Rental.Where(x => x.UserID == userId && x.endRentalDate >= DateTime.Now).Select(x => x.rentalID).FirstOrDefault();
+
+            if (rentalID != 0){
+                ViewData["Message"] = "You have rental booking, you cant remove your account";
+                return View("Information");
+            }
+
+            var userObj = _context.User.FirstOrDefault(x => x.UserID == userId);
+            userObj.Role = "cls";
+
+            _context.SaveChanges();
+
+            Logout();
+
+            return Json(new { success = true });
         }
     }
 }
