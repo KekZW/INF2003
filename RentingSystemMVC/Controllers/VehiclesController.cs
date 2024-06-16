@@ -321,6 +321,7 @@ namespace RentingSystem.Controllers
             return View(vehicleDetail);
         }
 
+        [HttpPost]
         public IActionResult AddMaintenance(int vehicleID, DateTime startDate, DateTime endDate, string description)
         {
             using(var connection = new MySqlConnection(_connectionString))
