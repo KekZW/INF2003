@@ -355,27 +355,37 @@ namespace RentingSystem.Controllers
         [HttpPost]
         public IActionResult CreateVehicle(CreateVehicleViewModel model)
         {   
-
+            
             if (ModelState.IsValid)
             {   
-                using (var connection = new MySqlConnection(_connectionString))
-                {
-                    connection.Open();
 
-                    string query = "INSERT INTO vehicle (LicensePlate, LicenseToOperate, VehicleTypeID) " +
-                                   "VALUES (@LicensePlate, @LicenseToOperate, @VehicleTypeID)";
+                try { 
 
-                    using (var command = new MySqlCommand(query, connection))
+                    using (var connection = new MySqlConnection(_connectionString))
                     {
-                        command.Parameters.AddWithValue("@LicensePlate",  model.LicensePlate);
-                        command.Parameters.AddWithValue("@LicenseToOperate", model.LicenseToOperate);
-                        command.Parameters.AddWithValue("@VehicleTypeID", model.VehicleTypeID);
+                        connection.Open();
 
-                        command.ExecuteNonQuery();
+                        string query = "INSERT INTO vehicle (LicensePlate, LicenseToOperate, VehicleTypeID) " +
+                                    "VALUES (@LicensePlate, @LicenseToOperate, @VehicleTypeID)";
+
+                        using (var command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@LicensePlate",  model.LicensePlate);
+                            command.Parameters.AddWithValue("@LicenseToOperate", model.LicenseToOperate);
+                            command.Parameters.AddWithValue("@VehicleTypeID", model.VehicleTypeID);
+
+                            command.ExecuteNonQuery();
+                        }
                     }
-                }
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                    
+                } catch (Exception e){
+                    ModelState.AddModelError(string.Empty, "There is existing license plate with these numbers, insert another number");
+                    model.VehicleTypes = _context.VehicleType.ToList();
+                    return View(model);
+                }
+                
             }
             return RedirectToAction("CreateVehicle");
         }
@@ -394,28 +404,34 @@ namespace RentingSystem.Controllers
  
             if (ModelState.IsValid) 
             { 
-                using (var connection = new MySqlConnection(_connectionString)) 
-                { 
-                    connection.Open(); 
-                    string query = "INSERT INTO vehicletype (brand, model, type, seats, fuelCapacity, fuelType, truckSpace, rentalCostPerDay) " + 
-                                   "VALUES (@Brand, @Model, @Type, @Seats, @FuelCapacity, @FuelType, @TruckSpace, @RentalCostPerDay)"; 
- 
-                    using (var command = new MySqlCommand(query, connection)) 
+
+                try { 
+                    using (var connection = new MySqlConnection(_connectionString)) 
                     { 
-                        command.Parameters.AddWithValue("@Brand", vt.Brand); 
-                        command.Parameters.AddWithValue("@Model", vt.Model); 
-                        command.Parameters.AddWithValue("@Type", vt.Type); 
-                        command.Parameters.AddWithValue("@Seats", vt.Seats); 
-                        command.Parameters.AddWithValue("@FuelCapacity", vt.FuelCapacity); 
-                        command.Parameters.AddWithValue("@FuelType", vt.FuelType); 
-                        command.Parameters.AddWithValue("@TruckSpace", vt.TruckSpace); 
-                        command.Parameters.AddWithValue("@RentalCostPerDay", vt.RentalCostPerDay); 
- 
-                        command.ExecuteNonQuery(); 
+                        connection.Open(); 
+                        string query = "INSERT INTO vehicletype (brand, model, type, seats, fuelCapacity, fuelType, truckSpace, rentalCostPerDay) " + 
+                                    "VALUES (@Brand, @Model, @Type, @Seats, @FuelCapacity, @FuelType, @TruckSpace, @RentalCostPerDay)"; 
+    
+                        using (var command = new MySqlCommand(query, connection)) 
+                        { 
+                            command.Parameters.AddWithValue("@Brand", vt.Brand); 
+                            command.Parameters.AddWithValue("@Model", vt.Model); 
+                            command.Parameters.AddWithValue("@Type", vt.Type); 
+                            command.Parameters.AddWithValue("@Seats", vt.Seats); 
+                            command.Parameters.AddWithValue("@FuelCapacity", vt.FuelCapacity); 
+                            command.Parameters.AddWithValue("@FuelType", vt.FuelType); 
+                            command.Parameters.AddWithValue("@TruckSpace", vt.TruckSpace); 
+                            command.Parameters.AddWithValue("@RentalCostPerDay", vt.RentalCostPerDay); 
+    
+                            command.ExecuteNonQuery(); 
+                        } 
                     } 
-                } 
  
-                return RedirectToAction("Index"); 
+                    return RedirectToAction("Index"); 
+
+                } catch (Exception e){
+                    return View(vt);
+                }
             } 
     
             return RedirectToAction("CreateVehicle"); 

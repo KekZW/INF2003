@@ -5,6 +5,14 @@
 
 <h2>Create New Vehicle Type</h2>
 
+@if (!ViewData.ModelState.IsValid)
+{
+<br>
+<div class="alert alert-danger" style="text-align:center;">
+    @ViewData.ModelState[string.Empty].Errors[0].ErrorMessage
+</div>
+}
+
 <form asp-action="CreateVehicleType" method="post">
     <div class="form-group">
         <label asp-for="Brand" class="control-label"></label>
