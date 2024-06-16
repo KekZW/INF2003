@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using RentingSystemMVC.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace RentingSystemMVC.Controllers
 {
@@ -95,18 +96,30 @@ namespace RentingSystemMVC.Controllers
         {
             try
             {
+                decimal cost = getRentalCost(vehicleID);
+                Console.WriteLine($"Cost retrieved: {cost}");
+
+                TimeSpan rentalDuration = endRentalDate - startRentalDate;
+                int rentalDays = (int)rentalDuration.TotalDays;
+                Console.WriteLine($"rental Days: {rentalDays}");
+
+                cost = cost * rentalDays;
+                Console.WriteLine($"Cost retrieved: {cost}");
+
                 using (var connection = new MySqlConnection(_connectionString))
                 {
                     connection.Open();
 
-                    string query = "UPDATE rental SET startRentalDate = @startRentalDate, " +
-                        "endRentalDate = @endRentalDate WHERE rentalID = @rentalID";
+                    string query =
+                        "UPDATE rental SET startRentalDate = @startRentalDate, " +
+                        "endRentalDate = @endRentalDate, rentalAmount = @cost WHERE rentalID = @rentalID";
 
                     using (var command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@startRentalDate", startRentalDate);
                         command.Parameters.AddWithValue("@endRentalDate", endRentalDate);
                         command.Parameters.AddWithValue("@rentalID", rentalID);
+                        command.Parameters.AddWithValue("@cost", cost);
                         command.ExecuteNonQuery();
                     }
                 }
@@ -150,6 +163,35 @@ namespace RentingSystemMVC.Controllers
                 }
             }
             return userID;
+        }
+
+        private decimal getRentalCost(int vehicleID)
+        {
+            decimal cost = 0;
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT vt.rentalCostPerDay FROM vehicle v " +
+                    "JOIN vehicletype vt ON v.vehicleTypeID = vt.vehicleTypeID " +
+                    "WHERE v.vehicleID = @vehicleID";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@vehicleID", vehicleID);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            cost = reader.GetDecimal("rentalCostPerDay");
+                        }
+                    }
+                }
+            }
+            Console.WriteLine($"Cost retrieved: {cost}");
+            return cost;
         }
     }
 }
