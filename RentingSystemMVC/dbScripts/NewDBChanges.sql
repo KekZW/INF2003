@@ -112,3 +112,13 @@ ADD UNIQUE INDEX `licensePlate_UNIQUE` (`licensePlate` ASC) VISIBLE;
 
 
 DROP TRIGGER IF EXISTS vehicledb.rental_BEFORE_UPDATE;
+
+-- Drops Foreign Key and Reinsert
+ALTER TABLE `vehicledb`.`vehicle` DROP FOREIGN KEY `vehicle_ibfk_1`;
+
+ALTER TABLE `vehicledb`.`vehicletype` 
+CHANGE COLUMN `vehicleTypeID` `vehicleTypeID` INT NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `vehicledb`.`vehicle` 
+ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`vehicleTypeID`) 
+REFERENCES `vehicletype` (`vehicleTypeID`);
