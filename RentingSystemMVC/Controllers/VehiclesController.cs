@@ -154,6 +154,7 @@ namespace RentingSystem.Controllers
             DateTime endRentalDate, string rentalAddress,
             int rentalLot, decimal rentalAmount)
         {
+        
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
