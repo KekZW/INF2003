@@ -71,11 +71,6 @@ namespace RentingSystemMVC.Controllers
             return View(vehicles);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

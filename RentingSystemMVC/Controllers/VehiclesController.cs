@@ -41,9 +41,9 @@ namespace RentingSystem.Controllers
                     "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
                     "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " + 
                     "WHERE v.vehicleID NOT IN" +
-                    "(SELECT DISTINCT r.vehicleID FROM rental r WHERE @todayDate BETWEEN r.startRentalDate AND r.endRentalDate)"+
+                    "(SELECT * FROM RentalInProgress)"+
                     "AND v.vehicleID NOT IN" +
-                    "(SELECT DISTINCT m.vehicleID FROM maintenance m WHERE m.finishMaintDate <= @todayDate AND m.workshopStatus != 'Completed')";
+                    "(SELECT * FROM MaintenanceInProgress)";
                     
 
                 if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
@@ -58,10 +58,6 @@ namespace RentingSystem.Controllers
                     if (selectedDate.HasValue)
                     {
                         command.Parameters.AddWithValue("@todayDate", selectedDate);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@todayDate", DateTime.Today);
                     }
 
                     if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
@@ -96,7 +92,6 @@ namespace RentingSystem.Controllers
                     }
                 }
             }
-
 
             return View(vehicles);
         }

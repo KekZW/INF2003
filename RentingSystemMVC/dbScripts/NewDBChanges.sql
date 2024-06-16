@@ -45,16 +45,30 @@ ADD COLUMN role VARCHAR(5);
 
 -- 17/06/2024
 
-CREATE DEFINER=`root`@`localhost` TRIGGER `license_AFTER_INSERT` AFTER INSERT ON `license` FOR EACH ROW BEGIN
+DELIMITER //
 
-UPDATE user SET licenseId = NEW.licenseID WHERE userID = NEW.userID;
+CREATE DEFINER=`root`@`localhost` TRIGGER `license_AFTER_INSERT`
+AFTER INSERT ON `license`
+FOR EACH ROW
+BEGIN
+    UPDATE `user` SET `licenseId` = NEW.`licenseID` WHERE `userID` = NEW.`userID`;
+END //
 
-END
+DELIMITER ;
 
-ALTER TABLE `vehicledb`.`user` 
+ALTER TABLE `vehicledb`.`user`
 CHANGE COLUMN `name` `name` VARCHAR(50) NULL DEFAULT NULL AFTER `userID`,
 CHANGE COLUMN `emailAddress` `emailAddress` VARCHAR(50) NULL DEFAULT NULL AFTER `name`,
 ADD UNIQUE INDEX `emailAddress_UNIQUE` (`emailAddress` ASC) VISIBLE;
-;
 
 DROP TRIGGER IF EXISTS `user_AFTER_INSERT`;
+
+CREATE VIEW RentalInProgress
+AS
+(SELECT DISTINCT vehicleID
+FROM rental
+WHERE CURRENT_DATE() BETWEEN startRentalDate AND endRentalDate);
+
+CREATE VIEW MaintenanceInProgress
+AS
+(SELECT DISTINCT m.vehicleID FROM maintenance m WHERE m.finishMaintDate <= CURRENT_DATE() AND m.workshopStatus != 'Completed');
