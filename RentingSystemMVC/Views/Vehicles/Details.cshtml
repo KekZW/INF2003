@@ -28,7 +28,7 @@
         <div class="d-flex justify-content-between">
             <h3> Maintenance Details </h3>
             @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
-            <a class="btn btn-primary"> New Maintenance </a>
+            <button class="btn btn-primary" onclick="openMaintenanceModal(@Model.Vehicle.VehicleID)"> New Maintenance </button>
         </div>
         <table class="table">
             <thead>
