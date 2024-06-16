@@ -359,52 +359,6 @@ namespace RentingSystem.Controllers
             return RedirectToAction("CreateVehicle");
         }
 
-        private void PopulateDropdownList()
-        {
-            List<SelectListItem> vehicleTypes = new List<SelectListItem>();
-
-            try
-            {
-                using (var connection = new MySqlConnection(_connectionString))
-                {
-                    connection.Open();
-
-                    string query = "SELECT vehicleTypeID, brand, model FROM vehicleType ORDER BY brand, model;";
-
-                    using (var command = new MySqlCommand(query, connection))
-                    {
-                        using (var reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                var value = reader["VehicleTypeID"].ToString();
-                                var text = $"{reader["Brand"]} - {reader["Model"]}"; 
-
-                                vehicleTypes.Add(new SelectListItem
-                                {
-                                    Value = value,
-                                    Text = text
-                                });
-                            }
-                        }
-                    }
-                }
-
-                ViewBag.VehicleTypes = vehicleTypes;
-
-                // Log success or number of items retrieved
-                Console.WriteLine($"Successfully populated {vehicleTypes.Count} vehicle types.");
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                Console.WriteLine($"Error in PopulateDropdownList(): {ex.Message}");
-                throw; // Rethrow the exception or handle it appropriately
-            }
-        }
-
-
-
         [HttpPost]
         public IActionResult AddMaintenance(int vehicleID, DateTime startDate, DateTime endDate, string description)
         {

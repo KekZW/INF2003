@@ -14,7 +14,13 @@
 
     <div class="form-group">
         <label asp-for="LicenseToOperate" class="control-label"></label>
-        <input asp-for="LicenseToOperate" class="form-control" />
+        <select class="form-select" aria-label="Default select example" id="LicenseToOperate" name="LicenseToOperate" placeholder="Enter license class" required>
+                            <option selected value="2B">2B</option>
+                            <option value="2A">2A</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="3A">3A</option>
+        </select>
         <span asp-validation-for="LicenseToOperate" class="text-danger"></span>
     </div>
 
@@ -27,7 +33,7 @@
     <div class="form-group">
         <br/>
         <button type="submit" class="btn btn-primary">Create</button>
-        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Manage" class="btn btn-secondary">Back to List</a>
         <br />
         <a asp-controller="Vehicles" asp-action="CreateVehicleType" class="text-muted" style="cursor:pointer;">Can't find vehicle model? Click here to add</a>
     </div>
