@@ -119,15 +119,15 @@
                         <input type="hidden" id="vehicleID" name="vehicleID"/>
                         <div class="form-group">
                             <label for="startMaintenanceDate">Start Date</label>
-                            <input type="date" class="form-control" id="startMaintenanceDate" name="startMaintenanceDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                            <input type="date" class="form-control" id="startMaintenanceDate" name="startDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
                         </div>
                         <div class="form-group mt-1">
                             <label for="endMaintenanceDate">End Date</label>
-                            <input type="date" class="form-control" id="endMaintenanceDate" name="endMaintenanceDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                            <input type="date" class="form-control" id="endMaintenanceDate" name="endDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
                         </div>
                         <div class="form-group mt-1">
                             <label for="workshopStatus">Description</label>
-                            <input type="text" class="form-control" id="workshopStatus" name="workshopStatus" required/>
+                            <input type="text" class="form-control" id="workshopStatus" name="description" required/>
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-2">Add</button>
