@@ -126,7 +126,6 @@ namespace RentingSystem.Controllers
 
                     if (rentalID > 0)
                     {
-                        query += "AND rentalID != @rentalID ";
                         command.Parameters.AddWithValue("@rentalID", rentalID);
                     }
 
@@ -300,7 +299,7 @@ namespace RentingSystem.Controllers
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 query +=
-                    " WHERE (v.licensePlate LIKE {0} OR vt.brand LIKE {0} OR vt.model LIKE {0} OR CONCAT(vt.brand, ' ', vt.model) LIKE {0})";
+                    " WHERE (v.licensePlate LIKE @p0 OR vt.brand LIKE @p0 OR vt.model LIKE @p0 OR CONCAT(vt.brand, ' ', vt.model) LIKE @p0)";
             }
 
             query += "GROUP BY v.vehicleID";
