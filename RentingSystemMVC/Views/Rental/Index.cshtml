@@ -152,6 +152,7 @@
                         url: '@Url.Action("CheckAvailability", "Vehicles")',
                         type: 'POST',
                         data: {
+                            rentalID: $('#rentalID').val(),
                             vehicleID: $('#vehicleID').val(),
                             startRentalDate: $('#startRentalDate').val(),
                             endRentalDate: $('#endRentalDate').val()

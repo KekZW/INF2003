@@ -91,20 +91,20 @@ namespace RentingSystemMVC.Controllers
             }
         }
 
+
+
         [HttpPost]
         public IActionResult EditRental(int rentalID, int vehicleID, DateTime startRentalDate, DateTime endRentalDate)
         {
             try
             {
                 decimal cost = getRentalCost(vehicleID);
-                Console.WriteLine($"Cost retrieved: {cost}");
+               
 
                 TimeSpan rentalDuration = endRentalDate - startRentalDate;
                 int rentalDays = (int)rentalDuration.TotalDays;
-                Console.WriteLine($"rental Days: {rentalDays}");
 
                 cost = cost * rentalDays;
-                Console.WriteLine($"Cost retrieved: {cost}");
 
                 using (var connection = new MySqlConnection(_connectionString))
                 {
@@ -190,7 +190,6 @@ namespace RentingSystemMVC.Controllers
                     }
                 }
             }
-            Console.WriteLine($"Cost retrieved: {cost}");
             return cost;
         }
     }
