@@ -43,20 +43,18 @@ DROP COLUMN username;
 ALTER TABLE USER
 ADD COLUMN role VARCHAR(5);
 
--- 16/06/2024
+-- 17/06/2024
 
-CREATE DEFINER=`root`@`localhost` TRIGGER `user_AFTER_INSERT` AFTER INSERT ON `user` FOR EACH ROW BEGIN
+CREATE DEFINER=`root`@`localhost` TRIGGER `license_AFTER_INSERT` AFTER INSERT ON `license` FOR EACH ROW BEGIN
 
--- Retrieve last inserted userID
-DECLARE new_user_id INT;
-
-SET new_user_id = New.UserID;
-
--- Updates the last inserted based on the values
-UPDATE license SET userID = new_user_id WHERE licenseID = (SELECT licenseID from user WHERE UserID = new_user_id);
+UPDATE user SET licenseId = NEW.licenseID WHERE userID = NEW.userID;
 
 END
 
 ALTER TABLE `vehicledb`.`user` 
+CHANGE COLUMN `name` `name` VARCHAR(50) NULL DEFAULT NULL AFTER `userID`,
+CHANGE COLUMN `emailAddress` `emailAddress` VARCHAR(50) NULL DEFAULT NULL AFTER `name`,
 ADD UNIQUE INDEX `emailAddress_UNIQUE` (`emailAddress` ASC) VISIBLE;
 ;
+
+DROP TRIGGER IF EXISTS `user_AFTER_INSERT`;

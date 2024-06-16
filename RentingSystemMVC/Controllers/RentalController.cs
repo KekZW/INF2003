@@ -12,6 +12,7 @@ namespace RentingSystemMVC.Controllers
     public class RentalController : Controller
     {
         private readonly string _connectionString = "Server=localhost;Database=vehicleDB;Uid=root;Pwd=;";
+        
         [Authorize(Roles="User")]
         public IActionResult Index()
         {
@@ -23,14 +24,16 @@ namespace RentingSystemMVC.Controllers
 
                 string query = "SELECT r.rentalID, r.userID, r.vehicleID, v.licensePlate, " +
                                 "r.startRentalDate, r.endRentalDate, r.rentalAmount, r.rentalAddress, r.rentalLot " +
-                                "FROM rental r LEFT JOIN vehicle v ON r.vehicleID = v.vehicleID " +
-                                "WHERE r.userID = @userID";
+                                "FROM rental r INNER JOIN vehicle v ON r.vehicleID = v.vehicleID " +
+                                "WHERE r.userID = @userID AND @todayDate < r.endRentalDate";
+
 
                 int userID = GetCurrentUserID();
 
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@userID", userID);
+                    command.Parameters.AddWithValue("@todayDate", DateTime.Today);
 
                     using (var reader = command.ExecuteReader())
                     {

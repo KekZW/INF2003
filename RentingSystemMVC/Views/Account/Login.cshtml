@@ -5,6 +5,13 @@
 </head>
 <div class="container">
     <div class="container login row">
+      @if (!ViewData.ModelState.IsValid)
+        {
+        <div class="alert alert-danger">
+            @ViewData.ModelState[string.Empty].Errors[0].ErrorMessage
+        </div>
+        }
+
         <div class="col"></div>
 
         <div class="col text-center">

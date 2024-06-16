@@ -25,7 +25,6 @@ namespace RentingSystemMVC.Controllers
         public IActionResult Index()
         {
             
-            
             List<SimpleVehicleViewModel> vehicles = new List<SimpleVehicleViewModel>();
             
             using (var connection = new MySqlConnection(_connectionString))

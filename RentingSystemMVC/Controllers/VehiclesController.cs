@@ -277,8 +277,7 @@ namespace RentingSystem.Controllers
             string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
                            "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
                            "FROM vehicle v " +
-                           "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
-                           "LEFT JOIN rental r ON v.vehicleID = r.vehicleID ";
+                           "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID ";
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
@@ -289,10 +288,10 @@ namespace RentingSystem.Controllers
             query += "GROUP BY v.vehicleID";
 
 
-            List < VehicleViewModel> vehicleList = _context.VehicleViewModel.FromSqlRaw(query, "%" + searchTerm + "%").ToList();
+            List <VehicleViewModel> vehicleList = _context.VehicleViewModel.FromSqlRaw(query, "%" + searchTerm + "%").ToList();
             return View(vehicleList);
         }
-
+        
         public IActionResult Details(int id)
         {
             if (!User.IsInRole("Admin"))

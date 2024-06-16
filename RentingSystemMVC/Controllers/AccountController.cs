@@ -58,7 +58,6 @@ namespace RentingSystemMVC.Controllers
                 ));
                 if (user.UserPassword == hashed_pass)
                 {   
-                    Debug.WriteLine("Index action has been called.",user.name);
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, user.EmailAddress),
@@ -80,8 +79,9 @@ namespace RentingSystemMVC.Controllers
                     // Redirect back home
                     return RedirectToAction("Index", "Vehicles");
                 }
-            }
-
+            } 
+            
+            ModelState.AddModelError(string.Empty, "Unassociated account, Please Register and Login");
             return View();
         }
 
@@ -118,17 +118,6 @@ namespace RentingSystemMVC.Controllers
                 return View();
             }
 
-            var License = new License
-            {
-                AcquireDate = licenseDate,
-                LicenseClass = licenseClass,
-            };
-            
-            _context.License.Add(License);
-            _context.SaveChanges();
-
-            int licenseId = License.LicenseID;
-
             byte[] salt = new byte[0];
 
             string hashed_pass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -138,20 +127,38 @@ namespace RentingSystemMVC.Controllers
                 iterationCount: 100000,
                 numBytesRequested: 256 / 8
             ));
-
-
-            var User = new User
+            
+            var user = new User
             {
                 UserPassword = hashed_pass,
                 name = firstName + " " + lastName,
                 Address = address,
-                LicenseID = licenseId,
                 EmailAddress = email,
                 PhoneNo = phoneNumber,
-                Role = "User"
             };
 
-            _context.User.Add(User);
+            try {
+
+                _context.User.Add(user);
+                _context.SaveChanges();
+
+            } catch (Exception e ) {
+
+                ModelState.AddModelError(string.Empty, "An error occurred while creating the user account. Please try again later.");
+                return View();
+
+            } 
+
+            int userId = user.UserID;
+
+            var License = new License
+            {
+                AcquireDate = licenseDate,
+                LicenseClass = licenseClass,
+                UserID = userId
+            };
+            
+            _context.License.Add(License);
             _context.SaveChanges();
 
             return RedirectToAction("Login");
@@ -213,7 +220,6 @@ namespace RentingSystemMVC.Controllers
             var user = _context.User.FirstOrDefault(x => x.UserID == userId);
             user.UserPassword = hashed_new_pass;
             _context.SaveChanges();
-
            
             ViewData["Message"] = "Successfully updated password" + userId;
             return View();
