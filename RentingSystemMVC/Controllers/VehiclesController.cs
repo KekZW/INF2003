@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Claims;
 using System.Windows.Input;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
@@ -321,6 +323,88 @@ namespace RentingSystem.Controllers
                 { Maintenances = maintenanceLogs, Vehicle = vehicle };
             return View(vehicleDetail);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            CreateVehicleViewModel model = new CreateVehicleViewModel();
+            model.VehicleTypes = _context.VehicleType.ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Vehicle vehicle)
+        {
+            Console.WriteLine($"YOOYOYOYOO");
+            PopulateDropdownList();
+            if (ModelState.IsValid)
+            {
+                using (var connection = new MySqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    string query = "INSERT INTO vehicle (LicensePlate, LicenseToOperate, VehicleTypeID) " +
+                                   "VALUES (@LicensePlate, @LicenseToOperate, @VehicleTypeID)";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@LicensePlate", vehicle.LicensePlate);
+                        command.Parameters.AddWithValue("@LicenseToOperate", vehicle.LicenseToOperate);
+                        command.Parameters.AddWithValue("@VehicleTypeID", vehicle.VehicleTypeID);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            return View(vehicle);
+        }
+
+        private void PopulateDropdownList()
+        {
+            List<SelectListItem> vehicleTypes = new List<SelectListItem>();
+
+            try
+            {
+                using (var connection = new MySqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT vehicleTypeID, brand, model FROM vehicleType ORDER BY brand, model;";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var value = reader["VehicleTypeID"].ToString();
+                                var text = $"{reader["Brand"]} - {reader["Model"]}"; 
+
+                                vehicleTypes.Add(new SelectListItem
+                                {
+                                    Value = value,
+                                    Text = text
+                                });
+                            }
+                        }
+                    }
+                }
+
+                ViewBag.VehicleTypes = vehicleTypes;
+
+                // Log success or number of items retrieved
+                Console.WriteLine($"Successfully populated {vehicleTypes.Count} vehicle types.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"Error in PopulateDropdownList(): {ex.Message}");
+                throw; // Rethrow the exception or handle it appropriately
+            }
+        }
+
+
 
         [HttpPost]
         public IActionResult AddMaintenance(int vehicleID, DateTime startDate, DateTime endDate, string description)

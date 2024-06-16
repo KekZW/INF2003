@@ -1,0 +1,41 @@
+﻿@model RentingSystemMVC.Models.CreateVehicleViewModel
+@{
+    ViewData["Title"] = "Create Vehicle";
+}
+
+<h2>Create Vehicle</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="LicensePlate" class="control-label"></label>
+        <input asp-for="LicensePlate" class="form-control" />
+        <span asp-validation-for="LicensePlate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LicenseToOperate" class="control-label"></label>
+        <input asp-for="LicenseToOperate" class="form-control" />
+        <span asp-validation-for="LicenseToOperate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Vehicle.VehicleType" class="control-label"></label>
+        <select asp-for="Vehicle.VehicleTypeID" asp-items="@(Model.VehicleTypes.Select(x => new SelectListItem { Value = x.VehicleTypeID.ToString(), Text = x.Brand + " - " + x.Model}))" class="form-control"></select>
+        <span asp-validation-for="Vehicle.VehicleTypeID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        </br>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <br />
+        <a asp-controller="Vehicles" asp-action="CreateVehicleType" class="text-muted" style="cursor:pointer;">Can't find vehicle model? Click here to add</a>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
