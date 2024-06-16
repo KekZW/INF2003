@@ -99,7 +99,7 @@ namespace RentingSystem.Controllers
         }
 
         [HttpPost]
-        public JsonResult CheckAvailability(int vehicleID, DateTime startRentalDate, DateTime endRentalDate)
+        public JsonResult CheckAvailability(int vehicleID, int? rentalID, DateTime startRentalDate, DateTime endRentalDate)
         {
             bool available = true;
 
@@ -118,6 +118,12 @@ namespace RentingSystem.Controllers
                     command.Parameters.AddWithValue("@vehicleID", vehicleID);
                     command.Parameters.AddWithValue("@startRentalDate", startRentalDate);
                     command.Parameters.AddWithValue("@endRentalDate", endRentalDate);
+
+                    if (rentalID.HasValue)
+                    {
+                        query += "AND rentalID != @rentalID ";
+                        command.Parameters.AddWithValue("@rentalID", rentalID);
+                    }
 
                     int count = Convert.ToInt32(command.ExecuteScalar());
                     if (count > 0)

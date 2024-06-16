@@ -91,7 +91,7 @@ namespace RentingSystemMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditRental(int rentalID, DateTime startRentalDate, DateTime endRentalDate)
+        public IActionResult EditRental(int rentalID, int vehicleID, DateTime startRentalDate, DateTime endRentalDate)
         {
             try
             {
@@ -113,9 +113,9 @@ namespace RentingSystemMVC.Controllers
 
                 return Json(new { success = true });
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
-                return Json(new { success = false, error = ex.Message });
+                return Json(new { success = false });
             }
         }
 

@@ -109,3 +109,37 @@ DELIMITER ;
 ALTER TABLE `vehicledb`.`vehicle` 
 ADD UNIQUE INDEX `licensePlate_UNIQUE` (`licensePlate` ASC) VISIBLE;
 ;
+
+
+DROP TRIGGER IF EXISTS vehicledb.rental_BEFORE_UPDATE;
+
+DELIMITER $$
+USE `vehicledb`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER rental_BEFORE_UPDATE BEFORE UPDATE ON rental FOR EACH ROW BEGIN
+    Declare rentalID INT;
+
+    IF (NEW.startRentalDate < CURRENT_DATE() OR NEW.endRentalDate < DATE_ADD(CURRENT_DATE(), INTERVAL 1 DAY)) 
+    OR (NEW.endRentalDate < NEW.startRentalDate) THEN 
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error: Invalid rental dates';
+    END IF;
+    
+    -- Check if there is a corresponding item between the dates
+    SELECT COUNT(r.rentalID) INTO rentalID 
+    FROM rental r 
+    WHERE r.userID = NEW.userID 
+    AND r.rentalID != OLD.rentalID 
+    AND (
+        (NEW.startRentalDate BETWEEN r.startRentalDate AND r.endRentalDate)
+        OR
+        (NEW.endRentalDate BETWEEN r.startRentalDate AND r.endRentalDate)
+    );
+    
+    -- Correspond with an error so user cannot have the same dates
+    IF rentalID > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error: Overlapping rental period';
+    END IF;
+    
+END$$
+DELIMITER ;
