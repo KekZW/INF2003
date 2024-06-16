@@ -111,9 +111,12 @@ body {
 }
 
 .card {
-  min-height: 400px; /* Adjust this value as needed */
   display: flex;
   flex-direction: column;
+}
+
+.card-carousel{
+  min-height: 400px;
 }
 
 .rent-text-0{
@@ -160,9 +163,43 @@ body {
 }
 
 p{
-  margin:auto;
+  margin:0;
 }
 
 .rent-button{
   border-radius: 0 .25rem .25rem 0;
+}
+
+.main-background-color{
+  background-color: ghostwhite;
+}
+
+html{
+  background-color: ghostwhite;
+}
+
+footer{
+  background-color: white;
+}
+
+.detail-card{
+  min-height: auto;
+}
+
+
+.overview-text{
+  font-size: x-large;
+  font-weight: 500;
+}
+
+.detail-col{
+  gap:12%;
+}
+
+.detail-col-label{
+  font-weight:500;
+}
+
+.detail-col-label,.detail-col-value{
+  margin-top: 0.8rem;
 }

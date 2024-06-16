@@ -1,64 +1,111 @@
 @model RentingSystemMVC.Models.VehicleDetailModel
 
-<div class="container gy-2">
-    <div class="row">
-        <div class="d-flex justify-content-between align-items-center">
-            <h1> Details for @Model.Vehicle.Brand @Model.Vehicle.Model</h1>
-            @* TODO: Open up a modal to edit the vehicle details (CJ) *@
-            <div>
-                <a class="btn btn-primary"> Edit </a>
+@functions {
+
+    public string GetImagePath(string model)
+    {
+        return $"/images/{model}.png";
+    }
+
+}
+
+<div class="container gy-2 pt-3">
+    <div class="card detail-card">
+        <div class="d-flex flex-row justify-content-between align-items-center" style="margin: 0 10px 0 30px">
+            <h1 class="col-sm-4">@Model.Vehicle.Brand @Model.Vehicle.Model</h1>
+            <img class="col-sm-2" src="@GetImagePath(@Model.Vehicle.Brand)"/>
+        </div>
+    </div>
+    <div>
+        <div class="d-flex flex-row mt-3">
+            <div class="col-sm-7">
+                <div class="card mt-3 ">
+                    <img src="@GetImagePath(@Model.Vehicle.Model)" alt="brand"/>
+                </div>
+                <div class="card mt-3 p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <p class="overview-text">Overview</p>
+                        <div>
+                            <a class="btn btn-primary"> Edit </a>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row detail-col">
+                        <div class="first-col">
+                            <div class="detail-col-label">License No.</div>
+                            <div class="detail-col-label">Type</div>
+                            <div class="detail-col-label">Fuel</div>
+                            <div class="detail-col-label">Trunk Space</div>
+                        </div>
+                        <div class="second-col">
+                            <div class="detail-col-value">@Model.Vehicle.LicensePlate</div>
+                            <div class="detail-col-value">@Model.Vehicle.Type</div>
+                            <div class="detail-col-value">@Model.Vehicle.FuelCapacity</div>
+                            <div class="detail-col-value">@Model.Vehicle.TruckSpace</div>
+
+                        </div>
+                        <div class="third-col">
+                            <div class="detail-col-label">License to Operate</div>
+                            <div class="detail-col-label">No. of Seats</div>
+                            <div class="detail-col-label">Fuel Type</div>
+                            <div class="detail-col-label">Rental Cost</div>
+                        </div>
+                        <div class="fourth-col">
+                            @if (Model.Vehicle.LicenseToOperate == "3A")
+                            {
+                                <div class="detail-col-value">3/3A</div>
+                            }
+                            else
+                            {
+                                <div class="detail-col-value">@Model.Vehicle.LicenseToOperate</div>
+                            }
+                            <div class="detail-col-value">@Model.Vehicle.Seats</div>
+                            <div class="detail-col-value">@Model.Vehicle.FuelType</div>
+                            <div class="detail-col-value">@Model.Vehicle.RentalCostPerDay</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card col-sm-5 mt-3 m-0 p-4">
+                <div class="row">
+                    <div class="d-flex justify-content-between">
+                        <h3> Maintenance Details </h3>
+                        @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
+                        <button class="btn btn-primary" onclick="openMaintenanceModal(@Model.Vehicle.VehicleID)"> New Maintenance </button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th> Status </th>
+                            <th> Start Date </th>
+                            <th> End Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (Model.Maintenances.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="3"> No maintenance records found </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var maintenance in Model.Maintenances)
+                            {
+                                <tr>
+                                    <td> @maintenance.WorkshopStatus </td>
+                                    <td> @maintenance.FinishMaintDate </td>
+                                    <td> @maintenance.LastMaintDate </td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <h4> License Number: @Model.Vehicle.LicensePlate </h4>
-        @if (Model.Vehicle.LicenseToOperate == "3A")
-        {
-            <p> License To Operate: 3/3A </p>
-        }
-        else
-        {
-            <p> License To Operate: @Model.Vehicle.LicenseToOperate </p>
-        }
-        <p> Number of Seats: @Model.Vehicle.Seats </p>
-        <p> Type: @Model.Vehicle.Type </p>
-        <p> Fuel: @(Model.Vehicle.FuelCapacity)L @Model.Vehicle.FuelType </p>
-        <p> Trunk Space: @Model.Vehicle.TruckSpace </p>
-        <p> Rental Cost: @(Model.Vehicle.RentalCostPerDay)/day </p>
     </div>
-    <div class="row">
-        <div class="d-flex justify-content-between">
-            <h3> Maintenance Details </h3>
-            @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
-            <button class="btn btn-primary" onclick="openMaintenanceModal(@Model.Vehicle.VehicleID)"> New Maintenance </button>
-        </div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th> Status </th>
-                <th> Start Date </th>
-                <th> End Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            @if (Model.Maintenances.Count == 0)
-            {
-                <tr>
-                    <td colspan="3"> No maintenance records found </td>
-                </tr>
-            }
-            else
-            {
-                @foreach (var maintenance in Model.Maintenances)
-                {
-                    <tr>
-                        <td> @maintenance.WorkshopStatus </td>
-                        <td> @maintenance.FinishMaintDate </td>
-                        <td> @maintenance.LastMaintDate </td>
-                    </tr>
-                }
-            }
-            </tbody>
-        </table>
-    </div>
+
+
     <!-- Add Maintenance Record -->
     <div class="modal fade" id="maintenanceModal" tabindex="-1" role="dialog" aria-labelledby="maintenanceModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -143,4 +190,5 @@
             });
         </script>
     }
+
 </div>
