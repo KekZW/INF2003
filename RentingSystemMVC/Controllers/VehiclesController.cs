@@ -323,8 +323,9 @@ namespace RentingSystem.Controllers
                 { Maintenances = maintenanceLogs, Vehicle = vehicle };
             return View(vehicleDetail);
         }
+
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateVehicle()
         {
             CreateVehicleViewModel model = new CreateVehicleViewModel();
             model.VehicleTypes = _context.VehicleType.ToList();
@@ -332,12 +333,10 @@ namespace RentingSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Vehicle vehicle)
-        {
-            Console.WriteLine($"YOOYOYOYOO");
-            PopulateDropdownList();
+        public IActionResult CreateVehicle(String LicensePlate,String LicenseToOperate,String vehicleTypeID)
+        {   
             if (ModelState.IsValid)
-            {
+            {   
                 using (var connection = new MySqlConnection(_connectionString))
                 {
                     connection.Open();
@@ -347,9 +346,9 @@ namespace RentingSystem.Controllers
 
                     using (var command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@LicensePlate", vehicle.LicensePlate);
-                        command.Parameters.AddWithValue("@LicenseToOperate", vehicle.LicenseToOperate);
-                        command.Parameters.AddWithValue("@VehicleTypeID", vehicle.VehicleTypeID);
+                        command.Parameters.AddWithValue("@LicensePlate", LicensePlate);
+                        command.Parameters.AddWithValue("@LicenseToOperate", LicenseToOperate);
+                        command.Parameters.AddWithValue("@VehicleTypeID", Int32.Parse(vehicleTypeID));
 
                         command.ExecuteNonQuery();
                     }
@@ -357,7 +356,7 @@ namespace RentingSystem.Controllers
 
                 return RedirectToAction("Index");
             }
-            return View(vehicle);
+            return RedirectToAction("CreateVehicle");
         }
 
         private void PopulateDropdownList()
