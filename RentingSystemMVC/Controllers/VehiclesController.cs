@@ -325,6 +325,7 @@ namespace RentingSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateVehicle()
         {
             CreateVehicleViewModel model = new CreateVehicleViewModel();
@@ -333,8 +334,9 @@ namespace RentingSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateVehicle(String LicensePlate,String LicenseToOperate,String vehicleTypeID)
+        public IActionResult CreateVehicle(CreateVehicleViewModel model)
         {   
+
             if (ModelState.IsValid)
             {   
                 using (var connection = new MySqlConnection(_connectionString))
@@ -346,9 +348,9 @@ namespace RentingSystem.Controllers
 
                     using (var command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@LicensePlate", LicensePlate);
-                        command.Parameters.AddWithValue("@LicenseToOperate", LicenseToOperate);
-                        command.Parameters.AddWithValue("@VehicleTypeID", Int32.Parse(vehicleTypeID));
+                        command.Parameters.AddWithValue("@LicensePlate",  model.LicensePlate);
+                        command.Parameters.AddWithValue("@LicenseToOperate", model.LicenseToOperate);
+                        command.Parameters.AddWithValue("@VehicleTypeID", model.VehicleTypeID);
 
                         command.ExecuteNonQuery();
                     }
