@@ -115,7 +115,6 @@ namespace RentingSystemMVC.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception
                 return Json(new { success = false, error = ex.Message });
             }
         }

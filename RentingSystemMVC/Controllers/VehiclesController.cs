@@ -156,7 +156,7 @@ namespace RentingSystem.Controllers
             DateTime endRentalDate, string rentalAddress,
             int rentalLot, decimal rentalAmount)
         {
-        
+
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
@@ -165,23 +165,32 @@ namespace RentingSystem.Controllers
                     "INSERT INTO rental (userID, vehicleID, startRentalDate, endRentalDate, rentalAmount, rentalAddress, rentalLot) " +
                     "VALUES (@userID, @vehicleID, @startRentalDate, @endRentalDate, @rentalAmount, @rentalAddress, @rentalLot)";
 
-                using (var command = new MySqlCommand(query, connection))
+                try
                 {
-                    int userID = GetCurrentUserID();
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        int userID = GetCurrentUserID();
 
-                    command.Parameters.AddWithValue("@userID", userID);
-                    command.Parameters.AddWithValue("@vehicleID", vehicleID);
-                    command.Parameters.AddWithValue("@startRentalDate", startRentalDate);
-                    command.Parameters.AddWithValue("@endRentalDate", endRentalDate);
-                    command.Parameters.AddWithValue("@rentalAmount", rentalAmount);
-                    command.Parameters.AddWithValue("@rentalAddress", rentalAddress);
-                    command.Parameters.AddWithValue("@rentalLot", rentalLot);
+                        command.Parameters.AddWithValue("@userID", userID);
+                        command.Parameters.AddWithValue("@vehicleID", vehicleID);
+                        command.Parameters.AddWithValue("@startRentalDate", startRentalDate);
+                        command.Parameters.AddWithValue("@endRentalDate", endRentalDate);
+                        command.Parameters.AddWithValue("@rentalAmount", rentalAmount);
+                        command.Parameters.AddWithValue("@rentalAddress", rentalAddress);
+                        command.Parameters.AddWithValue("@rentalLot", rentalLot);
 
-                    command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }
+
+                    return Json(new { success = true });
+                }
+
+                catch (MySqlException ex)
+                {
+
+                    return Json(new { success = false });
                 }
             }
-
-            return Json(new { success = true });
         }
 
         private int GetCurrentUserID()

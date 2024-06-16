@@ -208,10 +208,14 @@
                                 url: '@Url.Action("RentVehicle", "Vehicles")',
                                 type: 'POST',
                                 data: formData,
-                                success: function () {
-                                    alert('Vehicle rented successfully!');
-                                    $('#rentModal').modal('hide');
-                                    window.location.href = '@Url.Action("Index", "Rental")';
+                                success: function (response) {
+                                    if (response.success) {
+                                        alert('Vehicle rented successfully!');
+                                        $('#rentModal').modal('hide');
+                                        window.location.href = '@Url.Action("Index", "Rental")';
+                                    } else {
+                                        alert('Users are not allowed to double book on the same day');
+                                    }
                                 },
                                 error: function () {
                                     alert('Error occurred while renting the vehicle.');
