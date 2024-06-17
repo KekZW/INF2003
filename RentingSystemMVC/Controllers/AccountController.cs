@@ -76,8 +76,12 @@ namespace RentingSystemMVC.Controllers
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
 
-                    // Redirect back home
-                    return RedirectToAction("Index", "Vehicles");
+                    
+                    if ( user.Role == "User"){
+                        return RedirectToAction("Index", "Vehicles");
+                    }
+
+                    return RedirectToAction("Manage", "Vehicles");
                 }
             } 
             

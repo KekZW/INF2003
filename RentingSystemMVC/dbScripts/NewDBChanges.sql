@@ -162,4 +162,81 @@ END$$
 DELIMITER ;
 ;
 
+ALTER TABLE `vehicledb`.`maintenance` 
+CHANGE COLUMN `finishMaintDate` `startMaintDate` DATE NULL DEFAULT NULL ,
+CHANGE COLUMN `LastMaintDate` `endMaintDate` DATE NULL DEFAULT NULL ;
+
+
+USE `vehicledb`;
+CREATE  OR REPLACE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `maintenanceinprogress` AS
+    SELECT DISTINCT
+        `m`.`vehicleID` AS `vehicleID`
+    FROM
+        `maintenance` `m`
+    WHERE
+        ((`m`.`startMaintDate` <= CURDATE())
+            AND (`m`.`workshopStatus` <> 'Completed'));
+
+DROP TRIGGER IF EXISTS `vehicledb`.`maintenance_AFTER_INSERT`;
+
+DELIMITER $$
+USE `vehicledb`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `maintenance_AFTER_INSERT` AFTER INSERT ON `maintenance` FOR EACH ROW BEGIN
+
+DELETE FROM rental r
+WHERE EXISTS (
+    SELECT 1
+    FROM maintenance m
+    WHERE m.vehicleID = NEW.vehicleID
+      AND (
+          (r.startRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
+          OR (r.endRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
+      ) AND NEW.workshopStatus = "In Maintenance"
+);
+
+
+END$$
+DELIMITER ;
+
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `rental_BEFORE_INSERT` BEFORE INSERT ON `rental` FOR EACH ROW BEGIN
+    Declare rentalID INT;
+    Declare maintenanceID INT;
+
+    IF (NEW.startRentalDate < CURRENT_DATE() OR NEW.endRentalDate < DATE_ADD(CURRENT_DATE(), INTERVAL 1 DAY)) 
+    OR (NEW.endRentalDate < NEW.startRentalDate) THEN 
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Error';
+	END IF;
+    
+      -- Check if there is corresponding item between the dates 
+    SELECT COUNT(r.rentalID) into rentalID FROM rental r 
+    WHERE r.userID = NEW.userID AND
+    ((NEW.startRentalDate BETWEEN r.startRentalDate AND r.endRentalDate)
+    OR
+    (NEW.endRentalDate BETWEEN r.startRentalDate AND r.endRentalDate));
+    
+    
+	SELECT COUNT(m.maintenanceID) INTO maintenanceID
+	FROM maintenance m
+	WHERE m.vehicleID = NEW.vehicleID
+	AND (
+		(NEW.startRentalDate BETWEEN m.startMaintDate AND m.endMaintDate)
+		OR
+		(NEW.endRentalDate BETWEEN m.startMaintDate AND m.endMaintDate)
+	)
+	AND m.workshopStatus = 'In Maintenance';
+    
+    -- Correspond with an error so user cannot have the same dates
+	IF rentalID > 0 OR maintenanceID > 0 THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Error';
+	END IF;
+		
+    
+END
 

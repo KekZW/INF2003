@@ -27,7 +27,7 @@ namespace RentingSystem.Controllers
         }
 
 
-        // GET: Vehicles/Index
+        [Authorize(Roles="User")]
         public IActionResult Index(DateTime? selectedDate, string? filterColumn, string? filterValue)
         {
             List<AuthorisedVehicleView> vehicles = new List<AuthorisedVehicleView>();
@@ -139,8 +139,8 @@ namespace RentingSystem.Controllers
                 if (available)
                 {
                     query = "SELECT COUNT(*) FROM maintenance " +
-                            "WHERE vehicleID = @vehicleID " +
-                            "AND (finishMaintDate > @endRentalDate AND finishMaintDate > @startRentalDate) " +
+                            "WHERE vehicleID = @vehicleID " +   
+                            "AND (startMaintDate > @endRentalDate AND startMaintDate > @startRentalDate) " +
                             "AND workshopStatus != 'Completed'";
 
                     using (var command = new MySqlCommand(query, connection))
@@ -443,19 +443,19 @@ namespace RentingSystem.Controllers
 
 
         [HttpPost]
-        public IActionResult AddMaintenance(int vehicleID, DateTime startDate, DateTime endDate, string description)
+        public IActionResult AddMaintenance(int vehicleID, DateTime startDate, DateTime endDate, string workshopStatus)
         {
             using(var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
 
-                string query = "INSERT INTO maintenance (vehicleID, workshopStatus, finishMaintDate, LastMaintDate) "
-                + "VALUES (@vehicleID, @description, @startDate, @endDate)";
+                string query = "INSERT INTO maintenance (vehicleID, workshopStatus, startMaintDate, endMaintDate) "
+                + "VALUES (@vehicleID, @workshopStatus, @startDate, @endDate)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@vehicleID", vehicleID);
-                    command.Parameters.AddWithValue("@description", description);
+                    command.Parameters.AddWithValue("@workshopStatus", workshopStatus);
                     command.Parameters.AddWithValue("@startDate", startDate);
                     command.Parameters.AddWithValue("@endDate", endDate);
 
