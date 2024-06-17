@@ -462,5 +462,26 @@ namespace RentingSystem.Controllers
             
             return Json(new { success = true });
         }
+        [HttpPost]
+        public IActionResult DeleteVehicle(int vehicleID)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "DELETE FROM vehicle WHERE vehicleID = @vehicleID";
+                Console.WriteLine("Here");
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@vehicleID", vehicleID);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            return Json(new { success = true });
+        }
     }
+    
 }
