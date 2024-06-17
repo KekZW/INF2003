@@ -489,7 +489,7 @@ namespace RentingSystem.Controllers
                 }
             }
             return Json(new { success = true });
-        }
+        }   
         [HttpPost]
         public async Task<IActionResult> EditMaintenance(Maintenance maintenance)
         {
@@ -503,8 +503,8 @@ namespace RentingSystem.Controllers
                     using (var command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@MaintenanceID", maintenance.MaintenanceID);
-                        command.Parameters.AddWithValue("@StartDate", maintenance.startMaintDate);
-                        command.Parameters.AddWithValue("@EndDate", maintenance.endMaintDate);
+                        command.Parameters.AddWithValue("@StartDate", maintenance.startMaintDate.ToString("yyyy-MM-dd"));
+                        command.Parameters.AddWithValue("@EndDate", maintenance.endMaintDate.ToString("yyyy-MM-dd"));
                         command.Parameters.AddWithValue("@WorkshopStatus", maintenance.WorkshopStatus);
                         await command.ExecuteNonQueryAsync();
                     }

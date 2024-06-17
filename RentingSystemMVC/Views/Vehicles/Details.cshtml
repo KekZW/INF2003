@@ -158,15 +158,15 @@
                         <input type="hidden" id="editMaintenanceID" name="maintenanceID"/>
                         <div class="form-group">
                             <label for="editStartMaintenanceDate">Start Date</label>
-                            <input type="date" class="form-control" id="editStartMaintenanceDate" name="startDate" required/>
+                            <input type="date" class="form-control" id="editStartMaintenanceDate" name="startMaintDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
                         </div>
                         <div class="form-group mt-1">
                             <label for="editEndMaintenanceDate">End Date</label>
-                            <input type="date" class="form-control" id="editEndMaintenanceDate" name="endDate" required/>
+                            <input type="date" class="form-control" id="editEndMaintenanceDate" name="endMaintDate" required/>
                         </div>
                         <div class="form-group mt-1">
                             <label for="editWorkshopStatus">Description</label>
-                            <select class="form-select" aria-label="Default select example" id="editWorkshopStatus" name="workshopStatus" required>
+                            <select class="form-select" aria-label="Default select example" id="editWorkshopStatus" name="WorkshopStatus" required>
                                 <option value="In Maintenance">In Maintenance</option>
                                 <option value="Completed">Completed</option>
                             </select>
@@ -214,6 +214,9 @@
             startMaintenanceDate = document.getElementById('startMaintenanceDate');
             endMaintenanceDate = document.getElementById('endMaintenanceDate');
             workshopStatus = document.getElementById('workshopStatus');
+            editStartMaintenanceDate = document.getElementById('editStartMaintenanceDate');
+            editEndMaintenanceDate = document.getElementById('editEndMaintenanceDate');
+
 
             startMaintenanceDate.addEventListener('change', () => {
                 let startDate = new Date(startMaintenanceDate.value);
@@ -236,6 +239,31 @@
                     endMaintenanceDate.value = '';
                 }
             });
+
+            editStartMaintenanceDate.addEventListener('change', () => {
+                let startDate = new Date(startMaintenanceDate.value);
+                let minEndDate = new Date(startDate);
+                minEndDate.setDate(minEndDate.getDate());
+
+                let minEndDateString = minEndDate.toISOString().split('T')[0];
+                endMaintenanceDate.min = minEndDateString;
+
+                if (new Date(endMaintenanceDate.value) <= startDate) {
+                    endMaintenanceDate.value = minEndDateString;
+                }
+            });
+
+            editEndMaintenanceDate.addEventListener('change', () => {
+                let startDate = new Date(startMaintenanceDate.value);
+                let endDate = new Date(endMaintenanceDate.value);
+
+                if (endDate < startDate) {
+                    endMaintenanceDate.value = '';
+                }
+            });
+
+
+
         });
 
         function openMaintenanceModal(vehicleID) {

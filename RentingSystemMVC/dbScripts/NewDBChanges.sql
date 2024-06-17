@@ -203,6 +203,10 @@ END$$
 DELIMITER ;
 
 
+DROP TRIGGER IF EXISTS `vehicledb`.`rental_BEFORE_INSERT`;
+
+DELIMITER $$
+USE `vehicledb`$$
 CREATE DEFINER=`root`@`localhost` TRIGGER `rental_BEFORE_INSERT` BEFORE INSERT ON `rental` FOR EACH ROW BEGIN
     Declare rentalID INT;
     Declare maintenanceID INT;
@@ -238,5 +242,27 @@ CREATE DEFINER=`root`@`localhost` TRIGGER `rental_BEFORE_INSERT` BEFORE INSERT O
 	END IF;
 		
     
-END
+END$$
+DELIMITER ;
 
+DROP TRIGGER IF EXISTS `vehicledb`.`maintenance_AFTER_UPDATE`;
+
+DELIMITER $$
+USE `vehicledb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `vehicledb`.`maintenance_AFTER_UPDATE` AFTER UPDATE ON `maintenance` FOR EACH ROW
+BEGIN
+
+DELETE FROM rental r
+WHERE EXISTS (
+    SELECT 1
+    FROM maintenance m
+    WHERE m.vehicleID = NEW.vehicleID
+      AND (
+          (r.startRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
+          OR (r.endRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
+      ) AND NEW.workshopStatus = "In Maintenance"
+);
+
+
+END$$
+DELIMITER ;
