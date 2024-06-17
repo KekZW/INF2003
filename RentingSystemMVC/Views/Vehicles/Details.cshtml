@@ -76,9 +76,10 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th> Status </th>
-                            <th> Start Date </th>
+                            <th> Status</th>
+                            <th> Start Date</th>
                             <th> End Date</th>
+                            <th> Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -96,6 +97,9 @@
                                     <td> @maintenance.WorkshopStatus </td>
                                     <td> @maintenance.startMaintDate </td>
                                     <td> @maintenance.endMaintDate </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-secondary" onclick="openEditMaintenanceModal(@maintenance.MaintenanceID, '@maintenance.startMaintDate.ToString("yyyy-MM-dd")', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')">Edit</button>
+                                    </td>
                                 </tr>
                             }
                         }
@@ -141,6 +145,39 @@
         </div>
     </div>
 
+    <!-- Edit Maintenance Record -->
+    <div class="modal fade" id="editMaintenanceModal" tabindex="-1" role="dialog" aria-labelledby="editMaintenanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editMaintenanceModalLabel">Edit Maintenance Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editMaintenanceForm">
+                        <input type="hidden" id="editMaintenanceID" name="maintenanceID"/>
+                        <div class="form-group">
+                            <label for="editStartMaintenanceDate">Start Date</label>
+                            <input type="date" class="form-control" id="editStartMaintenanceDate" name="startDate" required/>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="editEndMaintenanceDate">End Date</label>
+                            <input type="date" class="form-control" id="editEndMaintenanceDate" name="endDate" required/>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="editWorkshopStatus">Description</label>
+                            <select class="form-select" aria-label="Default select example" id="editWorkshopStatus" name="workshopStatus" required>
+                                <option value="In Maintenance">In Maintenance</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Delete Vehicle Modal -->
     <div class="modal fade" style="top:40%" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -160,26 +197,25 @@
             </div>
         </div>
     </div>
-    
+
 
     @section Scripts
     {
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <script>
-            
-            let startMaintenanceDate;
-            let endMaintenanceDate;
-            let workshopStatus;
+    <script>
+        let startMaintenanceDate;
+        let endMaintenanceDate;
+        let workshopStatus;
 
-            document.addEventListener('DOMContentLoaded', (event) => {
-                startMaintenanceDate = document.getElementById('startMaintenanceDate');
-                endMaintenanceDate = document.getElementById('endMaintenanceDate');
-                workshopStatus = document.getElementById('workshopStatus');
+        document.addEventListener('DOMContentLoaded', (event) => {
+            startMaintenanceDate = document.getElementById('startMaintenanceDate');
+            endMaintenanceDate = document.getElementById('endMaintenanceDate');
+            workshopStatus = document.getElementById('workshopStatus');
 
-                startMaintenanceDate.addEventListener('change', () => {
+            startMaintenanceDate.addEventListener('change', () => {
                 let startDate = new Date(startMaintenanceDate.value);
                 let minEndDate = new Date(startDate);
                 minEndDate.setDate(minEndDate.getDate());
@@ -200,70 +236,94 @@
                     endMaintenanceDate.value = '';
                 }
             });
+        });
 
-            });
+        function openMaintenanceModal(vehicleID) {
+            $('#vehicleID').val(vehicleID);
+            $('#maintenanceModal').modal('show');
+        }
 
-            function openMaintenanceModal(vehicleID) {
-                $('#vehicleID').val(vehicleID);
-                $('#maintenanceModal').modal('show');
-            }
+        function openEditMaintenanceModal(maintenanceID, startDate, endDate, status) {
+            $('#editMaintenanceID').val(maintenanceID);
+            $('#editStartMaintenanceDate').val(startDate);
+            $('#editEndMaintenanceDate').val(endDate);
+            $('#editWorkshopStatus').val(status);
+            $('#editMaintenanceModal').modal('show');
+        }
 
-            function openDeleteModal(vehicleID) {
-                $('#deleteVehicleID').val(vehicleID);
-                $('#deleteModal').modal('show');
-            }
+        function openDeleteModal(vehicleID) {
+            $('#deleteVehicleID').val(vehicleID);
+            $('#deleteModal').modal('show');
+        }
 
-            $(document).ready(function () {
-                $('#maintenanceForm').on('submit', function (event) {
-                    event.preventDefault();
-                    var formData = $(this).serialize();
+        $(document).ready(function () {
+            $('#maintenanceForm').on('submit', function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
 
-                    if (startMaintenanceDate.value && endMaintenanceDate.value && workshopStatus.value) {
-                        $.ajax({
-                            url: '@Url.Action("AddMaintenance", "Vehicles")',
-                            type: 'POST',
-                            data: formData,
-                            success: function () {
-                                alert('New maintenance record added!');
-                                $('#rentModal').modal('hide');
-
-                                window.location.href = '@Url.Action("Details", "Vehicles")';
-                            },
-                            error: function() {
-                                alert('Error occurred while adding maintenance record.');
-                            }
-                        });
-                    } else {
-                        alert('All fields must be filled before submitting');
-                    }
-
-                    
-                });
-                $('#confirmDelete').on('click', function () {
-                    var vehicleID = $('#deleteVehicleID').val();
-
+                if (startMaintenanceDate.value && endMaintenanceDate.value && workshopStatus.value) {
                     $.ajax({
-                        url: '@Url.Action("DeleteVehicle", "Vehicles")',
+                        url: '@Url.Action("AddMaintenance", "Vehicles")',
                         type: 'POST',
-                        data: { vehicleID: vehicleID },
-                        success: function (response) {
-                            if (response.success){
-                                alert('Vehicle deleted successfully!');
-                                window.location.href = '@Url.Action("Manage", "Vehicles")';
-                            }else{
-                                alert("Vehicle still has existing rental cannot be deleted!");
-                                $('#deleteModal').modal('hide');
+                        data: formData,
+                        success: function () {
+                            alert('New maintenance record added!');
+                            $('#maintenanceModal').modal('hide');
 
-                            }
+                            window.location.href = '@Url.Action("Details", "Vehicles", new { id = Model.Vehicle.VehicleID })';
                         },
-                        error: function () {
-                            alert('Error occurred while deleting vehicle.');
+                        error: function() {
+                            alert('Error occurred while adding maintenance record.');
                         }
                     });
-                });
-                
+                } else {
+                    alert('All fields must be filled before submitting');
+                }
             });
-        </script>
+
+            $('#editMaintenanceForm').on('submit', function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '@Url.Action("EditMaintenance", "Vehicles")',
+                    type: 'POST',
+                    data: formData,
+                    success: function () {
+                        alert('Maintenance record updated!');
+                        $('#editMaintenanceModal').modal('hide');
+
+                        window.location.href = '@Url.Action("Details", "Vehicles", new { id = Model.Vehicle.VehicleID })';
+                    },
+                    error: function() {
+                        alert('Error occurred while updating maintenance record.');
+                    }
+                });
+            });
+
+            $('#confirmDelete').on('click', function () {
+                var vehicleID = $('#deleteVehicleID').val();
+
+                $.ajax({
+                    url: '@Url.Action("DeleteVehicle", "Vehicles")',
+                    type: 'POST',
+                    data: { vehicleID: vehicleID },
+                    success: function (response) {
+                        if (response.success){
+                            alert('Vehicle deleted successfully!');
+                            window.location.href = '@Url.Action("Manage", "Vehicles")';
+                        }else{
+                            alert("Vehicle still has existing rental, cannot be deleted!");
+                            $('#deleteModal').modal('hide');
+                        }
+                    },
+                    error: function () {
+                        alert('Error occurred while deleting vehicle.');
+                    }
+                });
+            });
+        });
+    </script>
     }
 
 </div>

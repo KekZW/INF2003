@@ -490,6 +490,32 @@ namespace RentingSystem.Controllers
             }
             return Json(new { success = true });
         }
+        [HttpPost]
+        public async Task<IActionResult> EditMaintenance(Maintenance maintenance)
+        {
+            try
+            {
+                using (var connection = new MySqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync();
+                    var query = "UPDATE maintenance SET startMaintDate = @StartDate, endMaintDate = @EndDate, workshopStatus = @WorkshopStatus " +
+                                "WHERE maintenanceID = @MaintenanceID";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@MaintenanceID", maintenance.MaintenanceID);
+                        command.Parameters.AddWithValue("@StartDate", maintenance.startMaintDate);
+                        command.Parameters.AddWithValue("@EndDate", maintenance.endMaintDate);
+                        command.Parameters.AddWithValue("@WorkshopStatus", maintenance.WorkshopStatus);
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+                return Json(new { success = true });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false });
+            }
+        }
     }
     
 }
