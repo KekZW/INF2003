@@ -122,3 +122,44 @@ CHANGE COLUMN `vehicleTypeID` `vehicleTypeID` INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `vehicledb`.`vehicle` 
 ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`vehicleTypeID`) 
 REFERENCES `vehicletype` (`vehicleTypeID`);
+
+--- 17/06/2024
+
+USE `vehicledb`;
+DROP procedure IF EXISTS `Safe_Drop_Vehicle`;
+
+USE `vehicledb`;
+DROP procedure IF EXISTS `vehicledb`.`Safe_Drop_Vehicle`;
+;
+
+DELIMITER $$
+USE `vehicledb`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Safe_Drop_Vehicle`(IN vehicleID INT)
+BEGIN
+	DECLARE rount_count INT;
+    DECLARE error_messages VARCHAR(255);
+    
+    SELECT COUNT(r.rentalID) into rount_count FROM rental r WHERE r.vehicleID = vehicleID AND CURRENT_DATE() <= r.endRentalDate;
+	
+    IF rount_count > 0 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: Cannot delete vehicle with active rental.';
+    ELSE
+		START TRANSACTION;
+
+		SET @orig_foreign_key_checks = @@FOREIGN_KEY_CHECKS;
+		SET FOREIGN_KEY_CHECKS = 0;
+
+		-- Perform delete operation
+		DELETE FROM vehicle v WHERE v.vehicleID = vehicleID;
+
+		-- Enable foreign key checks
+		SET FOREIGN_KEY_CHECKS = @orig_foreign_key_checks;
+		
+		COMMIT;
+	END IF; 
+END$$
+
+DELIMITER ;
+;
+
+

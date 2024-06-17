@@ -353,6 +353,7 @@ namespace RentingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")] 
         public IActionResult CreateVehicle(CreateVehicleViewModel model)
         {   
             
@@ -390,7 +391,8 @@ namespace RentingSystem.Controllers
             return RedirectToAction("CreateVehicle");
         }
 
-        [HttpGet] 
+        [HttpGet]
+        [Authorize(Roles = "Admin")] 
         public IActionResult CreateVehicleType() 
         {
             VehicleType vt = new VehicleType();
@@ -399,6 +401,7 @@ namespace RentingSystem.Controllers
         } 
 
         [HttpPost] 
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateVehicleType(VehicleType vt) 
         { 
  
@@ -462,24 +465,29 @@ namespace RentingSystem.Controllers
             
             return Json(new { success = true });
         }
+
         [HttpPost]
+        [Authorize(Roles = "Admin")] 
         public IActionResult DeleteVehicle(int vehicleID)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
-                connection.Open();
+                try {
+                    connection.Open();
 
-                string query = "DELETE FROM vehicle WHERE vehicleID = @vehicleID";
-                Console.WriteLine("Here");
+                    string query = "CALL Safe_Drop_Vehicle(@vehicleID)";
 
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@vehicleID", vehicleID);
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@vehicleID", vehicleID);
 
-                    command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }
+
+                }catch (Exception e){
+                    return Json(new { success = false });
                 }
             }
-
             return Json(new { success = true });
         }
     }
