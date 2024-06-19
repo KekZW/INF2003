@@ -1,5 +1,5 @@
 ALTER TABLE vehicleType
-MODIFY COLUMN truckSpace decimal(6,2);
+MODIFY COLUMN trunkSpace decimal(6,2);
 
 ALTER TABLE license
 RENAME COLUMN liceseClass TO licenseClass;

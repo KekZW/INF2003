@@ -32,7 +32,7 @@ CREATE TABLE `vehicletype` (
   `seats` int DEFAULT NULL,
   `fuelCapacity` decimal(6,2) DEFAULT NULL,
   `fuelType` varchar(20) DEFAULT NULL,
-  `truckSpace` decimal(6,2) DEFAULT NULL,
+  `trunkSpace` decimal(6,2) DEFAULT NULL,
   `rentalCostPerDay` decimal(6,2) DEFAULT NULL,
   PRIMARY KEY (`vehicleTypeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

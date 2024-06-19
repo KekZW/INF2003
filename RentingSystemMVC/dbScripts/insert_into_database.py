@@ -55,7 +55,7 @@ for index, row in new_df.iterrows():
     elif row.Seats >= 8:
         price += seat_adjustments.get('8+')
         
-    # vehicleTypeID, brand, model, type, seats, fuelCapacity, fuelType,truckSpace, rentalCostPerDay
+    # vehicleTypeID, brand, model, type, seats, fuelCapacity, fuelType,trunkSpace, rentalCostPerDay
     statement = (counter, row['Maker'], row['Model'], row['Type'], row['Seats'], row['Fuel Tank Capacity'], row['Fuel'], row['Boot Space'], price)
     sql = 'INSERT INTO vehicleType VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'
     cursor.execute(sql, statement)

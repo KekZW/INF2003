@@ -32,7 +32,7 @@ namespace RentingSystemMVC.Controllers
                 connection.Open();
                 string query = 
                     "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
-                    "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay, COUNT(r.vehicleID) AS timesRented " +
+                    "vt.seats, vt.fuelCapacity, vt.fuelType, vt.trunkSpace, vt.rentalCostPerDay, COUNT(r.vehicleID) AS timesRented " +
                     "FROM vehicle v " +
                     "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
                     "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " +
@@ -57,7 +57,7 @@ namespace RentingSystemMVC.Controllers
                                 Seats = reader.GetInt32("seats"),
                                 FuelCapacity = reader.GetDecimal("fuelCapacity"),
                                 FuelType = reader.GetString("fuelType"),
-                                TruckSpace = reader.GetDecimal("truckSpace"),
+                                TrunkSpace = reader.GetDecimal("trunkSpace"),
                                 RentalCostPerDay = reader.GetDecimal("rentalCostPerDay"),
                                 TimesRented = reader.GetInt32("timesRented")
                             };

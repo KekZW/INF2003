@@ -38,7 +38,7 @@ namespace RentingSystem.Controllers
 
                 string query =
                     "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
-                    "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay, COUNT(r.vehicleID) AS timesRented " +
+                    "vt.seats, vt.fuelCapacity, vt.fuelType, vt.trunkSpace, vt.rentalCostPerDay, COUNT(r.vehicleID) AS timesRented " +
                     "FROM vehicle v " +
                     "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
                     "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " + 
@@ -83,7 +83,7 @@ namespace RentingSystem.Controllers
                                 Seats = reader.GetInt32("seats"),
                                 FuelCapacity = reader.GetDecimal("fuelCapacity"),
                                 FuelType = reader.GetString("fuelType"),
-                                TruckSpace = reader.GetDecimal("truckSpace"),
+                                TrunkSpace = reader.GetDecimal("trunkSpace"),
                                 RentalCostPerDay = reader.GetDecimal("rentalCostPerDay"),
                             };
 
@@ -292,7 +292,7 @@ namespace RentingSystem.Controllers
             }
             
             string query = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
-                           "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                           "vt.seats, vt.fuelCapacity, vt.fuelType, vt.trunkSpace, vt.rentalCostPerDay " +
                            "FROM vehicle v " +
                            "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID ";
 
@@ -327,7 +327,7 @@ namespace RentingSystem.Controllers
             }
 
             string vehQuery = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
-                              "vt.seats, vt.fuelCapacity, vt.fuelType, vt.truckSpace, vt.rentalCostPerDay " +
+                              "vt.seats, vt.fuelCapacity, vt.fuelType, vt.trunkSpace, vt.rentalCostPerDay " +
                               "FROM vehicle v " +
                               "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
                               "WHERE v.vehicleID = @p0";
@@ -412,8 +412,8 @@ namespace RentingSystem.Controllers
                     using (var connection = new MySqlConnection(_connectionString)) 
                     { 
                         connection.Open(); 
-                        string query = "INSERT INTO vehicletype (brand, model, type, seats, fuelCapacity, fuelType, truckSpace, rentalCostPerDay) " + 
-                                    "VALUES (@Brand, @Model, @Type, @Seats, @FuelCapacity, @FuelType, @TruckSpace, @RentalCostPerDay)"; 
+                        string query = "INSERT INTO vehicletype (brand, model, type, seats, fuelCapacity, fuelType, trunkSpace, rentalCostPerDay) " + 
+                                    "VALUES (@Brand, @Model, @Type, @Seats, @FuelCapacity, @FuelType, @TrunkSpace, @RentalCostPerDay)"; 
     
                         using (var command = new MySqlCommand(query, connection)) 
                         { 
@@ -423,7 +423,7 @@ namespace RentingSystem.Controllers
                             command.Parameters.AddWithValue("@Seats", vt.Seats); 
                             command.Parameters.AddWithValue("@FuelCapacity", vt.FuelCapacity); 
                             command.Parameters.AddWithValue("@FuelType", vt.FuelType); 
-                            command.Parameters.AddWithValue("@TruckSpace", vt.TruckSpace); 
+                            command.Parameters.AddWithValue("@TrunkSpace", vt.TrunkSpace); 
                             command.Parameters.AddWithValue("@RentalCostPerDay", vt.RentalCostPerDay); 
     
                             command.ExecuteNonQuery(); 

@@ -11,7 +11,7 @@ type VARCHAR(20),
 seats INT,
 fuelCapacity DECIMAL(6,2),
 fuelType VARCHAR(20),
-truckSpace VARCHAR(20),
+trunkSpace VARCHAR(20),
 rentalCostPerDay DECIMAL(6,2));
 
 

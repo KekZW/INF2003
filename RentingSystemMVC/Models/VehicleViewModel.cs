@@ -11,7 +11,7 @@ public class VehicleViewModel
     public int Seats { get; set; }
     public decimal FuelCapacity { get; set; }
     public string FuelType { get; set; }
-    public decimal TruckSpace { get; set; }
+    public decimal TrunkSpace { get; set; }
     public decimal RentalCostPerDay { get; set; }
 
 }
