@@ -225,7 +225,7 @@ namespace RentingSystemMVC.Controllers
             user.UserPassword = hashed_new_pass;
             _context.SaveChanges();
            
-            ViewData["Message"] = "Successfully updated password" + userId;
+            ViewData["Message"] = "Successfully updated password";
             return View();
         }
 
