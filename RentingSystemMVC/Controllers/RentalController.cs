@@ -26,7 +26,7 @@ namespace RentingSystemMVC.Controllers
                 string query = "SELECT r.rentalID, r.userID, r.vehicleID, v.licensePlate, " +
                                 "r.startRentalDate, r.endRentalDate, r.rentalAmount, r.rentalAddress, r.rentalLot " +
                                 "FROM rental r INNER JOIN vehicle v ON r.vehicleID = v.vehicleID " +
-                                "WHERE r.userID = @userID AND @todayDate < r.endRentalDate";
+                                "WHERE r.userID = @userID";
 
 
                 int userID = GetCurrentUserID();

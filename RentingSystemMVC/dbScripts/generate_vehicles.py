@@ -5,8 +5,7 @@ import string
 import mysql.connector
 
 random.seed(10)
-
-
+    
 def generate_license():
     prefix = 'S' + ''.join(random.choices(string.ascii_uppercase, k=2))
     number = ''.join(random.choices(string.digits, k=4))
@@ -32,9 +31,13 @@ def insert_into_table(db, cursor):
     sql = "INSERT INTO vehicle (licensePlate, licenseToOperate, vehicleTypeID) VALUES (%s, %s, %s)"
 
     for i in random_id:
-        vehicle = (generate_license(), '3A', vehicle_types[i][0])
-        print("Inserting vehicle: ", vehicle)
-        cursor.execute(sql, vehicle)
+        try:
+            vehicle = (generate_license(), '3A', vehicle_types[i][0])
+            print("Inserting vehicle: ", vehicle)
+            cursor.execute(sql, vehicle)
+        except mysql.connector.Error as err:
+            print("Error: {}".format(err))
+            continue
 
     db.commit()
 

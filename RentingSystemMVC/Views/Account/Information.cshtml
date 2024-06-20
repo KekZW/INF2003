@@ -71,9 +71,12 @@
             
         </form>
 
-         <div class="mini-gap">
-                <button type="submit" class="btn btn-danger" onclick="closeAccount()" >Delete Account</button>
+        @if (Context.User.IsInRole("User"))
+        {
+            <div class="mini-gap">
+                <button type="submit" class="btn btn-danger" onclick="closeAccount()">Delete Account</button>
             </div>
+        }
     </div>
 </div>
 
@@ -97,7 +100,7 @@
                             alert("Account was successfully closed");
 
                         } else {
-                            alert("Failed to update account");
+                            alert("You have rental booking, you cant remove your account");
                         }
                     },
                     error: function () {
