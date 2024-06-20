@@ -1,5 +1,5 @@
-Require latest mySQL and mySQL workbench version
-Require ASP.Net MVC
+Require latest mySQL (https://dev.mysql.com/downloads/installer/) and mySQL workbench version (https://dev.mysql.com/downloads/workbench/)
+Require ASP.Net MVC (https://dotnet.microsoft.com/en-us/download)
 
 Create a new database 
 name: vehicleDB
@@ -12,6 +12,14 @@ Create a schema call vehicledb and run vehicleDBInit.sql to create the table
 Use mySQL workbench
 Download: https://dev.mysql.com/downloads/connector/net/
 Under "Manage NuGet Package" Download "MySql.Data"
+
+Admin Account:
+Email: admin@gmail.com
+Password: P@ssw0rd
+
+User Account:
+Email: user@gmail.com
+Password: P@ssw0rd
 
 
 
