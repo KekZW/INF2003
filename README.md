@@ -8,7 +8,7 @@ server: localhost
 Username:root
 Password=;
 
-Create a schema call vehicledb and run vehicleDBInit.sql to create the table
+Create a schema call vehicledb and run vehicleDBInit.sql to create the table / Just run the script 
 
 Use mySQL workbench
 Download: https://dev.mysql.com/downloads/connector/net/
