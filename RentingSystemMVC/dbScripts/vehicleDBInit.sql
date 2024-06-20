@@ -1,13 +1,18 @@
--- MySQL dump 10.13  Distrib 8.3.0, for macos14.2 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: localhost    Database: vehicleDB
+-- Host: localhost    Database: vehicledb
 -- ------------------------------------------------------
--- Server version	8.3.0
+-- Server version	8.0.31
+
+DROP DATABASE IF EXISTS vehicledb;
+CREATE DATABASE vehicledb;
+USE vehicledb;
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -97,7 +102,6 @@ UNLOCK TABLES;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `maintenance_AFTER_INSERT` AFTER INSERT ON `maintenance` FOR EACH ROW BEGIN
-
 DELETE FROM rental r
 WHERE EXISTS (
     SELECT 1
@@ -108,8 +112,6 @@ WHERE EXISTS (
           OR (r.endRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
       ) AND NEW.workshopStatus = "In Maintenance"
 );
-
-
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -126,7 +128,6 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `maintenance_AFTER_UPDATE` AFTER UPDATE ON `maintenance` FOR EACH ROW BEGIN
-
 DELETE FROM rental r
 WHERE EXISTS (
     SELECT 1
@@ -137,8 +138,6 @@ WHERE EXISTS (
           OR (r.endRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
       ) AND NEW.workshopStatus = "In Maintenance"
 );
-
-
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -202,7 +201,6 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `rental_BEFORE_INSERT` BEFORE INSERT ON `rental` FOR EACH ROW BEGIN
     Declare rentalID INT;
     Declare maintenanceID INT;
-
     IF (NEW.startRentalDate < CURRENT_DATE() OR NEW.endRentalDate < DATE_ADD(CURRENT_DATE(), INTERVAL 1 DAY)) 
     OR (NEW.endRentalDate < NEW.startRentalDate) THEN 
 		SIGNAL SQLSTATE '45000'
@@ -347,6 +345,53 @@ INSERT INTO `vehicletype` VALUES (1,'Nissan','GT-R','Sports Car',2,74.00,'Petrol
 UNLOCK TABLES;
 
 --
+-- Dumping events for database 'vehicledb'
+--
+
+--
+-- Dumping routines for database 'vehicledb'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `Safe_Drop_Vehicle` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Safe_Drop_Vehicle`(IN vehicleID INT)
+BEGIN
+	DECLARE rount_count INT;
+    DECLARE error_messages VARCHAR(255);
+
+    SELECT COUNT(r.rentalID) into rount_count FROM rental r WHERE r.vehicleID = vehicleID AND CURRENT_DATE() <= r.endRentalDate;
+
+    IF rount_count > 0 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: Cannot delete vehicle with active rental.';
+    ELSE
+		START TRANSACTION;
+
+		SET @orig_foreign_key_checks = @@FOREIGN_KEY_CHECKS;
+		SET FOREIGN_KEY_CHECKS = 0;
+
+		-- Perform delete operation
+		DELETE FROM vehicle v WHERE v.vehicleID = vehicleID;
+
+		-- Enable foreign key checks
+		SET FOREIGN_KEY_CHECKS = @orig_foreign_key_checks;
+
+		COMMIT;
+	END IF; 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
 -- Final view structure for view `maintenanceinprogress`
 --
 
@@ -391,4 +436,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-20 11:54:58
+-- Dump completed on 2024-06-20 12:05:28
