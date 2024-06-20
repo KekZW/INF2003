@@ -27,7 +27,6 @@ namespace RentingSystem.Controllers
         }
 
 
-        [Authorize(Roles="User")]
         public IActionResult Index(DateTime? selectedDate, string? filterColumn, string? filterValue)
         {
             List<AuthorisedVehicleView> vehicles = new List<AuthorisedVehicleView>();
