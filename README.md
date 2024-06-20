@@ -1,5 +1,5 @@
-Require latest mySQL (https://dev.mysql.com/downloads/installer/) and mySQL workbench version (https://dev.mysql.com/downloads/workbench/)
-Require ASP.Net MVC (https://dotnet.microsoft.com/en-us/download)
+Require latest mySQL Version 8.0.37 (https://dev.mysql.com/downloads/installer/) and mySQL workbench Version 8.0.36 (https://dev.mysql.com/downloads/workbench/)
+Require ASP.Net MVC Version 8.0 (https://dotnet.microsoft.com/en-us/download)
 
 Create a new database 
 name: vehicleDB
