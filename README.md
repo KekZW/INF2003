@@ -6,7 +6,7 @@ server: localhost
 Username:root
 Password=;
 
-Create a schema call vehicledb and run databaseInit.sql to create the table
+Create a schema call vehicledb and run vehicleDBInit.sql to create the table
 
 To use the python scripts, to insert data
 download:
