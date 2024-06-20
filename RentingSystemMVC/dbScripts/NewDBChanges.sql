@@ -266,3 +266,7 @@ WHERE EXISTS (
 
 END$$
 DELIMITER ;
+
+--- 20/06/2024
+
+ALTER TABLE vehicletype RENAME COLUMN truckSpace to trunkSpace;
