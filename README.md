@@ -1,4 +1,5 @@
 Require latest mySQL and mySQL workbench version
+Require ASP.Net MVC
 
 Create a new database 
 name: vehicleDB
