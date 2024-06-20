@@ -3,55 +3,58 @@
     ViewData["Title"] = "Create Vehicle";
 }
 
-<h2>Create Vehicle</h2>
+<div class="container">
+    <h2>Create Vehicle</h2>
 
-@if (!ViewData.ModelState.IsValid)
-{
-<br>
-<div class="alert alert-danger" style="text-align:center;">
-    @ViewData.ModelState[string.Empty].Errors[0].ErrorMessage
-</div>
-}
-
-<form asp-controller="Vehicles" asp-action="CreateVehicle" method="post">
-
-    <div class="form-group">
-        <label asp-for="LicensePlate" class="control-label"></label>
-        <input pattern="[A-Z]{3}[0-9]{4}[A-Z]{1}" asp-for="LicensePlate" class="form-control" />
-        <span style="font-size:10px">Enter License Pattern as Following: 3 Capital Alphabetic 4 Digit 1 Capital Alphabetic </span>
-        <span asp-validation-for="LicensePlate" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="LicenseToOperate" class="control-label"></label>
-        <select class="form-select" aria-label="Default select example" id="LicenseToOperate" name="LicenseToOperate" placeholder="Enter license class" required>
-                            <option selected value="2B">2B</option>
-                            <option value="2A">2A</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="3A">3A</option>
-        </select>
-        <span asp-validation-for="LicenseToOperate" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="VehicleTypeID" class="control-label"></label>
-        <select asp-for="VehicleTypeID" asp-items="@(Model.VehicleTypes.Select(x => new SelectListItem { Value = x.VehicleTypeID.ToString(), Text = x.Brand + " - " + x.Model}))" class="form-control"></select>
-        <span asp-validation-for="VehicleTypeID" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <br/>
-        <button type="submit" class="btn btn-primary">Create</button>
-        <a asp-action="Manage" class="btn btn-secondary">Back to List</a>
-        <br />
-        <a asp-controller="Vehicles" asp-action="CreateVehicleType" class="text-muted" style="cursor:pointer;">Can't find vehicle model? Click here to add</a>
-    </div>
-
-</form>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <br>
+        <div class="alert alert-danger" style="text-align:center;">
+            @ViewData.ModelState[string.Empty].Errors[0].ErrorMessage
+        </div>
     }
-}
+
+    <form asp-controller="Vehicles" asp-action="CreateVehicle" method="post">
+
+        <div class="form-group">
+            <label asp-for="LicensePlate" class="control-label"></label>
+            <input pattern="[A-Z]{3}[0-9]{4}[A-Z]{1}" asp-for="LicensePlate" class="form-control"/>
+            <span style="font-size:10px">Enter License Pattern as Following: 3 Capital Alphabetic 4 Digit 1 Capital Alphabetic </span>
+            <span asp-validation-for="LicensePlate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LicenseToOperate" class="control-label"></label>
+            <select class="form-select" aria-label="Default select example" id="LicenseToOperate" name="LicenseToOperate" placeholder="Enter license class" required>
+                <option selected value="2B">2B</option>
+                <option value="2A">2A</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3A">3A</option>
+            </select>
+            <span asp-validation-for="LicenseToOperate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="VehicleTypeID" class="control-label"></label>
+            <select asp-for="VehicleTypeID" asp-items="@(Model.VehicleTypes.Select(x => new SelectListItem { Value = x.VehicleTypeID.ToString(), Text = x.Brand + " - " + x.Model }))" class="form-control"></select>
+            <span asp-validation-for="VehicleTypeID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <br/>
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Manage" class="btn btn-secondary">Back to List</a>
+            <br/>
+            <a asp-controller="Vehicles" asp-action="CreateVehicleType" class="text-muted" style="cursor:pointer;">Can't find vehicle model? Click here to add</a>
+        </div>
+
+    </form>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+
+</div>

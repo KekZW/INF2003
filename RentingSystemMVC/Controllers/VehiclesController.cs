@@ -378,7 +378,7 @@ namespace RentingSystem.Controllers
                         }
                     }
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Manage");
                     
                 } catch (Exception e){
                     ModelState.AddModelError(string.Empty, "There is existing license plate with these numbers, insert another number");
@@ -429,7 +429,7 @@ namespace RentingSystem.Controllers
                         } 
                     } 
  
-                    return RedirectToAction("Index"); 
+                    return RedirectToAction("CreateVehicle"); 
 
                 } catch (Exception e){
                     return View(vt);
