@@ -1,13 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `vehicledb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `vehicledb`;
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
--- Host: localhost    Database: vehicledb
+-- Host: 127.0.0.1    Database: vehicledb
 -- ------------------------------------------------------
--- Server version	8.0.31
-
-DROP DATABASE IF EXISTS vehicledb;
-CREATE DATABASE vehicledb;
-USE vehicledb;
-
+-- Server version	8.0.37
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -146,18 +143,6 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Temporary view structure for view `maintenanceinprogress`
---
-
-DROP TABLE IF EXISTS `maintenanceinprogress`;
-/*!50001 DROP VIEW IF EXISTS `maintenanceinprogress`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `maintenanceinprogress` AS SELECT 
- 1 AS `vehicleID`*/;
-SET character_set_client = @saved_cs_client;
-
---
 -- Table structure for table `rental`
 --
 
@@ -178,7 +163,7 @@ CREATE TABLE `rental` (
   KEY `vehicleID` (`vehicleID`),
   CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
   CONSTRAINT `rental_ibfk_2` FOREIGN KEY (`vehicleID`) REFERENCES `vehicle` (`vehicleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,18 +223,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Temporary view structure for view `rentalinprogress`
---
-
-DROP TABLE IF EXISTS `rentalinprogress`;
-/*!50001 DROP VIEW IF EXISTS `rentalinprogress`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `rentalinprogress` AS SELECT 
- 1 AS `vehicleID`*/;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `user`
@@ -351,6 +324,70 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'vehicledb'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `GetVehicleInProgress` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetVehicleInProgress`(
+	IN todayDate DATE,
+    IN filterColumn VARCHAR(50),
+    IN filterValue VARCHAR(100)
+)
+BEGIN
+DECLARE query VARCHAR(1000);
+    
+    SET @query = CONCAT(
+        "WITH RentalVehicle AS ( ",
+        "    SELECT DISTINCT r.vehicleID ",
+        "    FROM rental r ",
+        "    WHERE '", todayDate, "' BETWEEN r.startRentalDate AND r.endRentalDate ",
+        "), ",
+        "MaintenanceVehicle AS (",
+        "    SELECT DISTINCT m.vehicleID ",
+        "    FROM maintenance m ",
+        "    WHERE '", todayDate, "' >= m.startMaintDate ",
+        "    AND m.workshopStatus <> 'Completed' ",
+        ") ",
+        "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, ",
+        "       vt.seats, vt.fuelCapacity, vt.fuelType, vt.trunkSpace, vt.rentalCostPerDay, ",
+        "       COUNT(r.vehicleID) AS timesRented ",
+        "FROM vehicle v ",
+        "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID ",
+        "LEFT JOIN rental r ON v.vehicleID = r.vehicleID ",
+        "WHERE v.vehicleID NOT IN ( ",
+        "    SELECT vehicleID FROM RentalVehicle ",
+        "    UNION ",
+        "    SELECT vehicleID FROM MaintenanceVehicle ",
+        ") "
+    );
+    
+    IF filterColumn IS NOT NULL AND filterValue IS NOT NULL THEN
+        SET @query = CONCAT(@query, " AND vt.", filterColumn, " LIKE '%", filterValue, "%'");
+    END IF;
+    
+   SET @query = CONCAT(@query,
+    " GROUP BY v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, ",
+    " vt.seats, vt.fuelCapacity, vt.fuelType, vt.trunkSpace, vt.rentalCostPerDay ",
+    "ORDER BY COUNT(r.vehicleID) DESC;"
+);
+    
+    -- Prepare and execute the dynamic query
+    PREPARE stmt FROM @query;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Safe_Drop_Vehicle` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -390,42 +427,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Final view structure for view `maintenanceinprogress`
---
-
-/*!50001 DROP VIEW IF EXISTS `maintenanceinprogress`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `maintenanceinprogress` AS select distinct `m`.`vehicleID` AS `vehicleID` from `maintenance` `m` where ((`m`.`startMaintDate` <= curdate()) and (`m`.`workshopStatus` <> 'Completed')) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `rentalinprogress`
---
-
-/*!50001 DROP VIEW IF EXISTS `rentalinprogress`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `rentalinprogress` AS select distinct `rental`.`vehicleID` AS `vehicleID` from `rental` where (curdate() between `rental`.`startRentalDate` and `rental`.`endRentalDate`) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -436,4 +437,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-20 12:05:28
+-- Dump completed on 2024-06-22  9:44:12

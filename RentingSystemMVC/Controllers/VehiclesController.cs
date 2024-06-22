@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using System.Data;
 using Mysqlx.Crud;
 using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
@@ -34,37 +35,16 @@ namespace RentingSystem.Controllers
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
+               
 
-                string query =
-                    "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
-                    "vt.seats, vt.fuelCapacity, vt.fuelType, vt.trunkSpace, vt.rentalCostPerDay, COUNT(r.vehicleID) AS timesRented " +
-                    "FROM vehicle v " +
-                    "INNER JOIN vehicleType vt ON v.vehicleTypeID = vt.vehicleTypeID " +
-                    "LEFT JOIN rental r ON v.vehicleID = r.vehicleID " + 
-                    "WHERE v.vehicleID NOT IN" +
-                    "(SELECT * FROM RentalInProgress)"+
-                    "AND v.vehicleID NOT IN" +
-                    "(SELECT * FROM MaintenanceInProgress)";
-                    
-
-                if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
+                using (var command = new MySqlCommand("GetVehicleInProgress", connection))
                 {
-                    query += " AND vt." + filterColumn + " LIKE @filterValue";
-                }
+                    command.CommandType = CommandType.StoredProcedure;
 
-                query += " GROUP BY v.vehicleID ORDER BY COUNT(r.vehicleID) DESC";
-
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    if (selectedDate.HasValue)
-                    {
-                        command.Parameters.AddWithValue("@todayDate", selectedDate);
-                    }
-
-                    if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
-                    {
-                        command.Parameters.AddWithValue("@filterValue", "%" + filterValue + "%");
-                    }
+                    // Add parameters
+                    command.Parameters.AddWithValue("@todayDate", selectedDate.HasValue ? selectedDate : DateTime.Now.Date);
+                    command.Parameters.AddWithValue("@filterColumn", filterColumn);
+                    command.Parameters.AddWithValue("@filterValue", filterValue);
 
                    
                     using (var reader = command.ExecuteReader())
