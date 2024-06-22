@@ -3,6 +3,10 @@
 
 @functions {
 
+    public string GetImageLogoPath(string model)
+    {
+        return $"/images/optimized/{model.ToLower()}.png";
+    }
     public string GetImagePath(string model)
     {
         return $"/images/{model}.png";
@@ -14,7 +18,7 @@
     <div class="card detail-card">
         <div class="d-flex flex-row justify-content-between align-items-center" style="margin: 0 10px 0 30px">
             <h1 class="col-sm-4">@Model.Vehicle.Brand @Model.Vehicle.Model</h1>
-            <img class="col-sm-2" src="@GetImagePath(@Model.Vehicle.Brand)"/>
+            <img class="col-sm-2" src="@GetImageLogoPath(@Model.Vehicle.Brand)"/>
         </div>
     </div>
     <div>
