@@ -18,7 +18,7 @@
 
         <div class="form-group">
             <label asp-for="LicensePlate" class="control-label"></label>
-            <input pattern="[A-Z]{3}[0-9]{4}[A-Z]{1}" asp-for="LicensePlate" class="form-control"/>
+            <input pattern="[A-Z]{3}[0-9]{4}[A-Z]{1}" asp-for="LicensePlate" class="form-control" required/>
             <span style="font-size:10px">Enter License Pattern as Following: 3 Capital Alphabetic 4 Digit 1 Capital Alphabetic </span>
             <span asp-validation-for="LicensePlate" class="text-danger"></span>
         </div>
