@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `vehicledb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `vehicledb`;
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: vehicledb
+-- Host: localhost    Database: vehicledb
 -- ------------------------------------------------------
--- Server version	8.0.37
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `license` (
   PRIMARY KEY (`licenseID`),
   KEY `userID` (`userID`),
   CONSTRAINT `license_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,19 +96,16 @@ UNLOCK TABLES;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `maintenance_AFTER_INSERT` AFTER INSERT ON `maintenance` FOR EACH ROW BEGIN
-DELETE FROM rental r
-WHERE EXISTS (
-    SELECT 1
-    FROM maintenance m
-    WHERE m.vehicleID = NEW.vehicleID
+ DELETE FROM rental
+    WHERE vehicleID = NEW.vehicleID
       AND (
-          (r.startRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
-          OR (r.endRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
-      ) AND NEW.workshopStatus = "In Maintenance"
-);
+          (startRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
+          OR (endRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
+      )
+      AND NEW.workshopStatus = 'In Maintenance';
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -122,19 +119,16 @@ DELIMITER ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `maintenance_AFTER_UPDATE` AFTER UPDATE ON `maintenance` FOR EACH ROW BEGIN
-DELETE FROM rental r
-WHERE EXISTS (
-    SELECT 1
-    FROM maintenance m
-    WHERE m.vehicleID = NEW.vehicleID
+ DELETE FROM rental
+    WHERE vehicleID = NEW.vehicleID
       AND (
-          (r.startRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
-          OR (r.endRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
-      ) AND NEW.workshopStatus = "In Maintenance"
-);
+          (startRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
+          OR (endRentalDate BETWEEN NEW.startMaintDate AND NEW.endMaintDate)
+      )
+      AND NEW.workshopStatus = 'In Maintenance';
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -163,7 +157,7 @@ CREATE TABLE `rental` (
   KEY `vehicleID` (`vehicleID`),
   CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
   CONSTRAINT `rental_ibfk_2` FOREIGN KEY (`vehicleID`) REFERENCES `vehicle` (`vehicleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +238,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `emailAddress_UNIQUE` (`emailAddress`),
   KEY `licenseID` (`licenseID`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`licenseID`) REFERENCES `license` (`licenseID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,4 +431,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-22  9:44:12
+-- Dump completed on 2024-06-24 16:52:04
