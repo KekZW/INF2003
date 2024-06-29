@@ -1,8 +1,15 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using RentingSystemMVC.Data;
+using RentingSystemMVC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.Configure<DatabaseSettings>(
+    builder.Configuration.GetSection("MongoDB"));
+
+builder.Services.AddSingleton<MongoDBContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -21,6 +28,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, 
        ServerVersion.AutoDetect(connectionString)));
+
+
 
 var app = builder.Build();
 
