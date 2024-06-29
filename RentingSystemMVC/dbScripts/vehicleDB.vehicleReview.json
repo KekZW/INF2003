@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "667ff8f84c17272d5ff9a299"
+  },
+  "vehicleID": 1,
+  "reviews": [
+    {
+      "userid": 1,
+      "rating": 5,
+      "comments": "bish"
+    }
+  ]
+}]

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using MongoDB.Driver;
 using System.Data;
 using Mysqlx.Crud;
 using RentingSystemMVC.Data;
@@ -21,17 +22,25 @@ namespace RentingSystem.Controllers
         private readonly string _connectionString = "Server=localhost;Database=vehicleDB;Uid=root;Pwd=;";
 
         private readonly ApplicationDbContext _context;
+        private readonly MongoDBContext _mongoContext;
 
-        public VehiclesController(ApplicationDbContext context)
+        public VehiclesController(ApplicationDbContext context, MongoDBContext mongoContext)
         {
             _context = context;
+            _mongoContext = mongoContext;
         }
 
+
+        public int GetAllVehicleReviews()
+        {
+            var collection = _mongoContext.VehicleReview;
+            collection.Find(FilterDefinition<VehicleReview>.Empty).ToList();
+            return 1;
+        }
 
         public IActionResult Index(DateTime? selectedDate, string? filterColumn, string? filterValue)
         {
             List<AuthorisedVehicleView> vehicles = new List<AuthorisedVehicleView>();
-
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
@@ -73,7 +82,6 @@ namespace RentingSystem.Controllers
                     }
                 }
             }
-
             return View(vehicles);
         }
 

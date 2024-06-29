@@ -7,7 +7,7 @@ namespace RentingSystemMVC.Data;
 
 public class MongoDBContext
 {
-    private readonly IMongoDatabase _rentalCollection;
+    private readonly IMongoDatabase mongoDatabase;
 
     public MongoDBContext(
         IOptions<DatabaseSettings> DatabaseSettings)
@@ -15,13 +15,13 @@ public class MongoDBContext
         var mongoClient = new MongoClient(
             DatabaseSettings.Value.ConnectionString);
 
-        var mongoDatabase = mongoClient.GetDatabase(
+        mongoDatabase = mongoClient.GetDatabase(
             DatabaseSettings.Value.DatabaseName);
 
     }
 
     // Define your collections (tables) here
     public IMongoCollection<VehicleReview> VehicleReview =>
-        _rentalCollection.GetCollection<VehicleReview>("vehicleReview");
+        mongoDatabase.GetCollection<VehicleReview>("vehicleReview");
 
 }

@@ -1,29 +1,24 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
-namespace RentingSystemMVC.Models
+
+namespace RentingSystemMVC.Models;
+
+public class Review
 {
-    public class VehicleReview
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+public int userid { get; set; }
+public int rating { get; set; }
+public string comments { get; set; }
+}
 
-        [BsonElement("Make")]
-        public string Make { get; set; }
+public class VehicleReview
+{
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string _id { get; set; } = null;
 
-        [BsonElement("Model")]
-        public string Model { get; set; }
+    public int vehicleID { get; set; }
 
-        [BsonElement("Year")]
-        public int Year { get; set; }
-
-        [BsonElement("Color")]
-        public string Color { get; set; }
-
-        [BsonElement("LicensePlate")]
-        public string LicensePlate { get; set; }
-
-        // Add other properties as needed
-    }
+    public List<Review> reviews { get; set; } = new List<Review>(); 
 }
