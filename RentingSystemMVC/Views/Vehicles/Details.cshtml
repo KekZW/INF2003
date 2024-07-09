@@ -525,7 +525,7 @@
                     data: { promotionCode: promotionCode },
                     success: function(response) {
                         if (response) {
-                            $('#discountHolder').text("You will received " + response.promotion.discountRate + "% off your total bill");
+                            $('#discountHolder').text("You will received " + response.discountRate + "% off your total bill");
                             var rentalValue = $('#rentalAmount').val();
                             var integerValue = parseFloat(rentalValue);
 

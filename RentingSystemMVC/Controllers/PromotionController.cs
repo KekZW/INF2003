@@ -5,6 +5,8 @@ using MongoDB.Bson.Serialization;
 using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
 using System;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace RentingSystemMVC.Controllers
 {
@@ -12,6 +14,7 @@ namespace RentingSystemMVC.Controllers
     {
         private readonly MongoDBContext _mongoContext;
         private readonly ILogger<PromotionController> _logger;
+        private static readonly FilterDefinitionBuilder<Promotion> filterBuilder = Builders<Promotion>.Filter;
 
         public PromotionController(MongoDBContext mongoContext, ILogger<PromotionController> logger)
         {
@@ -19,25 +22,71 @@ namespace RentingSystemMVC.Controllers
             _logger = logger;
         }
 
-        public ActionResult GetPromotion(string promotionCode)
+        [HttpGet]
+        public IActionResult GetPromotion(string promotionCode)
         {
             try
             {
-                var filterBuilder = Builders<Promotion>.Filter;
+                var currentDate = DateTime.Now;
                 var filter = filterBuilder.Eq("promotionCode", promotionCode);
-                var dateFilter = Builders<Promotion>.Filter.Gte("ExpiryDate", new DateTime());
+                var dateFilter = filterBuilder.Gte("ExpiryDate", currentDate);
                 var combinedFilter = filterBuilder.And(filter,dateFilter);
                 var promotion = _mongoContext.Promotion.Find(combinedFilter).FirstOrDefault();
 
                 if (promotion == null) return BadRequest("promotion not found");
 
 
-                return Json(new { promotion }); // Return promotion as JSON
+                return Json(new { promotion.discountRate }); // Return promotion as JSON
             }
             catch (Exception ex)
             {
                 return BadRequest("promotion not found");
             }
         }
+        [HttpGet]
+        [Authorize(Roles="Admin")]
+        public IActionResult Manage(){
+
+            var currentDate = DateTime.Now;
+            var filter = filterBuilder.Gte("ExpiryDate",currentDate);
+
+            var promotions = _mongoContext.Promotion.Find(filter).ToList();
+            return View(promotions);
+        }
+
+        [HttpPost]
+        [Authorize(Roles="Admin")]
+        public IActionResult postPromotions(string promotionCode, DateTime ExpiryDate, int discountRate){
+        try
+        {
+
+            if (ModelState.IsValid)
+            {
+                
+                TimeZoneInfo sgTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+                // Convert UTC to your local time zone (+8 hours)
+                ExpiryDate = TimeZoneInfo.ConvertTimeFromUtc(ExpiryDate, sgTimeZone);
+
+                Promotion promotion = new Promotion {
+                    promotionCode = promotionCode,
+                    ExpiryDate = ExpiryDate.ToUniversalTime(),
+                    discountRate = discountRate,
+                };
+                _mongoContext.Promotion.InsertOne(promotion);
+                return Json(new { Message = "Promotion added successfully." } );
+            }
+            else
+            {
+                return BadRequest(ModelState); // Return validation errors if ModelState is invalid
+            }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                _logger.LogError(ex, "Error occurred while adding promotion");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
+    
 }
