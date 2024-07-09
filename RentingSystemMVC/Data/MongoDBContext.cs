@@ -24,4 +24,7 @@ public class MongoDBContext
     public IMongoCollection<VehicleReview> VehicleReview =>
         mongoDatabase.GetCollection<VehicleReview>("vehicleReview");
 
+    public IMongoCollection<Promotion> Promotion => 
+        mongoDatabase.GetCollection<Promotion>("promotion");
+
 }
