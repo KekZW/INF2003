@@ -25,4 +25,8 @@ public class MongoDBContext
     public IMongoCollection<Promotion> Promotion => 
         mongoDatabase.GetCollection<Promotion>("promotion");
 
+    public IMongoCollection<RentalHistory> RentalHistory =>
+        mongoDatabase.GetCollection<RentalHistory>("RentalHistory");
+
+
 }
