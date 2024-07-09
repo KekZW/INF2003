@@ -33,11 +33,11 @@ namespace RentingSystem.Controllers
 
         public IActionResult Index(DateTime? selectedDate, string? filterColumn, string? filterValue)
         {
+            
             List<AuthorisedVehicleView> vehicles = new List<AuthorisedVehicleView>();
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-               
 
                 using (var command = new MySqlCommand("GetVehicleInProgress", connection))
                 {
@@ -110,8 +110,11 @@ namespace RentingSystem.Controllers
                     }
 
                     int count = Convert.ToInt32(command.ExecuteScalar());
+                           System.Diagnostics.Debug.WriteLine("Executing SQL Query: " + count);
                     if (count > 0)
                     {
+                 
+                        
                         available = false;
                     }
                 }
@@ -177,7 +180,9 @@ namespace RentingSystem.Controllers
 
                 catch (MySqlException ex)
                 {
-
+                    Console.WriteLine("Count Result: " + ex.Message);
+                    Console.WriteLine("Count Result: " + ex.Number);
+                    Console.WriteLine("Count Result: " + ex.StackTrace);
                     return Json(new { success = false });
                 }
             }

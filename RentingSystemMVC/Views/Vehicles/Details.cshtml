@@ -14,6 +14,18 @@
 
 }
 
+<style>
+    .input-wrapper div {
+        display:flex;
+    }
+  
+    .input-wrapper input { 
+        width : 36vw;
+        margin-right:10px;
+    } 
+  
+</style>
+
 <div class="container gy-2 pt-3">
     <div class="card detail-card">
         <div class="d-flex flex-row justify-content-between align-items-center" style="margin: 0 10px 0 30px">
@@ -212,6 +224,16 @@
                             <label for="rentalLot">Rental Lot</label>
                             <input type="number" class="form-control" id="rentalLot" name="rentalLot" required/>
                         </div>
+
+                        <div class="form-group mt-1 input-wrapper">
+                            <label for="rentalDiscount">Rental Discount</label>
+                            <div> 
+                                <input type="text" class="form-control" id="rentalDiscount" name="rentalDiscount" placeholder="Put Discount Code"/>
+                                <button type="button" class="btn btn-dark" id="applyButton">Apply</button>
+                            </div>
+                            <span style="font-size:10px"id="discountHolder"></span>
+                        </div>
+                        
                         <div class="form-group mt-1">
                             <label for="rentalAmount">Rental Amount</label>
                             <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly/>
@@ -491,10 +513,53 @@
                     }
                 });
             });
-        });
 
-        
-        $(document).ready(function () {
+            $("#applyButton").on('click', function(event) {
+                event.preventDefault();
+
+                var promotionCode = $('#rentalDiscount').val();
+
+                $.ajax({
+                    url: '/Promotion/getPromotion',
+                    type: 'GET',
+                    data: { promotionCode: promotionCode },
+                    success: function(response) {
+                        if (response) {
+                            $('#discountHolder').text("You will received " + response.promotion.discountRate + "% off your total bill");
+                            var rentalValue = $('#rentalAmount').val();
+                            var integerValue = parseFloat(rentalValue);
+
+                            if (!isNaN(integerValue)){
+                                var startDate = new Date($('#startRentalDate').val());
+                                var endDate = new Date($('#endRentalDate').val());
+                                var rentalCostPerDay = parseFloat($('#rentalCostPerDay').val());
+                                var timeDiff = endDate.getTime() - startDate.getTime();
+                                var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                                $('#rentalAmount').val((daysDiff * rentalCostPerDay * (100-response.promotion.discountRate)/100).toFixed(2));
+                            }
+
+                        }
+                        
+                    },
+                    error: function(error) {
+                        $('#discountHolder').text("There is no valid discount with this promotion code.");
+                    
+                        var startDate = new Date($('#startRentalDate').val());
+                        var endDate = new Date($('#endRentalDate').val());
+                        var rentalCostPerDay = parseFloat($('#rentalCostPerDay').val());
+
+                        if (startDate && endDate && startDate <= endDate && !isNaN(rentalCostPerDay)){ 
+                            var timeDiff = endDate.getTime() - startDate.getTime();
+                            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                            $('#rentalAmount').val((daysDiff * rentalCostPerDay ).toFixed(2));
+                        }
+                     
+                    }
+                });
+
+            })
+
+
             $('#rentForm').on('submit', function (event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
@@ -534,17 +599,34 @@
                 });
             });
 
+        
+
+
             $('#startRentalDate, #endRentalDate').on('change', function () {
                 var startDate = new Date($('#startRentalDate').val());
                 var endDate = new Date($('#endRentalDate').val());
                 var rentalCostPerDay = parseFloat($('#rentalCostPerDay').val());
-
+            
                 if (startDate && endDate && startDate <= endDate && !isNaN(rentalCostPerDay)) {
-                    var timeDiff = endDate.getTime() - startDate.getTime();
+                   var timeDiff = endDate.getTime() - startDate.getTime();
                     var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    var rentalCost;
+                    var discountRate;
+                    if ($('#discountHolder').text() === "" ||  $('#discountHolder').text() === "There is no valid discount with this promotion code.")
+                    {
+                     discountRate = undefined;   
+                    }else{
 
-                    var rentalAmount = daysDiff * rentalCostPerDay;
-                    $('#rentalAmount').val(rentalAmount.toFixed(2));
+                        discountRate = $('#discountHolder').text().split(" ")[3].replace("%", "") ;
+                    }
+                    
+                    if (discountRate === undefined){
+                        rentalCost = daysDiff * rentalCostPerDay;
+                    } else {
+                        rentalCost = daysDiff * rentalCostPerDay * (100 - discountRate) / 100; // If discountRate is defined
+                    }
+                    
+                   $('#rentalAmount').val(rentalCost.toFixed(2));
                 } else {
                     $('#rentalAmount').val('');
                 }

@@ -10,7 +10,7 @@
     {
         <br>
         <div class="alert alert-danger" style="text-align:center;">
-            @ViewData.ModelState[string.Empty].Errors[0].ErrorMessage
+            @ViewData?.ModelState[string.Empty].Errors[0].ErrorMessage
         </div>
     }
 
@@ -37,7 +37,7 @@
 
         <div class="form-group">
             <label asp-for="VehicleTypeID" class="control-label"></label>
-            <select asp-for="VehicleTypeID" asp-items="@(Model.VehicleTypes.Select(x => new SelectListItem { Value = x.VehicleTypeID.ToString(), Text = x.Brand + " - " + x.Model }))" class="form-control"></select>
+            <select asp-for="VehicleTypeID" asp-items="@(Model?.VehicleTypes.Select(x => new SelectListItem { Value = x.VehicleTypeID.ToString(), Text = x.Brand + " - " + x.Model }))" class="form-control"></select>
             <span asp-validation-for="VehicleTypeID" class="text-danger"></span>
         </div>
 
