@@ -3,8 +3,6 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace RentingSystemMVC.Data;
-
-
 public class MongoDBContext
 {
     private readonly IMongoDatabase mongoDatabase;
@@ -23,5 +21,8 @@ public class MongoDBContext
     // Define your collections (tables) here
     public IMongoCollection<VehicleReview> VehicleReview =>
         mongoDatabase.GetCollection<VehicleReview>("vehicleReview");
+
+    public IMongoCollection<RentalHistory> RentalHistory =>
+        mongoDatabase.GetCollection<RentalHistory>("RentalHistory");
 
 }
