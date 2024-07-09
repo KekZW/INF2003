@@ -30,9 +30,23 @@
                 <div class="card mt-3 p-4">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <p class="overview-text">Overview</p>
-                        <div>
-                            <a class="btn btn-danger" onclick="openDeleteModal(@Model.Vehicle.VehicleID)">Delete</a>
-                        </div>
+                        
+                          @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                            {
+                                <div> 
+                                    <a class="btn btn-dark" onclick="openRentModal(@Model.Vehicle.VehicleID,@Model.Vehicle.RentalCostPerDay)">Rent</a>
+                                </div>
+                            }
+                            else if (User.IsInRole("Admin"))
+                            {
+                                <div>
+                                    <a class="btn btn-danger" onclick="openDeleteModal(@Model.Vehicle.VehicleID)">Delete</a>
+                                </div>
+                            } else {
+                                <div>
+                                    <button type="button" class="btn btn-dark" disabled>Rent</button>
+                                </div>  
+                            }
                     </div>
                     <div class="d-flex flex-row detail-col">
                         <div class="first-col">
@@ -70,7 +84,10 @@
                     </div>
                 </div>
             </div>
-            <div class="card col-sm-5 mt-3 m-0 p-4">
+
+             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")){
+
+                <div class="card col-sm-5 mt-3 m-0 p-4">
                 <div class="row">
                     <div class="d-flex justify-content-between">
                         <h3> Maintenance Details </h3>
@@ -97,6 +114,55 @@
                         {
                             @foreach (var maintenance in Model.Maintenances)
                             {
+                                <tr>    
+                                    <td> @maintenance.WorkshopStatus </td>
+                                    <td> @maintenance.startMaintDate </td>
+                                    <td> @maintenance.endMaintDate </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-secondary" onclick="openEditMaintenanceModal(@maintenance.MaintenanceID, '@maintenance.startMaintDate.ToString("yyyy-MM-dd")', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')">Edit</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+             } else {
+
+                <div class="card col-sm-5 mt-3 m-0 p-4">
+                <div class="row">
+                    <div class="d-flex justify-content-between">
+                        <h3> Reviews </h3>
+                        @if ( User.Identity.IsAuthenticated){
+                            <button class="btn btn-primary" onclick="addReviews(@Model.Vehicle.VehicleID)">Add new review </button>
+                        } else {
+                            <button class="btn btn-primary" disabled>Add new review </button>
+                        }
+                        @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th> Email</th>
+                            <th> Comment</th>
+                            <th> Stars</th>
+                            <th> Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (Model.Maintenances.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="3"> No Review records found </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var maintenance in Model.Maintenances)
+                            {
                                 <tr>
                                     <td> @maintenance.WorkshopStatus </td>
                                     <td> @maintenance.startMaintDate </td>
@@ -109,6 +175,50 @@
                         }
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+             }
+            
+            
+        </div>
+    </div>
+
+    <!-- Rent Modal -->
+    <div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rentModalLabel">Rent Vehicle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="rentForm">
+                        <input type="hidden" id="vehicleID" name="vehicleID"/>
+                        <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay"/>
+                        <div class="form-group">
+                            <label for="startRentalDate">Start Date</label>
+                            <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="endRentalDate">End Date</label>
+                            <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required/>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="rentalAddress">Rental Address</label>
+                            <input type="text" class="form-control" id="rentalAddress" name="rentalAddress" required/>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="rentalLot">Rental Lot</label>
+                            <input type="number" class="form-control" id="rentalLot" name="rentalLot" required/>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="rentalAmount">Rental Amount</label>
+                            <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-2">Rent</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -220,6 +330,30 @@
             workshopStatus = document.getElementById('workshopStatus');
             editStartMaintenanceDate = document.getElementById('editStartMaintenanceDate');
             editEndMaintenanceDate = document.getElementById('editEndMaintenanceDate');
+            const startRentalDate = document.getElementById('startRentalDate');
+            const endRentalDate = document.getElementById('endRentalDate');
+
+            startRentalDate.addEventListener('change', () => {
+                let startDate = new Date(startRentalDate.value);
+                let minEndDate = new Date(startDate);
+                minEndDate.setDate(minEndDate.getDate() + 1);
+
+                let minEndDateString = minEndDate.toISOString().split('T')[0];
+                endRentalDate.min = minEndDateString;
+
+                if (new Date(endRentalDate.value) <= startDate) {
+                    endRentalDate.value = minEndDateString;
+                }
+            });
+
+            endRentalDate.addEventListener('change', () => {
+                let startDate = new Date(startRentalDate.value);
+                let endDate = new Date(endRentalDate.value);
+
+                if (endDate <= startDate) {
+                    endRentalDate.value = '';
+                }
+            });
 
 
             startMaintenanceDate.addEventListener('change', () => {
@@ -265,14 +399,17 @@
                     endMaintenanceDate.value = '';
                 }
             });
-
-
-
         });
 
         function openMaintenanceModal(vehicleID) {
             $('#vehicleID').val(vehicleID);
             $('#maintenanceModal').modal('show');
+        }
+
+         function openRentModal(vehicleID, rentalCostPerDay) {
+            $('#vehicleID').val(vehicleID);
+            $('#rentalCostPerDay').val(rentalCostPerDay);
+            $('#rentModal').modal('show');
         }
 
         function openEditMaintenanceModal(maintenanceID, startDate, endDate, status) {
@@ -355,6 +492,65 @@
                 });
             });
         });
+
+        
+        $(document).ready(function () {
+            $('#rentForm').on('submit', function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+
+                // Check availability first
+                $.ajax({
+                    url: '@Url.Action("CheckAvailability", "Vehicles")',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.available) {
+                            // Proceed with rental if available
+                            $.ajax({
+                                url: '@Url.Action("RentVehicle", "Vehicles")',
+                                type: 'POST',
+                                data: formData,
+                                success: function (response) {
+                                    if (response.success) {
+                                        alert('Vehicle rented successfully!');
+                                        $('#rentModal').modal('hide');
+                                        window.location.href = '@Url.Action("Index", "Rental")';
+                                    } else {
+                                        alert('Users are not allowed to double book on the same day');
+                                    }
+                                },
+                                error: function () {
+                                    alert('Error occurred while renting the vehicle.');
+                                }
+                            });
+                        } else {
+                            alert('The vehicle is not available for the selected dates.');
+                        }
+                    },
+                    error: function () {
+                        alert('Error occurred while checking availability.');
+                    }
+                });
+            });
+
+            $('#startRentalDate, #endRentalDate').on('change', function () {
+                var startDate = new Date($('#startRentalDate').val());
+                var endDate = new Date($('#endRentalDate').val());
+                var rentalCostPerDay = parseFloat($('#rentalCostPerDay').val());
+
+                if (startDate && endDate && startDate <= endDate && !isNaN(rentalCostPerDay)) {
+                    var timeDiff = endDate.getTime() - startDate.getTime();
+                    var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    var rentalAmount = daysDiff * rentalCostPerDay;
+                    $('#rentalAmount').val(rentalAmount.toFixed(2));
+                } else {
+                    $('#rentalAmount').val('');
+                }
+            });
+        });
+ 
     </script>
     }
 

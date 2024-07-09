@@ -31,13 +31,6 @@ namespace RentingSystem.Controllers
         }
 
 
-        public int GetAllVehicleReviews()
-        {
-            var collection = _mongoContext.VehicleReview;
-            collection.Find(FilterDefinition<VehicleReview>.Empty).ToList();
-            return 1;
-        }
-
         public IActionResult Index(DateTime? selectedDate, string? filterColumn, string? filterValue)
         {
             List<AuthorisedVehicleView> vehicles = new List<AuthorisedVehicleView>();
@@ -298,11 +291,7 @@ namespace RentingSystem.Controllers
         
         public IActionResult Details(int id)
         {
-            if (!User.IsInRole("Admin"))
-            {
-                return RedirectToAction("Index");
-            }
-            
+
             // TODO: Retrieve maintenance logs for the vehicle, combine with vehicleViewModel 
             string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
 
@@ -323,8 +312,7 @@ namespace RentingSystem.Controllers
                 .FromSqlRaw(vehQuery, id)
                 .FirstOrDefault();
 
-            Console.WriteLine(maintenanceLogs);
-
+            
             VehicleDetailModel vehicleDetail = new VehicleDetailModel
                 { Maintenances = maintenanceLogs, Vehicle = vehicle };
             return View(vehicleDetail);
