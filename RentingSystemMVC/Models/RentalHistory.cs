@@ -8,6 +8,7 @@ namespace RentingSystemMVC.Models
 {
     public class RentalHistory
     {
+        public int rentalID { get; set; }
         public int userid { get; set; }
         public string name { get; set; }
         public DateTime startRentalDate { get; set; }
