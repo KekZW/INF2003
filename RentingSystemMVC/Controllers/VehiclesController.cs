@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using MongoDB.Driver;
+using MongoDB.Bson.Serialization;
 using System.Data;
 using Mysqlx.Crud;
 using RentingSystemMVC.Data;
@@ -23,6 +24,7 @@ namespace RentingSystem.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly MongoDBContext _mongoContext;
+        private static readonly FilterDefinitionBuilder<VehicleReview> filterBuilder = Builders<VehicleReview>.Filter;
 
         public VehiclesController(ApplicationDbContext context, MongoDBContext mongoContext)
         {
@@ -296,17 +298,7 @@ namespace RentingSystem.Controllers
         
         public IActionResult Details(int id)
         {
-
-            // TODO: Retrieve maintenance logs for the vehicle, combine with vehicleViewModel 
-            string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
-
-            List<Maintenance> maintenanceLogs = null;
-
-            if (_context.Maintenance != null)
-            {
-                maintenanceLogs = _context.Maintenance.FromSqlRaw(maintenanceQuery, id).ToList();
-            }
-
+  
             string vehQuery = "SELECT v.vehicleID, v.licensePlate, v.licenseToOperate, vt.brand, vt.model, vt.type, " +
                               "vt.seats, vt.fuelCapacity, vt.fuelType, vt.trunkSpace, vt.rentalCostPerDay " +
                               "FROM vehicle v " +
@@ -317,9 +309,27 @@ namespace RentingSystem.Controllers
                 .FromSqlRaw(vehQuery, id)
                 .FirstOrDefault();
 
+            List<Maintenance> maintenanceLogs = new List<Maintenance>();
+            VehicleReview? vr = null;
+
+            if (User.IsInRole("Admin")){
+                
+                // TODO: Retrieve maintenance logs for the vehicle, combine with vehicleViewModel 
+                string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
+
+                if (_context.Maintenance != null)
+                {
+                    maintenanceLogs = _context.Maintenance.FromSqlRaw(maintenanceQuery, id).ToList();
+                }
+         
+            } else{
+                // Retrieve the reviews of the current vehicle ID
+                var filter = filterBuilder.Eq("vehicleID",id);
+                vr = _mongoContext.VehicleReview.Find(filter).FirstOrDefault();
+            }
             
             VehicleDetailModel vehicleDetail = new VehicleDetailModel
-                { Maintenances = maintenanceLogs, Vehicle = vehicle };
+                { Maintenances = maintenanceLogs, Vehicle = vehicle , vehicleReview = vr};
             return View(vehicleDetail);
         }
 
@@ -496,6 +506,68 @@ namespace RentingSystem.Controllers
                 return Json(new { success = false });
             }
         }
-    }
+    
+        [HttpPost]
+        [Authorize(Roles = "User")]
+        public ActionResult postReview(int vehicleId, string comment, int rating)
+        {
+            try
+            {
+
+                var filter = Builders<VehicleReview>.Filter.And(
+                    Builders<VehicleReview>.Filter.Eq("vehicleID", vehicleId),
+                    Builders<VehicleReview>.Filter.ElemMatch("reviews", Builders<Review>.Filter.Eq("name", User.FindFirst(ClaimTypes.Name)?.Value))
+                );
+
+                var existingUserReview = _mongoContext.VehicleReview.Find(filter).FirstOrDefault();
+       
+               if(existingUserReview != null) return BadRequest();
+
+                var update = Builders<VehicleReview>.Update.Push("reviews", new Review
+                {
+                    name = User.FindFirst(ClaimTypes.Name)?.Value,
+                    rating = rating,
+                    comment = comment
+                });
+
+                var options = new FindOneAndUpdateOptions<VehicleReview>{
+                    ReturnDocument = ReturnDocument.After,
+                    IsUpsert = true,
+
+                };
+               
+                _mongoContext.VehicleReview.FindOneAndUpdate(filter, update,options);
+
+                return Json (new {success = true});    
+
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "User")] 
+        public ActionResult DeleteReview(int vehicleID){
+            try {
+                
+                var filter = Builders<VehicleReview>.Filter.And(
+                Builders<VehicleReview>.Filter.Eq("vehicleID", vehicleID),
+                Builders<VehicleReview>.Filter.ElemMatch("reviews", Builders<Review>.Filter.Eq("name", User.FindFirst(ClaimTypes.Name)?.Value))
+                );
+            
+                var update =  Builders<VehicleReview>.Update.PullFilter("reviews", Builders<Review>.Filter.Eq("name", User.FindFirst(ClaimTypes.Name)?.Value));
+                _mongoContext.VehicleReview.UpdateOne(filter, update);
+
+                return  Json( new {success = true});
+            } catch (Exception ex) {
+                return StatusCode (500, "Internal Server error: " + ex.Message);
+            } 
+        
+        }
+    }   
     
 }

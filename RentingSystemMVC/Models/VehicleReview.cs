@@ -6,10 +6,15 @@ using System.Collections.Generic;
 namespace RentingSystemMVC.Models;
 
 public class Review
-{
-public int userid { get; set; }
-public int rating { get; set; }
-public string comments { get; set; }
+{   
+    [BsonElement("name")]
+    public string name { get; set; }
+
+    [BsonElement("rating")]
+    public int rating { get; set; }
+
+    [BsonElement("comment")]
+    public string comment { get; set; }
 }
 
 public class VehicleReview
@@ -18,6 +23,7 @@ public class VehicleReview
     [BsonRepresentation(BsonType.ObjectId)]
     public string _id { get; set; } = null;
 
+    [BsonElement("vehicleID")]
     public int vehicleID { get; set; }
 
     public List<Review> reviews { get; set; } = new List<Review>(); 

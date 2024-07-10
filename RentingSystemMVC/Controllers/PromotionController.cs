@@ -43,6 +43,7 @@ namespace RentingSystemMVC.Controllers
                 return BadRequest("promotion not found");
             }
         }
+
         [HttpGet]
         [Authorize(Roles="Admin")]
         public IActionResult Manage(){
@@ -58,10 +59,12 @@ namespace RentingSystemMVC.Controllers
         [Authorize(Roles="Admin")]
         public IActionResult postPromotions(string promotionCode, DateTime ExpiryDate, int discountRate){
         try
-        {
-
-            if (ModelState.IsValid)
+        {   
+          if (ModelState.IsValid)
             {
+                var existingPromoCode = _mongoContext.Promotion.Find(filterBuilder.Eq("promotionCode",promotionCode)).FirstOrDefault();
+            
+                if (existingPromoCode != null) return BadRequest(ModelState);
                 
                 TimeZoneInfo sgTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
                 // Convert UTC to your local time zone (+8 hours)

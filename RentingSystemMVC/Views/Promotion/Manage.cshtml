@@ -84,10 +84,11 @@
                     type: 'POST',
                     data: formData,
                     success: function (response) {
+                        alert("New Discount Code added!");
                         location.reload();
                     },
                     error: function () {
-                        alert('Unavailable to add the data.');
+                        alert('There exists a discount code with this');
                     }
                 });
             });
