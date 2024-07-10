@@ -65,8 +65,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="card">
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <nav aria-label="Page navigation example">
@@ -91,14 +89,26 @@
                 $.ajax({
                     url: "/Vehicles/getAllRentalHistory",
                     type: "GET",
-                    data: { "vehicleID": vehicleID, "pageNumber": pageNumber , "pageSize":5},
+                    data: { "vehicleID": vehicleID, "pageNumber": pageNumber , "pageSize":2},
                     success: function (response) {
                         if (response.success) {
-                            $('.card').empty();
+                            $('.modal-body').empty();
                             $.each(response.paginatedTotalItems, function (index, history) {
-                                $('.card').append('<div style="margin-bottom:10px" class="card-body">' +
-                                 history.name, history.startRentalDate, history.endRentalDate,history.status
-                                 +'</div>');
+                                $('.modal-body').append(
+                                '<div style="margin-bottom:10px;" class="card">' +
+                                    '<div class="card-body">'+ 
+                                        '<div class="card-header">'+
+                                            "<p> Rental ID: " + history.rentalID +
+                                            "</p><p> User ID: " + history.userID + 
+                                            "</p><p> Name: "+ history.name + 
+                                            "</p>"
+                                        +'</div> <ul class="list-group list-group-flush">' +  
+                                        "<li class='list-group-item'> Start Rental: " + history.startRentalDate + "</li>"
+                                        + "<li class='list-group-item'> End Rental: " + history.endRentalDate + "</li>"
+                                        + "<li class='list-group-item'> Status: " + history.status + "</li>"
+                                        + "</ul>"
+                                    +'</div>' 
+                                +'</div>');
                             });
 
                             // Update pagination links
