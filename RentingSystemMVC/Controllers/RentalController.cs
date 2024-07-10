@@ -7,13 +7,24 @@ using MySql.Data.MySqlClient;
 using RentingSystemMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using RentingSystemMVC.Data;
+using MongoDB.Driver;
+using MongoDB.Bson.Serialization;
+using Newtonsoft.Json;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace RentingSystemMVC.Controllers
 {
     public class RentalController : Controller
     {
         private readonly string _connectionString = "Server=localhost;Database=vehicleDB;Uid=root;Pwd=;";
-        
+        private readonly MongoDBContext _mongoContext;
+
+        public RentalController(MongoDBContext mongoContext)
+        {
+            _mongoContext = mongoContext;
+        }
+
         [Authorize(Roles="User")]
         public IActionResult Index()
         {
@@ -67,11 +78,63 @@ namespace RentingSystemMVC.Controllers
         [HttpPost]
         public IActionResult DeleteRental(int rentalID)
         {
+            List<RentalHistory> rentalHistories = new List<RentalHistory>();
             try
             {
                 using (var connection = new MySqlConnection(_connectionString))
                 {
                     connection.Open();
+
+                    string rentalHistoryQuery =
+                        "SELECT r.rentalID, r.vehicleID, r.userID, u.name, r.startRentalDate, r.endRentalDate " +
+                        "FROM rental r " +
+                        "JOIN user u ON u.userID = r.userID " +
+                        "WHERE r.rentalID = @rentalID";
+
+                    History history = null;
+                    int vehicleID = 0;
+
+                    using (var rentalCommand = new MySqlCommand(rentalHistoryQuery, connection))
+                    {
+                        rentalCommand.Parameters.AddWithValue("@rentalID", rentalID);
+
+                        using (var reader = rentalCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                history = new History
+                                {
+                                    rentalID = reader.GetInt32("rentalID"),
+                                    userID = reader.GetInt32("userID"),
+                                    name = reader.GetString("name"),
+                                    startRentalDate = reader.GetDateTime("startRentalDate"),
+                                    endRentalDate = reader.GetDateTime("endRentalDate"),
+                                    status = "canceled" // Mark as canceled
+                                };
+
+                                vehicleID = reader.GetInt32("vehicleID");
+                            }
+                        }
+                    }
+
+                    if (history != null)
+                    {
+
+                        // If record does not exist, create a new one
+                        var newRentalHistory = new RentalHistory
+                        {
+                            vehicleID = vehicleID,
+                            History = new List<History> { history }
+                        };
+
+                        var filter = Builders<RentalHistory>.Filter.Eq(r => r.vehicleID, newRentalHistory.vehicleID);
+                        var update = Builders<RentalHistory>.Update
+                            .AddToSetEach(r => r.History, newRentalHistory.History);
+
+                        var updateOptions = new UpdateOptions { IsUpsert = true };
+                        _mongoContext.RentalHistory.UpdateOne(filter, update, updateOptions);
+
+                    }
 
                     string query = "DELETE FROM rental WHERE rentalID = @rentalID";
 
@@ -81,9 +144,8 @@ namespace RentingSystemMVC.Controllers
                         command.ExecuteNonQuery();
                     }
 
+                    return Json(new { success = true });
                 }
-
-                return Json(new { success = true });
             }
             catch (Exception ex)
             {
