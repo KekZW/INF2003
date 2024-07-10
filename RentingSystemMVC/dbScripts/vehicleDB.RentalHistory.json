@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "668e76570cc3a78438cfb375"
+  },
+  "vehicleID": 1,
+  "History": [
+    {
+      "rentalID": 1,
+      "userID": 2,
+      "name": "Bob",
+      "startRentalDate": {
+        "$date": "1970-01-01T00:00:02.004Z"
+      },
+      "endRentalDate": {
+        "$date": "1970-01-01T00:00:02.003Z"
+      },
+      "status": "ongoing"
+    },
+    {
+      "rentalID": 2,
+      "userID": 3,
+      "name": "Alice",
+      "startRentalDate": {
+        "$date": "1970-01-01T00:00:02.023Z"
+      },
+      "endRentalDate": {
+        "$date": "1970-01-01T00:00:02.023Z"
+      },
+      "status": "completed"
+    }
+  ]
+}]
