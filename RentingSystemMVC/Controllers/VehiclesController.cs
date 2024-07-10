@@ -572,13 +572,31 @@ namespace RentingSystem.Controllers
 
         [HttpGet]
         [Authorize(Roles="Admin")]
-        public ActionResult getAllRentalHistory(int VehicleID){
+        public ActionResult getAllRentalHistory(int vehicleID,int pageNumber, int pageSize){
 
-            var filter = filterHistoryBuilder.Eq("vehicleID", VehicleID);
-            var rentalHistoryData = _mongoContext.Find(filter).ToList();
+            var filter = filterHistoryBuilder.Eq("vehicleID", vehicleID);
+            var rentalHistoryData = _mongoContext.RentalHistory.Find(filter).FirstOrDefault();
 
-            return Json(rentalHistoryData);
-            
+            if (rentalHistoryData == null){
+                return Json(new { success = false, message = "Car not found" });
+            }
+
+            var totalItemsCount = rentalHistoryData.History?.Count() ?? 0;
+              var paginatedTotalItems = rentalHistoryData.History
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                
+            var result = new {
+                success = true,
+                paginatedTotalItems = paginatedTotalItems,
+                totalItemsCount = totalItemsCount,
+                pageNumber = pageNumber,
+                pageSize = pageSize
+            };
+
+            return Json(result);
+
         }
 
     }   

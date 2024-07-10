@@ -1,4 +1,5 @@
 @model List<RentingSystemMVC.Models.VehicleViewModel>
+
 <div class="container">
     <h1> Manage Vehicles </h1>
     <div class="row">
@@ -28,7 +29,7 @@
             <th>Fuel Type</th>
             <th>Truck Space</th>
             <th>Rental Cost Per Day</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -47,9 +48,81 @@
                 <td>@vehicle.RentalCostPerDay</td>
                 <td>
                     <a asp-controller="Vehicles" asp-action="Details" asp-route-id="@vehicle.VehicleID" class="btn btn-primary">View</a>
+                    <a onclick="getAllVehicleHistory(@vehicle.VehicleID,1)" class="btn btn-primary">History</a>
+                    
                 </td>
             </tr>
         }
         </tbody>
     </table>
+
+
+     <div class="modal fade" id="viewRentalHistoryModal" tabindex="-1" role="dialog" aria-labelledby="viewRentalHistoryModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewRentalHistoryModalLabel">View Rental History</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination" id="pagination">
+                            <!-- Pagination links will be loaded here by JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script>
+
+            function getAllVehicleHistory(vehicleID, pageNumber) {
+                $.ajax({
+                    url: "/Vehicles/getAllRentalHistory",
+                    type: "GET",
+                    data: { "vehicleID": vehicleID, "pageNumber": pageNumber , "pageSize":5},
+                    success: function (response) {
+                        if (response.success) {
+                            $('.card').empty();
+                            $.each(response.paginatedTotalItems, function (index, history) {
+                                $('.card').append('<div style="margin-bottom:10px" class="card-body">' +
+                                 history.name, history.startRentalDate, history.endRentalDate,history.status
+                                 +'</div>');
+                            });
+
+                            // Update pagination links
+                            updatePagination(vehicleID,response.pageNumber, response.pageSize, response.totalItemsCount);
+                        }
+                    }
+                });
+
+                $('#viewRentalHistoryModal').modal('show');
+            }
+
+            function updatePagination(vehicleID,currentPage, pageSize, totalItems) {
+                var totalPages = Math.ceil(totalItems / pageSize);
+                var paginationHtml = '';
+                for (var i = 1; i <= totalPages; i++) {
+                    paginationHtml += '<li class="page-item ' + (i === currentPage ? 'active' : '') + '">';
+                    paginationHtml += '<a class="page-link" href="javascript:void(0);" onclick="getAllVehicleHistory(\'' + vehicleID + '\', ' + i + ');">' + i + '</a>';
+                    paginationHtml += '</li>';
+                }
+
+                $('#pagination').html(paginationHtml);
+            }
+        </script>
+    }
+
+
 </div>
