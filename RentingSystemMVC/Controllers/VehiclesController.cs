@@ -25,6 +25,7 @@ namespace RentingSystem.Controllers
         private readonly ApplicationDbContext _context;
         private readonly MongoDBContext _mongoContext;
         private static readonly FilterDefinitionBuilder<VehicleReview> filterBuilder = Builders<VehicleReview>.Filter;
+        private static readonly FilterDefinitionBuilder<RentalHistory> filterHistoryBuilder = Builders<RentalHistory>.Filter;
 
         public VehiclesController(ApplicationDbContext context, MongoDBContext mongoContext)
         {
@@ -554,9 +555,9 @@ namespace RentingSystem.Controllers
         public ActionResult DeleteReview(int vehicleID){
             try {
                 
-                var filter = Builders<VehicleReview>.Filter.And(
-                Builders<VehicleReview>.Filter.Eq("vehicleID", vehicleID),
-                Builders<VehicleReview>.Filter.ElemMatch("reviews", Builders<Review>.Filter.Eq("name", User.FindFirst(ClaimTypes.Name)?.Value))
+                var filter = filterBuilder.And(
+                    filterBuilder.Eq("vehicleID", vehicleID),
+                    filterBuilder.ElemMatch("reviews", Builders<Review>.Filter.Eq("name", User.FindFirst(ClaimTypes.Name)?.Value))
                 );
             
                 var update =  Builders<VehicleReview>.Update.PullFilter("reviews", Builders<Review>.Filter.Eq("name", User.FindFirst(ClaimTypes.Name)?.Value));
@@ -568,6 +569,18 @@ namespace RentingSystem.Controllers
             } 
         
         }
+
+        [HttpGet]
+        [Authorize(Roles="Admin")]
+        public ActionResult getAllRentalHistory(int VehicleID){
+
+            var filter = filterHistoryBuilder.Eq("vehicleID", VehicleID);
+            var rentalHistoryData = _mongoContext.Find(filter).ToList();
+
+            return Json(rentalHistoryData);
+            
+        }
+
     }   
     
 }
