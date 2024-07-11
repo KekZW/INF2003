@@ -32,6 +32,8 @@ public class Support
     
     [BsonElement("comments")]
     public List<Comment> comments { get; set; } = new List<Comment>();
+    
+    public User user { get; set; }
 }
 
 public class Comment
@@ -43,9 +45,11 @@ public class Comment
     [BsonElement("comment_date")]
     public DateTime comment_date { get; set; }
 
-    [BsonElement("admin_id")]
-    public int admin_id { get; set; }
+    [BsonElement("user_id")]
+    public int user_id { get; set; }
 
     [BsonElement("comment_text")]
     public string comment_text { get; set; }
+    
+    public User user { get; set; }
 }

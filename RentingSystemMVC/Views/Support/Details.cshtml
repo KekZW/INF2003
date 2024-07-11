@@ -1,17 +1,31 @@
 @model RentingSystemMVC.Models.Support
 
-<div class="container py-3 d-flex justify-content-center align-items-center">
-    <div class="bg-white border rounded w-75">
-        <div class="px-3 py-2">
-            <h4 class="fw-bold"> @Model.subject </h4>
-            <small class="text-black text-opacity-25"> @Model._id | Last Updated: @Model.updatedDate </small>
-        </div>
-        <hr class="mt-0"/>
-        <div class="px-3 py-2">
-            <div class="my-2">
-                <p class="fw-bold"> Test User </p>
-                <p class="text-black text-opacity-75"> Test Description </p>
+<div class="container pt-3 d-flex justify-content-center align-items-center">
+    <div class="bg-white border rounded w-75 d-flex flex-column justify-content-between" style="height: 87vh;">
+        <div>
+            <div class="px-3 py-2">
+                <h4 class="fw-bold"> @Model.subject </h4>
+                <small class="text-black text-opacity-25"> @Model._id | Last Updated: @Model.updatedDate </small>
             </div>
+            <hr class="mt-0"/>
+        </div>
+        <div class="px-3 py-2 overflow-scroll flex-grow-1">
+            <div class="my-2">
+                <p class="fw-bold"> @Model.user.name </p>
+                <p class="text-black text-opacity-75"> @Model.description </p>
+            </div>
+            @foreach (var comment in Model.comments)
+            {
+                <div class="my-2">
+                    <p class="fw-bold"> @comment.user.name </p>
+                    <p class="text-black text-opacity-75"> @comment.comment_text </p>
+                    <small>@comment.comment_date</small>
+                </div>
+            }
+        </div>
+        <div class="d-flex flex-column align-items-center pb-3">
+            <hr class="w-100"/>
+            <textarea class="form-control" style="resize: none; width: 95%" rows="5"></textarea>
         </div>
     </div>
 </div>
