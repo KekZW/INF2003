@@ -26,5 +26,6 @@ public class VehicleReview
     [BsonElement("vehicleID")]
     public int vehicleID { get; set; }
 
+    [BsonElement("reviews")]
     public List<Review> reviews { get; set; } = new List<Review>(); 
 }
