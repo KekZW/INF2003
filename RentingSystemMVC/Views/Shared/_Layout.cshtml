@@ -2,96 +2,104 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - Car Chng Rentals</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/RentingSystemMVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/RentingSystemMVC.styles.css" asp-append-version="true"/>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-end">
-                    <ul class="navbar-nav">
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-lg-inline-flex justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <img src="~/images/wheel.svg" height="25" width="25" alt="My Happy SVG" style="padding-top: 12px" asp-area="" asp-controller="Home" asp-action="Index"/>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Drive.</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    @if (Context.User.IsInRole("User") || !Context.User.Identity.IsAuthenticated)
+                    {
                         <li class="nav-item">
-                            <img src = "~/images/wheel.svg" height="25" width="25" alt="My Happy SVG" style="padding-top: 12px" asp-area="" asp-controller="Home" asp-action="Index"/>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index">Rent Vehicle</a>
+                        </li>
+                    }
+                    @if (Context.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Manage">Manage Vehicles</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Promotion" asp-action="Manage">Manage Promotion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Drive.</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Manage">Manage Tickets</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @if (Context.User.IsInRole("User") || !Context.User.Identity.IsAuthenticated){
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index">Rent Vehicle</a>
-                            </li>
-                        }
-                        @if (Context.User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Manage">Manage Vehicles</a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Promotion" asp-action="Manage">Manage Promotion</a>
-                            </li>
-                        }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="navbar-collapse collapse flex justify-content-end">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item position-relative">
-                            @if (Context.User.Identity.IsAuthenticated)
-                            {   
-                                <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                   Welcome, @Context.User.Identity.Name   
-                                </button>
-                                <ul style="left:auto; right:0;"class="dropdown-menu dropdown-menu-light">
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Information">User Profile</a>
-                                    </li>
-                            
-                                    @if (Context.User.IsInRole("User") ){
-                                        <li class="nav-item">
-                                            <a class="dropdown-item" asp-area="" asp-controller="Rental" asp-action="Index">View Rental</a>
-                                        </li>
-                                    }
-                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a></li>
-                                </ul>
-                            }
-                            else
-                            {
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
-                            }
-                        </li>
-                    </ul>
-                </div>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
-    <main role="main" class="pb-3 main-background-color">
-        @RenderBody()
-    </main>
+            <div class="navbar-collapse collapse flex justify-content-end">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item position-relative">
+                        @if (Context.User.Identity.IsAuthenticated)
+                        {
+                            <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Welcome, @Context.User.Identity.Name
+                            </button>
+                            <ul style="left:auto; right:0;"class="dropdown-menu dropdown-menu-light">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Information">User Profile</a>
+                                </li>
 
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - RentingSystemMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                @if (Context.User.IsInRole("User"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="" asp-controller="Rental" asp-action="Index">View Rental</a>
+                                    </li>
+                                }
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                        }
+                    </li>
+                </ul>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    </nav>
+</header>
+<main role="main" class="pb-3 main-background-color">
+    @RenderBody()
+</main>
+
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2024 - RentingSystemMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -5,6 +5,7 @@
 </head>
 <div class="container">
     <h1>Manage Tickets</h1>
+    <a asp-controller="Support" asp-action="Assign" class="btn btn-primary"  method="get">Assign a ticket</a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -18,19 +19,27 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var ticket in Model)
+        @if (Model.Any())
+        {
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <th scope="row">#@ticket._id</th>
+                    <td>@ticket.subject</td>
+                    <td>@ticket.email</td>
+                    <td>@ticket.creationDate</td>
+                    <td>@ticket.updatedDate</td>
+                    <td>@ticket.status</td>
+                    <td>
+                        <a asp-controller="Support" asp-route-id="@ticket._id" asp-action="Details" class="btn btn-primary">View</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <th scope="row">#@ticket._id</th>
-                <td>@ticket.subject</td>
-                <td>@ticket.email</td>
-                <td>@ticket.creationDate</td>
-                <td>@ticket.updatedDate</td>
-                <td>@ticket.status</td>
-                <td>
-                    <a asp-controller="Support" asp-route-id="@ticket._id" asp-action="Details" class="btn btn-primary">View</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
-                </td>
+                <td colspan="7" class="text-center">No tickets unassigned, please assign a ticket</td>
             </tr>
         }
         </tbody>

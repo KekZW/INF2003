@@ -30,14 +30,20 @@ public class Support
     [BsonElement("description")]
     public string description { get; set; }
     
+    // NEW
+    [BsonElement("assigned_to")]
+    public int? assigned_to { get; set; }
+    
     [BsonElement("comments")]
     public List<Comment> comments { get; set; } = new List<Comment>();
     
+    [BsonIgnore]
     public User user { get; set; }
 }
 
 public class Comment
 {
+    // NEW
     [BsonElement("comment_id")]
     [BsonRepresentation(BsonType.ObjectId)]
     public ObjectId comment_id { get; set; }
@@ -51,5 +57,6 @@ public class Comment
     [BsonElement("comment_text")]
     public string comment_text { get; set; }
     
+    [BsonIgnore]
     public User user { get; set; }
 }

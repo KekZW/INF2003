@@ -22,10 +22,32 @@
                     <small>@comment.comment_date</small>
                 </div>
             }
+            @if (Model.status == "Resolved")
+            {
+                <div class="my-2">
+                    <hr/>
+                    <p class="fw-bold text-center"> Issue has been marked as resolved </p>
+                </div>
+            }
         </div>
-        <div class="d-flex flex-column align-items-center pb-3">
+        <div class="">
             <hr class="w-100"/>
-            <textarea class="form-control" style="resize: none; width: 95%" rows="5"></textarea>
+            <form asp-controller="Support" asp-action="Comment" class="d-flex flex-column align-items-end mx-3 border border-1 rounded-2 my-2">
+                <textarea class="form-control border-0 w-100" name="comment" id="comment" style="resize: none;" rows="5" placeholder="Reply" @(Model.status == "Resolved" ? "disabled" : "")></textarea>
+                <hr class="w-100 m-0"/>
+                <div>
+                    @if (Model.status != "Resolved")
+                    {
+                        <a asp-controller="Support" asp-action="Resolve" class="btn btn-outline fw-bold">
+                            Mark as Resolved
+                        </a>
+                    }
+                    <button type="submit" class="btn btn-secondary m-2" @(Model.status == "Resolved" ? "disabled" : "")>
+                        <i class="bi bi-send"></i>
+                        Submit
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
