@@ -122,7 +122,8 @@ namespace RentingSystemMVC.Controllers
                 comment_date = DateTime.Now,
                 user_id = userId,
                 comment_text = comment
-            });
+            })
+            .Set("updatedDate", DateTime.Now);
             
             _mongoContext.Support.UpdateOne(filter, update);
             

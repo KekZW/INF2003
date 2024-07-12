@@ -38,7 +38,7 @@ public class Support
     public List<Comment> comments { get; set; } = new List<Comment>();
     
     [BsonIgnore]
-    public User user { get; set; }
+    public User? user { get; set; }
 }
 
 public class Comment
@@ -58,5 +58,5 @@ public class Comment
     public string comment_text { get; set; }
     
     [BsonIgnore]
-    public User user { get; set; }
+    public User? user { get; set; }
 }

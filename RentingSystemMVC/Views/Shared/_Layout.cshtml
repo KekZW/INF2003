@@ -37,20 +37,30 @@
                     }
                     @if (Context.User.IsInRole("Admin"))
                     {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Manage">Manage Vehicles</a>
-                        </li>
+                        <div class="dropdown">
+                            <button class="btn btn-outline dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Manage
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Manage">Vehicles</a>
+                                </li>
 
+                                <li class="nav-item">
+                                    <a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="Promotion" asp-action="Manage">Promotion</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Manage">Tickets</a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    @if (Context.User.Identity.IsAuthenticated)
+                    {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Promotion" asp-action="Manage">Manage Promotion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Manage">Manage Tickets</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
                         </li>
                     }
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
-                    </li>
                 </ul>
             </div>
             <div class="navbar-collapse collapse flex justify-content-end">
