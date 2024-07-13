@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace RentingSystemMVC.Models;
 
+[BsonIgnoreExtraElements]
 public class Support
 {
     [BsonId]

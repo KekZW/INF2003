@@ -7,6 +7,8 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace RentingSystemMVC.Controllers
 {
@@ -22,12 +24,14 @@ namespace RentingSystemMVC.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles="User")]
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles="User")]
         public IActionResult Index(string email, string subject, string description)
         {
             try
@@ -58,10 +62,12 @@ namespace RentingSystemMVC.Controllers
             {
                 // Log the exception for debugging
                 Console.WriteLine(ex);
+                Console.WriteLine(email);
                 return StatusCode(500, "Internal Server Error");
             }
         }
 
+        [Authorize(Roles="Admin")]
         public IActionResult Manage()
         {
             int userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
@@ -132,6 +138,7 @@ namespace RentingSystemMVC.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
+     
         public IActionResult Resolve()
         {
             string id = TempData["TicketId"] as string;
@@ -149,17 +156,19 @@ namespace RentingSystemMVC.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
+        [Authorize(Roles="Admin")]
         public IActionResult Assign()
         {
             var filter = Builders<Support>.Filter.Eq("assigned_to", BsonNull.Value);
             var unassignedSupports = _mongoContext.Support.Find(filter).ToList();
 
-            
+        
             // var supports = _mongoContext.Support.Find(_ => true).ToList();
             return View(unassignedSupports);
         }
 
         [HttpPost]
+        [Authorize(Roles="Admin")]
         public IActionResult Assign(List<string> selectedTickets)
         {
             int userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);

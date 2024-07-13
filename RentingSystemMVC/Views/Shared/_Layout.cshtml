@@ -55,7 +55,7 @@
                             </ul>
                         </div>
                     }
-                    @if (Context.User.Identity.IsAuthenticated)
+                    @if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("User"))
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Support</a>
