@@ -31,5 +31,8 @@ public class MongoDBContext
     public IMongoCollection<RentalHistory> RentalHistory =>
         mongoDatabase.GetCollection<RentalHistory>("RentalHistory");
 
+    public IMongoCollection<MaintenanceRecords> MaintenanceRecords =>
+        mongoDatabase.GetCollection<MaintenanceRecords>("MaintenanceRecords");
+
 
 }
