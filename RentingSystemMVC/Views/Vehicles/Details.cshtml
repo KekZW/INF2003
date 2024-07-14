@@ -157,7 +157,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if (Model.Maintenances.Count == 0)
+                        @if (Model.maintenanceRecords == null)
                         {
                             <tr>
                                 <td colspan="3"> No maintenance records found </td>
@@ -165,7 +165,7 @@
                         }
                         else
                         {
-                            @foreach (var maintenance in Model.Maintenances)
+                            @foreach (var maintenance in Model.maintenanceRecords)
                             {
                                 <tr>    
                                     <td> @maintenance.WorkshopStatus </td>
