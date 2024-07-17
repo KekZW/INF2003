@@ -5,13 +5,17 @@ using RentingSystemMVC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Load configuration settings from appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json");
+
+// Configure DatabaseSettings from appsettings.json
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("MongoDB"));
 
+// Register MongoDB context
 builder.Services.AddSingleton<MongoDBContext>();
 
-// Add services to the container.
+// Add other services
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -22,22 +26,21 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Forbidden/";
     });
 
+// Configure MySQL DbContext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-// Register ApplicationDbContext with the DI container
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString, 
-       ServerVersion.AutoDetect(connectionString)));
-
-
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Resolve and ensure MongoDB collections exist
+var mongoContext = app.Services.GetRequiredService<MongoDBContext>();
+mongoContext.EnsureCollectionsExist();
+
+// Configure middleware and routing
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -51,7 +54,6 @@ app.MapRazorPages();
 app.MapDefaultControllerRoute();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

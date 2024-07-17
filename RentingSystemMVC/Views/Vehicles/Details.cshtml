@@ -171,9 +171,19 @@
                                     <td> @maintenance.WorkshopStatus </td>
                                     <td> @maintenance.startMaintDate </td>
                                     <td> @maintenance.endMaintDate </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-secondary" onclick="openEditMaintenanceModal(@maintenance.MaintenanceID, '@maintenance.startMaintDate.ToString("yyyy-MM-dd")', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')">Edit</button>
-                                    </td>
+                                    @if (@maintenance.WorkshopStatus != "Completed")
+                                    {
+                                        <td>
+                                             <button class="btn btn-sm btn-success" onclick="openEditMaintenanceModal(@maintenance.MaintenanceID, '@maintenance.startMaintDate.ToString("yyyy-MM-dd")', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')">Edit</button>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary" onclick="#', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')" aria-disabled="true">Edit</button>
+                                        </td>
+                                    }
+                                    
                                 </tr>
                             }
                         }

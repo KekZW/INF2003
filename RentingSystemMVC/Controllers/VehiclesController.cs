@@ -15,6 +15,7 @@ using Mysqlx.Crud;
 using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Diagnostics;
 
 namespace RentingSystem.Controllers
 {
@@ -307,16 +308,16 @@ namespace RentingSystem.Controllers
                               "WHERE v.vehicleID = @p0";
 
             VehicleViewModel vehicle = _context.VehicleViewModel
-                .FromSqlRaw(vehQuery, id)
-                .FirstOrDefault();
+                                        ?.FromSqlRaw(vehQuery, id)
+                                        ?.FirstOrDefault();
 
             List<Maintenance> maintenanceLogs = new List<Maintenance>();
             VehicleReview? vr = null;
-
+            
             if (User.IsInRole("Admin")){
                 
                 // TODO: Retrieve maintenance logs for the vehicle, combine with vehicleViewModel 
-                string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
+                string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0 AND workshopStatus != 'Completed'";
 
                 if (_context.Maintenance != null)
                 {
@@ -438,7 +439,6 @@ namespace RentingSystem.Controllers
         {
             using(var connection = new MySqlConnection(_connectionString))
             {
-                Console.WriteLine("The value of the vehicle ID is",vehicleID);
                 connection.Open();
 
                 string query = "INSERT INTO maintenance (vehicleID, workshopStatus, startMaintDate, endMaintDate) "
@@ -457,6 +457,7 @@ namespace RentingSystem.Controllers
             
             return Json(new { success = true });
         }
+    
 
         [HttpPost]
         [Authorize(Roles = "Admin")] 
@@ -500,6 +501,68 @@ namespace RentingSystem.Controllers
                         command.Parameters.AddWithValue("@WorkshopStatus", maintenance.WorkshopStatus);
                         await command.ExecuteNonQueryAsync();
                     }
+
+                    Debug.WriteLine("Current Status is  {maintenance.WorkshopStatus}", maintenance.WorkshopStatus);
+
+                    if (maintenance.WorkshopStatus == "Completed")
+                    {
+
+                         query = "SELECT vehicleID FROM maintenance WHERE maintenanceID = @MaintenanceID";
+    
+                        using (var command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@MaintenanceID", maintenance.MaintenanceID);
+                            var vehicleID = await command.ExecuteScalarAsync();
+
+                            Console.WriteLine($"Current Vehicle ID is {vehicleID}");
+
+                            var filter = Builders<MaintenanceRecords>.Filter.And(
+                                Builders<MaintenanceRecords>.Filter.Eq("vehicleID", vehicleID)
+                            );
+
+                            var maintenanceHistory = _mongoContext.MaintenanceRecords.Find(filter)
+                                               .FirstOrDefault();
+
+
+                            var update = Builders<MaintenanceRecords>.Update.Push("records", new Records
+                            {
+                                startMaintDate = maintenance.startMaintDate,
+                                endMaintDate = maintenance.endMaintDate,
+                                status = maintenance.WorkshopStatus
+
+                            });
+
+                            var options = new FindOneAndUpdateOptions<MaintenanceRecords>
+                            {
+                                ReturnDocument = ReturnDocument.After,
+                                IsUpsert = true,
+                            };
+
+                            var updatedMaintenanceRecord = _mongoContext.MaintenanceRecords.FindOneAndUpdate(filter, update, options);
+
+                            if (updatedMaintenanceRecord != null)
+                            {
+                                Console.WriteLine("Maintenance record updated or created successfully.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Failed to update or create the maintenance record.");
+                            }
+                        }
+
+                        /*
+                        query = "SELECT vehicleID FROM maintenance WHERE maintenanceID = " + maintenance.MaintenanceID;
+                        var vehicleID = _context.Maintenance.FromSqlRaw(query, connection);
+                        
+                        Console.WriteLine("Current Vehicle ID is  {vehicleID}",vehicleID);
+                         */
+
+                      
+                       
+
+                       
+                    }
+
                 }
                 return Json(new { success = true });
             }
@@ -508,6 +571,8 @@ namespace RentingSystem.Controllers
                 return Json(new { success = false });
             }
         }
+
+
     
         [HttpPost]
         [Authorize(Roles = "User")]
