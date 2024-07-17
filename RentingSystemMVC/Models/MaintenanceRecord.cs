@@ -6,10 +6,6 @@ namespace RentingSystemMVC.Models;
 
 public class Records {
 
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
-
     [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
     [BsonElement("startMaintDate")]
     public DateTime startMaintDate { get; set; }
@@ -18,8 +14,8 @@ public class Records {
     [BsonElement("endMaintDate")]
     public DateTime endMaintDate { get; set; }
     
-    [BsonElement("status")]
-    public string? status {get; set;}
+    [BsonElement("WorkshopStatus")]
+    public string? WorkshopStatus { get; set;}
 }
 
 

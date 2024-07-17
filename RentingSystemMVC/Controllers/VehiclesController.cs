@@ -26,6 +26,7 @@ namespace RentingSystem.Controllers
         private readonly MongoDBContext _mongoContext;
         private static readonly FilterDefinitionBuilder<VehicleReview> filterBuilder = Builders<VehicleReview>.Filter;
         private static readonly FilterDefinitionBuilder<RentalHistory> filterHistoryBuilder = Builders<RentalHistory>.Filter;
+        private static readonly FilterDefinitionBuilder<MaintenanceRecords> filterMaintenanceRecord = Builders<MaintenanceRecords>.Filter;
 
         public VehiclesController(ApplicationDbContext context, MongoDBContext mongoContext)
         {
@@ -512,7 +513,7 @@ namespace RentingSystem.Controllers
                         var update = Builders<MaintenanceRecords>.Update.Push("records", new Records {
                             startMaintDate = maintenance.startMaintDate,
                             endMaintDate = maintenance.endMaintDate,
-                            status = maintenance.WorkshopStatus,
+                            WorkshopStatus = maintenance.WorkshopStatus,
                         });
 
                         var options = new FindOneAndUpdateOptions<MaintenanceRecords>{
@@ -527,9 +528,6 @@ namespace RentingSystem.Controllers
                     }
 
                 }
-
-
-                
                 return Json(new { success = true });
             }
             catch (Exception)
@@ -626,6 +624,20 @@ namespace RentingSystem.Controllers
             };
 
             return Json(result);
+
+        }
+
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult getAllCompletedMaintenanceRecord(int vehicleID)
+        {
+            var filter = filterMaintenanceRecord.Eq("vehicleID", vehicleID);
+            var maintenanceHistoryData =  _mongoContext.MaintenanceRecords.Find(filter).ToList();
+
+            
+
+            return PartialView("_CompletedMaintenanceRecordsPartial", maintenanceHistoryData);
 
         }
 

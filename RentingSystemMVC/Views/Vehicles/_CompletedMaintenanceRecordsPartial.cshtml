@@ -1,0 +1,22 @@
+﻿@model List<RentingSystemMVC.Models.MaintenanceRecords>
+
+@if (!Model.Any())
+{
+    <tr>
+        <td colspan="3">No maintenance records found</td>
+    </tr>
+}
+else
+{
+    @foreach (var record in Model)
+    {
+        @foreach (var maintenance in record.maintenanceRecords)
+        {
+            <tr>
+                <td>@maintenance.WorkshopStatus</td>
+                <td>@maintenance.startMaintDate.ToString("dd/MM/yyyy")</td>
+                <td>@maintenance.endMaintDate.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    }
+}

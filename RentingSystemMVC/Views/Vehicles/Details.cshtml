@@ -145,8 +145,14 @@
                     <div class="d-flex justify-content-between">
                         <h3> Maintenance Details </h3>
                         @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
-                        <button class="btn btn-primary" onclick="openMaintenanceModal('@Model.Vehicle.VehicleID')"> New Maintenance </button>
+                            <div class="btn-group-vertical">
+                                <button class="btn btn-success btn-sm" onclick="openMaintenanceModal('@Model.Vehicle.VehicleID')">New Maintenance</button>
+                                <h4> </h4>
+                                <button class="btn btn-info btn-sm" onclick="openCompletedMaintenanceModal('@Model.Vehicle.VehicleID')">Completed Maintenance</button>
+                            </div>
+                            
                     </div>
+                       
                     <table class="table" id="maintenanceTable">
                         <thead>
                         <tr>
@@ -442,6 +448,36 @@
         </div>
     </div>
 
+    <!-- Open Past Maintenance Record -->
+    <div class="modal fade" id="pastMaintenanceModal" tabindex="-1" role="dialog" aria-labelledby="pastMaintenanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pastMaintenanceModalLabel">Past Maintenance Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="pastMaintenanceForm">
+                        <table class="table" id="pastMaintenance">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="maintenanceTableBody">
+                                <!-- Data will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                        <div class="col text-center"><button type="button" class="btn btn-primary mt-2 text" data-bs-dismiss="modal">Close</button></div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     @section Scripts
     {
@@ -537,6 +573,32 @@
             $('#vehicleID').val(vehicleID);
             $('#maintenanceModal').modal('show');
         }
+
+            function openCompletedMaintenanceModal(vehicleID) {
+                $.ajax({
+                    url: '@Url.Action("getAllCompletedMaintenanceRecord", "Vehicles")',
+                    type: 'GET',
+                    data: { vehicleID: vehicleID },
+                    success: function (response) {
+                        $('#maintenanceTableBody').html(response);
+                        $('#pastMaintenanceModal').modal('show');
+                        $('#pastMaintenanceModal').on('shown.bs.modal', function () {
+                            if ($.fn.DataTable.isDataTable('#pastMaintenance')) {
+                                $('#pastMaintenance').DataTable().clear().destroy();
+                            }
+
+                            $('#pastMaintenance').DataTable({
+                                "paging": true,   // Enable pagination
+                                "searching": true // Enable search functionality
+                            });
+                        });
+                    },
+                    error: function () {
+                        alert('Error loading maintenance records.');
+                    }
+                });
+            }
+
 
          function openRentModal(vehicleID, rentalCostPerDay) {
             $('#rentalvehicleID').val(vehicleID);
@@ -805,17 +867,17 @@
             });
         });
 
-            $(document).ready(function () {
-                $('#maintenanceTable').DataTable({
-                    "paging": true, // Enable pagination
-                    "searching": false, 
-                    "ordering": true, // Enable sorting
-                    "info": true, // Show table info
-                    "lengthChange": true,
-                    "pageLength": 5,
-                    "lengthChange": false
-                });
+        $(document).ready(function () {
+            $('#maintenanceTable').DataTable({
+                "paging": true, // Enable pagination
+                "searching": false, 
+                "ordering": true, // Enable sorting
+                "info": true, // Show table info
+                "lengthChange": true,
+                "pageLength": 5,
+                "lengthChange": false
             });
+        });
  
     </script>
     }
