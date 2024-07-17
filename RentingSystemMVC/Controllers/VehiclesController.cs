@@ -316,7 +316,7 @@ namespace RentingSystem.Controllers
             if (User.IsInRole("Admin")){
                 
                 // TODO: Retrieve maintenance logs for the vehicle, combine with vehicleViewModel 
-                string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
+                string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0 AND workshopStatus != 'Completed'";
 
                 if (_context.Maintenance != null)
                 {
@@ -438,7 +438,6 @@ namespace RentingSystem.Controllers
         {
             using(var connection = new MySqlConnection(_connectionString))
             {
-                Console.WriteLine("The value of the vehicle ID is",vehicleID);
                 connection.Open();
 
                 string query = "INSERT INTO maintenance (vehicleID, workshopStatus, startMaintDate, endMaintDate) "
@@ -491,16 +490,46 @@ namespace RentingSystem.Controllers
                 {
                     await connection.OpenAsync();
                     var query = "UPDATE maintenance SET startMaintDate = @StartDate, endMaintDate = @EndDate, workshopStatus = @WorkshopStatus " +
-                                "WHERE maintenanceID = @MaintenanceID";
+                                "WHERE maintenanceID = @MaintenanceID AND vehicleID = @vehicleID";
                     using (var command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@MaintenanceID", maintenance.MaintenanceID);
+                        command.Parameters.AddWithValue("@VehicleID", maintenance.VehicleID);
                         command.Parameters.AddWithValue("@StartDate", maintenance.startMaintDate.ToString("yyyy-MM-dd"));
                         command.Parameters.AddWithValue("@EndDate", maintenance.endMaintDate.ToString("yyyy-MM-dd"));
                         command.Parameters.AddWithValue("@WorkshopStatus", maintenance.WorkshopStatus);
                         await command.ExecuteNonQueryAsync();
                     }
+
+
+                    if(maintenance.WorkshopStatus == "Completed"){
+                         var filter = Builders<MaintenanceRecords>.Filter.And(
+                            Builders<MaintenanceRecords>.Filter.Eq("vehicleID", maintenance.VehicleID));
+                        // ## things to do insert and update also need to convert the maintenance date to sg time and check if
+
+                        var existingMaintenanceRecords = _mongoContext.MaintenanceRecords.Find(filter).FirstOrDefault();
+                        
+                        var update = Builders<MaintenanceRecords>.Update.Push("records", new Records {
+                            startMaintDate = maintenance.startMaintDate,
+                            endMaintDate = maintenance.endMaintDate,
+                            status = maintenance.WorkshopStatus,
+                        });
+
+                        var options = new FindOneAndUpdateOptions<MaintenanceRecords>{
+                            ReturnDocument = ReturnDocument.After,
+                            IsUpsert = true,
+
+                        };
+                    
+                        _mongoContext.MaintenanceRecords.FindOneAndUpdate(filter, update,options);
+
+
+                    }
+
                 }
+
+
+                
                 return Json(new { success = true });
             }
             catch (Exception)

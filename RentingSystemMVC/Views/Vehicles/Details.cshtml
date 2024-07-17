@@ -169,10 +169,10 @@
                             {
                                 <tr>    
                                     <td> @maintenance.WorkshopStatus </td>
-                                    <td> @maintenance.startMaintDate </td>
-                                    <td> @maintenance.endMaintDate </td>
+                                    <td> @maintenance.startMaintDate.Date.ToString("dd/MM/yyyy") </td>
+                                    <td> @maintenance.endMaintDate.Date.ToString("dd/MM/yyyy") </td>
                                     <td>
-                                        <button class="btn btn-sm btn-secondary" onclick="openEditMaintenanceModal(@maintenance.MaintenanceID, '@maintenance.startMaintDate.ToString("yyyy-MM-dd")', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')">Edit</button>
+                                        <button class="btn btn-sm btn-secondary" onclick="openEditMaintenanceModal(@maintenance.MaintenanceID, @maintenance.VehicleID, '@maintenance.startMaintDate.ToString("yyyy-MM-dd")', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')">Edit</button>
                                     </td>
                                 </tr>
                             }
@@ -398,6 +398,8 @@
                 <div class="modal-body">
                     <form id="editMaintenanceForm">
                         <input type="hidden" id="editMaintenanceID" name="maintenanceID"/>
+                        <input type="hidden" id="editVehicleMaintenanceID" name="vehicleID"/>
+
                         <div class="form-group">
                             <label for="editStartMaintenanceDate">Start Date</label>
                             <input type="date" class="form-control" id="editStartMaintenanceDate" name="startMaintDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
@@ -540,8 +542,9 @@
             $('#rentModal').modal('show');
         }
 
-        function openEditMaintenanceModal(maintenanceID, startDate, endDate, status) {
+        function openEditMaintenanceModal(maintenanceID, vehicleID, startDate, endDate, status) {
             $('#editMaintenanceID').val(maintenanceID);
+            $('#editVehicleMaintenanceID').val(vehicleID);
             $('#editStartMaintenanceDate').val(startDate);
             $('#editEndMaintenanceDate').val(endDate);
             $('#editWorkshopStatus').val(status);
@@ -567,7 +570,7 @@
             $('#maintenanceForm').on('submit', function (event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
-                console.log(formData);
+
                 if (startMaintenanceDate.value && endMaintenanceDate.value && workshopStatus.value) {
                     $.ajax({
                         url: '@Url.Action("AddMaintenance", "Vehicles")',
@@ -591,8 +594,8 @@
             $('#editMaintenanceForm').on('submit', function (event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
-
-                $.ajax({
+                
+                $.ajax({    
                     url: '@Url.Action("EditMaintenance", "Vehicles")',
                     type: 'POST',
                     data: formData,
