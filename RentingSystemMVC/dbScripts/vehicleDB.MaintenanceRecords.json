@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "66972215f856d03a6f68ea47"
+  },
+  "vehicleId": 1,
+  "records": [
+    {
+      "startMaintDate": {
+        "$date": "2024-05-16T00:00:00.000Z"
+      },
+      "endMaintDate": {
+        "$date": "2024-06-18T00:00:00.000Z"
+      },
+      "Status": "Completed"
+    }
+  ]
+}]
