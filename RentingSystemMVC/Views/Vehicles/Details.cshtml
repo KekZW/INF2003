@@ -145,7 +145,7 @@
                     <div class="d-flex justify-content-between">
                         <h3> Maintenance Details </h3>
                         @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
-                        <button class="btn btn-primary" onclick="openMaintenanceModal(@Model.Vehicle.VehicleID)"> New Maintenance </button>
+                        <button class="btn btn-primary" onclick="openMaintenanceModal('@Model.Vehicle.VehicleID')"> New Maintenance </button>
                     </div>
                     <table class="table">
                         <thead>
@@ -157,7 +157,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if (Model.maintenanceRecords == null)
+                        @if (Model.Maintenances.Count == 0)
                         {
                             <tr>
                                 <td colspan="3"> No maintenance records found </td>
@@ -165,7 +165,7 @@
                         }
                         else
                         {
-                            @foreach (var maintenance in Model.maintenanceRecords)
+                            @foreach (var maintenance in Model.Maintenances)
                             {
                                 <tr>    
                                     <td> @maintenance.WorkshopStatus </td>
@@ -251,7 +251,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="rentForm">
-                        <input type="hidden" id="vehicleID" name="vehicleID"/>
+                        <input type="hidden" id="rentalvehicleID" name="vehicleID"/>
                         <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay"/>
                         <div class="form-group">
                             <label for="startRentalDate">Start Date</label>
@@ -535,7 +535,7 @@
         }
 
          function openRentModal(vehicleID, rentalCostPerDay) {
-            $('#vehicleID').val(vehicleID);
+            $('#rentalvehicleID').val(vehicleID);
             $('#rentalCostPerDay').val(rentalCostPerDay);
             $('#rentModal').modal('show');
         }
@@ -567,7 +567,7 @@
             $('#maintenanceForm').on('submit', function (event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
-
+                console.log(formData);
                 if (startMaintenanceDate.value && endMaintenanceDate.value && workshopStatus.value) {
                     $.ajax({
                         url: '@Url.Action("AddMaintenance", "Vehicles")',

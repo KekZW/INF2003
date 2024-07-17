@@ -15,19 +15,17 @@ using Mysqlx.Crud;
 using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using DnsClient.Protocol;
 
 namespace RentingSystem.Controllers
 {
     public class VehiclesController : Controller
     {
-        private readonly string _connectionString = "Server=localhost;Database=vehicleDB;Uid=root;Pwd=comSCI2023;";
+        private readonly string _connectionString = "Server=localhost;Database=vehicleDB;Uid=root;Pwd=;";
 
         private readonly ApplicationDbContext _context;
         private readonly MongoDBContext _mongoContext;
         private static readonly FilterDefinitionBuilder<VehicleReview> filterBuilder = Builders<VehicleReview>.Filter;
         private static readonly FilterDefinitionBuilder<RentalHistory> filterHistoryBuilder = Builders<RentalHistory>.Filter;
-        private static readonly FilterDefinitionBuilder<MaintenanceRecords> filterMaintenanceRecordsBuilder = Builders<MaintenanceRecords>.Filter;
 
         public VehiclesController(ApplicationDbContext context, MongoDBContext mongoContext)
         {
@@ -314,20 +312,16 @@ namespace RentingSystem.Controllers
 
             List<Maintenance> maintenanceLogs = new List<Maintenance>();
             VehicleReview? vr = null;
-            MaintenanceRecords? mr = null;
 
             if (User.IsInRole("Admin")){
                 
                 // TODO: Retrieve maintenance logs for the vehicle, combine with vehicleViewModel 
-                /*string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
+                string maintenanceQuery = "SELECT * FROM maintenance WHERE vehicleID = @p0";
 
                 if (_context.Maintenance != null)
                 {
                     maintenanceLogs = _context.Maintenance.FromSqlRaw(maintenanceQuery, id).ToList();
-                }*/
-
-                var filter = filterMaintenanceRecordsBuilder.Eq("vehicleID", id);
-                mr = _mongoContext.MaintenanceRecords.Find(filter).FirstOrDefault();
+                }
          
             } else{
                 // Retrieve the reviews of the current vehicle ID
@@ -336,7 +330,7 @@ namespace RentingSystem.Controllers
             }
             
             VehicleDetailModel vehicleDetail = new VehicleDetailModel
-                { maintenanceRecords = mr, Vehicle = vehicle , vehicleReview = vr};
+                { Maintenances = maintenanceLogs, Vehicle = vehicle , vehicleReview = vr};
             return View(vehicleDetail);
         }
 
@@ -440,10 +434,11 @@ namespace RentingSystem.Controllers
 
 
         [HttpPost]
-        public IActionResult AddMaintenance(int vehicleID, DateOnly startDate, DateOnly endDate, string workshopStatus)
+        public IActionResult AddMaintenance(int vehicleID, DateTime startDate, DateTime endDate, string workshopStatus)
         {
-            /*using(var connection = new MySqlConnection(_connectionString))
+            using(var connection = new MySqlConnection(_connectionString))
             {
+                Console.WriteLine("The value of the vehicle ID is",vehicleID);
                 connection.Open();
 
                 string query = "INSERT INTO maintenance (vehicleID, workshopStatus, startMaintDate, endMaintDate) "
@@ -460,35 +455,7 @@ namespace RentingSystem.Controllers
                 }
             }
             
-            return Json(new { success = true });*/
-
-            try
-            {
-                var filter = Builders<MaintenanceRecords>.Filter.Eq("vehicleID", vehicleID);
-                var maintenanceData = _mongoContext.MaintenanceRecords.Find(filter).FirstOrDefault();
-
-                if (maintenanceData == null) 
-                { return Json(new { success = false, message = "Car not found" }); }
-
-                Random mid = new Random();
-
-                var create = Builders<MaintenanceRecords>.Update.AddToSet("maintenanceRecords",
-                new Maintenance
-                {
-                    MaintenanceID = mid.Next(0, 1000),
-                    WorkshopStatus = workshopStatus,
-                    startMaintDate = startDate,
-                    endMaintDate = endDate
-                });
-
-                _mongoContext.MaintenanceRecords.FindOneAndUpdate(filter, create);
-
-                return Json(new { success = true });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
+            return Json(new { success = true });
         }
 
         [HttpPost]
@@ -518,7 +485,7 @@ namespace RentingSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> EditMaintenance(Maintenance maintenance)
         {
-            /*try
+            try
             {
                 using (var connection = new MySqlConnection(_connectionString))
                 {
@@ -539,30 +506,6 @@ namespace RentingSystem.Controllers
             catch (Exception)
             {
                 return Json(new { success = false });
-            }*/
-
-            try
-            {
-                var filter = Builders<MaintenanceRecords>.Filter
-                .ElemMatch("maintenanceRecords", 
-                Builders<Maintenance>.Filter.Eq("MaintenanceID", maintenance.MaintenanceID));
-
-                var existingMaintenanceRecord = _mongoContext.MaintenanceRecords.Find(filter).FirstOrDefault();
-
-                if(existingMaintenanceRecord == null) return BadRequest();
-
-                var update = Builders<MaintenanceRecords>.Update
-                .Set("WorkshopStatus", maintenance.WorkshopStatus)
-                .Set("startMaintDate", maintenance.startMaintDate)
-                .Set("endMaintDate", maintenance.endMaintDate);
-
-                _mongoContext.MaintenanceRecords.UpdateOne(filter, update);
-
-                return  Json( new {success = true});
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
     
