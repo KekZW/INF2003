@@ -8,7 +8,7 @@ public class MongoDBContext
     private readonly IMongoDatabase mongoDatabase;
 
     public MongoDBContext(
-string connectionString, IOptions<DatabaseSettings> DatabaseSettings)
+        IOptions<DatabaseSettings> DatabaseSettings)
     {
         var mongoClient = new MongoClient(
             DatabaseSettings.Value.ConnectionString);
@@ -34,25 +34,5 @@ string connectionString, IOptions<DatabaseSettings> DatabaseSettings)
     public IMongoCollection<MaintenanceRecords> MaintenanceRecords =>
         mongoDatabase.GetCollection<MaintenanceRecords>("MaintenanceRecords");
 
-    public void checkCollectionExists<T>(string collectionName){
-        var collectionNames = mongoDatabase.ListCollectionNames().ToList();
 
-        if (!collectionNames.Contains(collectionName)){
-            mongoDatabase.CreateCollection(collectionName);
-        }
-    }
-
-    public void EnsureAllCollectionsExist()
-    {
-        checkCollectionExists<VehicleReview>("vehicleReview");
-        checkCollectionExists<Promotion>("promotion");
-        checkCollectionExists<Support>("support");
-        checkCollectionExists<RentalHistory>("RentalHistory");
-        checkCollectionExists<MaintenanceRecords>("MaintenanceRecords");
-    }
-
-    internal void EnsureCollectionsExist()
-    {
-        throw new NotImplementedException();
-    }
 }
