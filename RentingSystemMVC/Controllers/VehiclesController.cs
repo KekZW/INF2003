@@ -351,34 +351,41 @@ namespace RentingSystem.Controllers
             
             if (ModelState.IsValid)
             {   
-
-                try { 
-
-                    using (var connection = new MySqlConnection(_connectionString))
+                using (var connection = new MySqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        connection.Open();
-
-                        string query = "INSERT INTO vehicle (LicensePlate, LicenseToOperate, VehicleTypeID) " +
-                                    "VALUES (@LicensePlate, @LicenseToOperate, @VehicleTypeID)";
-
-                        using (var command = new MySqlCommand(query, connection))
+                        try
                         {
-                            command.Parameters.AddWithValue("@LicensePlate",  model.LicensePlate);
-                            command.Parameters.AddWithValue("@LicenseToOperate", model.LicenseToOperate);
-                            command.Parameters.AddWithValue("@VehicleTypeID", model.VehicleTypeID);
+                            string query = "INSERT INTO vehicle (LicensePlate, LicenseToOperate, VehicleTypeID) " +
+                                           "VALUES (@LicensePlate, @LicenseToOperate, @VehicleTypeID)";
 
-                            command.ExecuteNonQuery();
+                            using (var command = new MySqlCommand(query, connection, transaction))
+                            {
+                                command.Parameters.AddWithValue("@LicensePlate", model.LicensePlate);
+                                command.Parameters.AddWithValue("@LicenseToOperate", model.LicenseToOperate);
+                                command.Parameters.AddWithValue("@VehicleTypeID", model.VehicleTypeID);
+
+                                command.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                            return RedirectToAction("Manage");
+                        }
+                        catch (Exception e)
+                        {
+                            transaction.Rollback();
+                            ModelState.AddModelError(string.Empty, "There is existing license plate with these numbers, insert another number");
+                            model.VehicleTypes = _context.VehicleType.ToList();
+                            return View(model);
                         }
                     }
-
-                    return RedirectToAction("Manage");
-                    
-                } catch (Exception e){
-                    ModelState.AddModelError(string.Empty, "There is existing license plate with these numbers, insert another number");
-                    model.VehicleTypes = _context.VehicleType.ToList();
-                    return View(model);
                 }
+
                 
+
+                   
             }
             return RedirectToAction("CreateVehicle");
         }
