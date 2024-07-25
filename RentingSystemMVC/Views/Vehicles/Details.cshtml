@@ -21,84 +21,90 @@
 
 <style>
     .input-wrapper div {
-        display:flex;
+        display: flex;
     }
-  
-    .input-wrapper input { 
-        width : 36vw;
-        margin-right:10px;
-    } 
+
+    .input-wrapper input {
+        width: 36vw;
+        margin-right: 10px;
+    }
 
     .rating {
-    float:left;
-    border:none;
+        float: left;
+        border: none;
     }
-    .rating:not(:checked) > input {
-        position:absolute;
-        top:-9999px;
-        clip:rect(0, 0, 0, 0);
-    }
-    .rating:not(:checked) > label {
-        float:right;
-        width:1em;
-        padding:0 .1em;
-        overflow:hidden;
-        white-space:nowrap;
-        cursor:pointer;
-        font-size:200%;
-        line-height:1.2;
-        color:#ddd;
-    }
-    .rating:not(:checked) > label:before {
-        content:'★ ';
-    }
-    .rating > input:checked ~ label {
-        color: #f70;
-    }
-    .rating:not(:checked) > label:hover, .rating:not(:checked) > label:hover ~ label {
-        color: gold;
-    }
-    .rating > input:checked + label:hover, .rating > input:checked + label:hover ~ label, .rating > input:checked ~ label:hover, .rating > input:checked ~ label:hover ~ label, .rating > label:hover ~ input:checked ~ label {
-        color: #ea0;
-    }
-    .rating > label:active {
-        position:relative;
-    }
-  
+
+        .rating:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        .rating:not(:checked) > label {
+            float: right;
+            width: 1em;
+            padding: 0 .1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 200%;
+            line-height: 1.2;
+            color: #ddd;
+        }
+
+            .rating:not(:checked) > label:before {
+                content: '★ ';
+            }
+
+        .rating > input:checked ~ label {
+            color: #f70;
+        }
+
+        .rating:not(:checked) > label:hover, .rating:not(:checked) > label:hover ~ label {
+            color: gold;
+        }
+
+        .rating > input:checked + label:hover, .rating > input:checked + label:hover ~ label, .rating > input:checked ~ label:hover, .rating > input:checked ~ label:hover ~ label, .rating > label:hover ~ input:checked ~ label {
+            color: #ea0;
+        }
+
+        .rating > label:active {
+            position: relative;
+        }
 </style>
 
 <div class="container gy-2 pt-3">
     <div class="card detail-card">
         <div class="d-flex flex-row justify-content-between align-items-center" style="margin: 0 10px 0 30px">
             <h1 class="col-sm-4">@Model.Vehicle.Brand @Model.Vehicle.Model</h1>
-            <img class="col-sm-2" src="@GetImageLogoPath(@Model.Vehicle.Brand)"/>
+            <img class="col-sm-2" src="@GetImageLogoPath(@Model.Vehicle.Brand)" />
         </div>
     </div>
     <div>
         <div class="d-flex flex-row mt-3">
             <div class="col-sm-7">
                 <div class="card mt-3 ">
-                    <img src="@GetImagePath(@Model.Vehicle.Model)" alt="brand"/>
+                    <img src="@GetImagePath(@Model.Vehicle.Model)" alt="brand" />
                 </div>
                 <div class="card mt-3 p-4">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <p class="overview-text">Overview</p>
-                        
-                          @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
                             {
-                                <div> 
-                                    <a class="btn btn-dark" onclick="openRentModal(@Model.Vehicle.VehicleID,@Model.Vehicle.RentalCostPerDay)">Rent</a>
-                                </div>
+                        <div>
+                            <a class="btn btn-dark" onclick="openRentModal(@Model.Vehicle.VehicleID,@Model.Vehicle.RentalCostPerDay)">Rent</a>
+                        </div>
                             }
                             else if (User.IsInRole("Admin"))
                             {
-                                <div>
-                                    <a class="btn btn-danger" onclick="openDeleteModal(@Model.Vehicle.VehicleID)">Delete</a>
-                                </div>
+                        <div>
+                            <a class="btn btn-danger" onclick="openDeleteModal(@Model.Vehicle.VehicleID)">Delete</a>
+                        </div>
                             } else {
-                                <div>
-                                    <button type="button" class="btn btn-dark" disabled>Rent</button>
-                                </div>  
+                        <div>
+                            <button type="button" class="btn btn-dark" disabled>Rent</button>
+                        </div>
                             }
                     </div>
                     <div class="d-flex flex-row detail-col">
@@ -124,11 +130,11 @@
                         <div class="fourth-col">
                             @if (Model.Vehicle.LicenseToOperate == "3A")
                             {
-                                <div class="detail-col-value">3/3A</div>
+                            <div class="detail-col-value">3/3A</div>
                             }
                             else
                             {
-                                <div class="detail-col-value">@Model.Vehicle.LicenseToOperate</div>
+                            <div class="detail-col-value">@Model.Vehicle.LicenseToOperate</div>
                             }
                             <div class="detail-col-value">@Model.Vehicle.Seats</div>
                             <div class="detail-col-value">@Model.Vehicle.FuelType</div>
@@ -138,32 +144,32 @@
                 </div>
             </div>
 
-             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")){
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")){
 
-                <div class="card col-sm-5 mt-3 m-0 p-4">
+            <div class="card col-sm-5 mt-3 m-0 p-4">
                 <div class="row">
                     <div class="d-flex justify-content-between">
                         <h3> Maintenance Details </h3>
                         @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
-                            <div class="btn-group-vertical">
-                                <button class="btn btn-success btn-sm" onclick="openMaintenanceModal('@Model.Vehicle.VehicleID')">New Maintenance</button>
-                                <h4> </h4>
-                                <button class="btn btn-info btn-sm" onclick="openCompletedMaintenanceModal('@Model.Vehicle.VehicleID')">Completed Maintenance</button>
-                            </div>
-                            
+                        <div class="btn-group-vertical">
+                            <button class="btn btn-success btn-sm" onclick="openMaintenanceModal('@Model.Vehicle.VehicleID')">New Maintenance</button>
+                            <h4> </h4>
+                            <button class="btn btn-info btn-sm" onclick="openCompletedMaintenanceModal('@Model.Vehicle.VehicleID')">Completed Maintenance</button>
+                        </div>
+
                     </div>
-                       
+
                     <table class="table" id="maintenanceTable">
                         <thead>
-                        <tr>
-                            <th> Status</th>
-                            <th> Start Date</th>
-                            <th> End Date</th>
-                            <th> Actions</th>
-                        </tr>
+                            <tr>
+                                <th> Status</th>
+                                <th> Start Date</th>
+                                <th> End Date</th>
+                                <th> Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @if (Model.Maintenances.Count == 0)
+                            @if (Model.Maintenances.Count == 0)
                         {
                             <tr>
                                 <td colspan="3"> No maintenance records found </td>
@@ -173,14 +179,14 @@
                         {
                             @foreach (var maintenance in Model.Maintenances)
                             {
-                                <tr>    
-                                    <td> @maintenance.WorkshopStatus </td>
-                                    <td> @maintenance.startMaintDate.Date.ToString("dd/MM/yyyy") </td>
-                                    <td> @maintenance.endMaintDate.Date.ToString("dd/MM/yyyy") </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-secondary" onclick="openEditMaintenanceModal(@maintenance.MaintenanceID, @maintenance.VehicleID, '@maintenance.startMaintDate.ToString("yyyy-MM-dd")', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')">Edit</button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td> @maintenance.WorkshopStatus </td>
+                                <td> @maintenance.startMaintDate.Date.ToString("dd/MM/yyyy") </td>
+                                <td> @maintenance.endMaintDate.Date.ToString("dd/MM/yyyy") </td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary" onclick="openEditMaintenanceModal(@maintenance.MaintenanceID, @maintenance.VehicleID, '@maintenance.startMaintDate.ToString("yyyy-MM-dd")', '@maintenance.endMaintDate.ToString("yyyy-MM-dd")', '@maintenance.WorkshopStatus')">Edit</button>
+                                </td>
+                            </tr>
                             }
                         }
                         </tbody>
@@ -191,28 +197,28 @@
 
              } else {
 
-                <div class="card col-sm-5 mt-3 m-0 p-4">
+            <div class="card col-sm-5 mt-3 m-0 p-4">
                 <div class="row">
                     <div class="d-flex justify-content-between">
                         <h3> Reviews </h3>
                         @if (User.Identity.IsAuthenticated){
-                            <button class="btn btn-primary" onclick="openReviewModal(@Model.Vehicle.VehicleID)">Add new review </button>
+                        <button class="btn btn-primary" onclick="openReviewModal(@Model.Vehicle.VehicleID)">Add new review </button>
                         } else {
-                            <button class="btn btn-primary" disabled>Add new review </button>
+                        <button class="btn btn-primary" disabled>Add new review </button>
                         }
                         @* TODO: This button will open up a modal with the vehicle id to create a new maintenance record for this vehicle *@
                     </div>
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th> Name</th>
-                            <th> Comment</th>
-                            <th> Rating</th>
-                            <th> Actions</th>
-                        </tr>
+                            <tr>
+                                <th> Name</th>
+                                <th> Comment</th>
+                                <th> Rating</th>
+                                <th> Actions</th>
+                            </tr>
                         </thead>
-                    <tbody>
-                        @if (Model.vehicleReview == null)
+                        <tbody>
+                            @if (Model.vehicleReview == null)
                         {
                             <tr>
                                 <td colspan="3"> No Review records found </td>
@@ -222,18 +228,18 @@
                         {
                             @foreach (var review in Model.vehicleReview.reviews)
                             {
-                                <tr>
-                                    <td> @review.name </td>
-                                    <td> @review.comment </td>
-                                    <td> @review.rating </td>
-                                    
-                                    @if (@review.name == @givenName){
-                                        <td>
-                                            <button class="btn btn-danger btn-sm" onclick="openDeleteReviewModal(@Model.vehicleReview.vehicleID)">Delete</button>
-                                        </td>
-                                    } 
-                                    
-                                </tr>
+                            <tr>
+                                <td> @review.name </td>
+                                <td> @review.comment </td>
+                                <td> @review.rating </td>
+
+                                @if (@review.name == @givenName){
+                                <td>
+                                    <button class="btn btn-danger btn-sm" onclick="openDeleteReviewModal(@Model.vehicleReview.vehicleID)">Delete</button>
+                                </td>
+                                    }
+
+                            </tr>
                             }
                         }
                         </tbody>
@@ -242,8 +248,8 @@
             </div>
 
              }
-            
-            
+
+
         </div>
     </div>
 
@@ -257,37 +263,37 @@
                 </div>
                 <div class="modal-body">
                     <form id="rentForm">
-                        <input type="hidden" id="rentalvehicleID" name="vehicleID"/>
-                        <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay"/>
+                        <input type="hidden" id="rentalvehicleID" name="vehicleID" />
+                        <input type="hidden" id="rentalCostPerDay" name="rentalCostPerDay" />
                         <div class="form-group">
                             <label for="startRentalDate">Start Date</label>
-                            <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                            <input type="date" class="form-control" id="startRentalDate" name="startRentalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
                         </div>
                         <div class="form-group mt-1">
                             <label for="endRentalDate">End Date</label>
-                            <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required/>
+                            <input type="date" class="form-control" id="endRentalDate" name="endRentalDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
                         </div>
                         <div class="form-group mt-1">
                             <label for="rentalAddress">Rental Address</label>
-                            <input type="text" class="form-control" id="rentalAddress" name="rentalAddress" required/>
+                            <input type="text" class="form-control" id="rentalAddress" name="rentalAddress" required />
                         </div>
                         <div class="form-group mt-1">
                             <label for="rentalLot">Rental Lot</label>
-                            <input type="number" class="form-control" id="rentalLot" name="rentalLot" required/>
+                            <input type="number" class="form-control" id="rentalLot" name="rentalLot" required />
                         </div>
 
                         <div class="form-group mt-1 input-wrapper">
                             <label for="rentalDiscount">Rental Discount</label>
-                            <div> 
-                                <input type="text" class="form-control" id="rentalDiscount" name="rentalDiscount" placeholder="Put Discount Code"/>
+                            <div>
+                                <input type="text" class="form-control" id="rentalDiscount" name="rentalDiscount" placeholder="Put Discount Code" />
                                 <button type="button" class="btn btn-dark" id="applyButton">Apply</button>
                             </div>
-                            <span style="font-size:10px"id="discountHolder"></span>
+                            <span style="font-size:10px" id="discountHolder"></span>
                         </div>
-                        
+
                         <div class="form-group mt-1">
                             <label for="rentalAmount">Rental Amount</label>
-                            <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly/>
+                            <input type="text" class="form-control" id="rentalAmount" name="rentalAmount" readonly />
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-2">Rent</button>
@@ -297,7 +303,7 @@
         </div>
     </div>
 
-    
+
     <!-- Add Review Record -->
     <div class="modal fade" id="addReviewlModal" tabindex="-1" role="dialog" aria-labelledby="maintenanceModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -308,10 +314,10 @@
                 </div>
                 <div class="modal-body">
                     <form id="reviewForm">
-                        <input type="hidden" id="reviewVehicleID" name="reviewVehicleID"/>
+                        <input type="hidden" id="reviewVehicleID" name="reviewVehicleID" />
                         <div class="form-group mt-1">
                             <label for="Comments">Comment</label>
-                            <input type="Text" class="form-control" id="comments" name="comments" required/>
+                            <input type="Text" class="form-control" id="comments" name="comments" required />
                         </div>
                         <div class="form-group mt-1">
                             <label for="Star">Rating</label>
@@ -348,7 +354,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to delete this Review?</p>
-                    <input type="hidden" id="deleteReviewID" name="deleteReviewID"/>
+                    <input type="hidden" id="deleteReviewID" name="deleteReviewID" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -369,21 +375,18 @@
                 </div>
                 <div class="modal-body">
                     <form id="maintenanceForm">
-                        <input type="hidden" id="vehicleID" name="vehicleID"/>
+                        <input type="hidden" id="vehicleID" name="vehicleID" />
                         <div class="form-group">
                             <label for="startMaintenanceDate">Start Date</label>
-                            <input type="date" class="form-control" id="startMaintenanceDate" name="startDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                            <input type="date" class="form-control" id="startMaintenanceDate" name="startDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required />
                         </div>
                         <div class="form-group mt-1">
                             <label for="endMaintenanceDate">End Date</label>
-                            <input type="date" class="form-control" id="endMaintenanceDate" name="endDate" required/>
+                            <input type="date" class="form-control" id="endMaintenanceDate" name="endDate" required />
                         </div>
                         <div class="form-group mt-1">
-                            <label for="workshopStatus">Description</label>
-                            <select class="form-select" aria-label="Default select example" id="workshopStatus" name="workshopStatus" required>
-                                <option selected value="In Maintenance">In Maintenance</option>
-                                <option value="Completed">Completed</option>
-                            </select>
+                            <input type="text" class="form-control" id="workshopStatus" name="workshopStatus" value="In Maintenance" hidden>
+                            </input>
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-2">Add</button>
@@ -403,16 +406,16 @@
                 </div>
                 <div class="modal-body">
                     <form id="editMaintenanceForm">
-                        <input type="hidden" id="editMaintenanceID" name="maintenanceID"/>
-                        <input type="hidden" id="editVehicleMaintenanceID" name="vehicleID"/>
+                        <input type="hidden" id="editMaintenanceID" name="maintenanceID" />
+                        <input type="hidden" id="editVehicleMaintenanceID" name="vehicleID" />
 
                         <div class="form-group">
                             <label for="editStartMaintenanceDate">Start Date</label>
-                            <input type="date" class="form-control" id="editStartMaintenanceDate" name="startMaintDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+                            <input type="date" class="form-control" id="editStartMaintenanceDate" name="startMaintDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" required />
                         </div>
                         <div class="form-group mt-1">
                             <label for="editEndMaintenanceDate">End Date</label>
-                            <input type="date" class="form-control" id="editEndMaintenanceDate" name="endMaintDate" required/>
+                            <input type="date" class="form-control" id="editEndMaintenanceDate" name="endMaintDate" required />
                         </div>
                         <div class="form-group mt-1">
                             <label for="editWorkshopStatus">Description</label>
@@ -438,7 +441,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to delete this vehicle (@Model.Vehicle.Brand @Model.Vehicle.Model @Model.Vehicle.LicensePlate)?</p>
-                    <input type="hidden" id="deleteVehicleID" name="vehicleID"/>
+                    <input type="hidden" id="deleteVehicleID" name="vehicleID" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -471,7 +474,7 @@
                             </tbody>
                         </table>
                         <div class="col text-center"><button type="button" class="btn btn-primary mt-2 text" data-bs-dismiss="modal">Close</button></div>
-                        
+
                     </form>
                 </div>
             </div>
@@ -481,13 +484,13 @@
 
     @section Scripts
     {
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-    <script>
+        <script>
         let startMaintenanceDate;
         let endMaintenanceDate;
         let workshopStatus;
@@ -658,8 +661,8 @@
             $('#editMaintenanceForm').on('submit', function (event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
-                
-                $.ajax({    
+
+                $.ajax({
                     url: '@Url.Action("EditMaintenance", "Vehicles")',
                     type: 'POST',
                     data: formData,
@@ -722,21 +725,21 @@
                             }
 
                         }
-                        
+
                     },
                     error: function(error) {
                         $('#discountHolder').text("There is no valid discount with this promotion code.");
-                    
+
                         var startDate = new Date($('#startRentalDate').val());
                         var endDate = new Date($('#endRentalDate').val());
                         var rentalCostPerDay = parseFloat($('#rentalCostPerDay').val());
 
-                        if (startDate && endDate && startDate <= endDate && !isNaN(rentalCostPerDay)){ 
+                        if (startDate && endDate && startDate <= endDate && !isNaN(rentalCostPerDay)){
                             var timeDiff = endDate.getTime() - startDate.getTime();
                             var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
                             $('#rentalAmount').val((daysDiff * rentalCostPerDay ).toFixed(2));
                         }
-                     
+
                     }
                 });
 
@@ -764,7 +767,7 @@
                         location.reload();
                     }, error: function(error){
                         alert("There exists a comment with your review");
-                        
+
                     }
 
                 });
@@ -833,14 +836,14 @@
                 });
             });
 
-        
+
 
 
             $('#startRentalDate, #endRentalDate').on('change', function () {
                 var startDate = new Date($('#startRentalDate').val());
                 var endDate = new Date($('#endRentalDate').val());
                 var rentalCostPerDay = parseFloat($('#rentalCostPerDay').val());
-            
+
                 if (startDate && endDate && startDate <= endDate && !isNaN(rentalCostPerDay)) {
                    var timeDiff = endDate.getTime() - startDate.getTime();
                     var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -848,18 +851,18 @@
                     var discountRate;
                     if ($('#discountHolder').text() === "" ||  $('#discountHolder').text() === "There is no valid discount with this promotion code.")
                     {
-                     discountRate = undefined;   
+                     discountRate = undefined;
                     }else{
 
                         discountRate = $('#discountHolder').text().split(" ")[3].replace("%", "") ;
                     }
-                    
+
                     if (discountRate === undefined){
                         rentalCost = daysDiff * rentalCostPerDay;
                     } else {
                         rentalCost = daysDiff * rentalCostPerDay * (100 - discountRate) / 100; // If discountRate is defined
                     }
-                    
+
                    $('#rentalAmount').val(rentalCost.toFixed(2));
                 } else {
                     $('#rentalAmount').val('');
@@ -870,7 +873,7 @@
         $(document).ready(function () {
             $('#maintenanceTable').DataTable({
                 "paging": true, // Enable pagination
-                "searching": false, 
+                "searching": false,
                 "ordering": true, // Enable sorting
                 "info": true, // Show table info
                 "lengthChange": true,
@@ -878,8 +881,8 @@
                 "lengthChange": false
             });
         });
- 
-    </script>
+
+        </script>
     }
 
 </div>
