@@ -21,6 +21,9 @@
             <h5 class="card-title">Promotion Code: @promotion.promotionCode</h5>
             <h5 class="card-title">Expiry Date: @promotion.ExpiryDate.ToString("dd/MM/yyyy") </h5>
             <h5 class="card-title">Discount Rate: @promotion.discountRate%</h5>
+            <form class="delete-promotion-form" data-promotion-code="@promotion.promotionCode">
+                <button type="button" class="btn btn-danger" onclick="deletePromotion(this)">Delete</button>
+            </form>
         </div>
         </div>
 
@@ -93,6 +96,25 @@
                 });
             });
         });
+
+            function deletePromotion(button) {
+                var form = button.closest('.delete-promotion-form');
+                var promotionCode = form.getAttribute('data-promotion-code');
+
+                if (confirm('Are you sure you want to delete this promotion?')) {
+                    $.ajax({
+                        url: '@Url.Action("deletePromotions", "Promotion")',
+                        type: 'POST',
+                        data: { promotionCode: promotionCode },
+                        success: function (response) {
+                            location.reload();
+                        },
+                        error: function (xhr) {
+                            alert('Error deleting promotion: ' + xhr.responseText);
+                        }
+                    });
+                }
+            }
     
     </script>
     

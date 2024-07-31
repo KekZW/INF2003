@@ -6,6 +6,7 @@ using RentingSystemMVC.Data;
 using RentingSystemMVC.Models;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using MongoDB.Bson;
 
 
 namespace RentingSystemMVC.Controllers
@@ -90,6 +91,40 @@ namespace RentingSystemMVC.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult deletePromotions(string promotionCode)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(promotionCode))
+                {
+                    return BadRequest(new { Message = "Promotion code is required." });
+                }
+                {
+                    var filter = Builders<Promotion>.Filter.Eq(p => p.promotionCode, promotionCode);
+                    var result = _mongoContext.Promotion.Find(filter).FirstOrDefault();
+
+                    if (result == null)
+                    {
+                        return NotFound(new { Message = "Promotion code not found." });
+                    }
+
+                    _mongoContext.Promotion.DeleteOne(filter);
+                    return Json(new { Message = "Promotion deleted successfully." });
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                _logger.LogError(ex, "Error occurred while adding promotion");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+       
+
     }
-    
+
 }

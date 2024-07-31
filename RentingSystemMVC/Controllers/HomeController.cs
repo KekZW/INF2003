@@ -29,9 +29,17 @@ namespace RentingSystemMVC.Controllers
             _mongoContext = mongoContext;
         }
 
+        public void DeleteExpiredPromotionCodes()
+        {
+            var filter = Builders<Promotion>.Filter.Lt(pc => pc.ExpiryDate, DateTime.UtcNow);
+            _mongoContext.Promotion.DeleteMany(filter);
+        }
+
         public IActionResult Index()
         {
-            
+            DeleteExpiredPromotionCodes();
+
+
             List<SimpleVehicleViewModel> vehicles = new List<SimpleVehicleViewModel>();
             List<RentalHistory> rentalHistories = new List<RentalHistory>();
 
@@ -120,6 +128,8 @@ namespace RentingSystemMVC.Controllers
             }
 
             ViewBag.JsonData = JsonConvert.SerializeObject(rentalHistories);
+
+            
             return View(vehicles);
         }
 
