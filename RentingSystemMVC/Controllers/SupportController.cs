@@ -77,6 +77,16 @@ namespace RentingSystemMVC.Controllers
             return View(supports);
         }
 
+        [Authorize(Roles = "User")]
+        public IActionResult Tickets()
+        {
+            int userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            var filter = Builders<Support>.Filter.Eq("userID", userId);
+            var supports = _mongoContext.Support.Find(filter).SortBy(Support => Support.status).ToList();
+            return View(supports);
+        }
+
         [HttpGet]
         public IActionResult Details(string id)
         {

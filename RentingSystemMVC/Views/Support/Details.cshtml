@@ -38,9 +38,12 @@
                 <div>
                     @if (Model.status != "Resolved")
                     {
-                        <a asp-controller="Support" asp-action="Resolve" class="btn btn-outline fw-bold">
-                            Mark as Resolved
-                        </a>
+                        @if (Context.User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Support" asp-action="Resolve" class="btn btn-outline fw-bold">
+                                Mark as Resolved
+                            </a>
+                        }
                     }
                     <button type="submit" class="btn btn-secondary m-2" @(Model.status == "Resolved" ? "disabled" : "")>
                         <i class="bi bi-send"></i>

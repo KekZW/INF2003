@@ -1,0 +1,46 @@
+@model List<RentingSystemMVC.Models.Support>
+
+<head>
+    <title>title</title>
+</head>
+<div class="container">
+    <h1>View Tickets</h1>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Ticket ID</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Email</th>
+            <th scope="col">Created On</th>
+            <th scope="col">Updated On</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <th scope="row">#@ticket._id</th>
+                    <td>@ticket.subject</td>
+                    <td>@ticket.email</td>
+                    <td>@ticket.creationDate</td>
+                    <td>@ticket.updatedDate</td>
+                    <td>@ticket.status</td>
+                    <td>
+                        <a asp-controller="Support" asp-route-id="@ticket._id" asp-action="Details" class="btn btn-primary">View</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">No tickets created, please create a ticket first.</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
