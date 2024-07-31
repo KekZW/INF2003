@@ -31,7 +31,7 @@ namespace RentingSystemMVC.Controllers
                 var currentDate = DateTime.Now;
                 var filter = filterBuilder.Eq("promotionCode", promotionCode);
                 var dateFilter = filterBuilder.Gte("ExpiryDate", currentDate);
-                var combinedFilter = filterBuilder.And(filter,dateFilter);
+                var combinedFilter = filterBuilder.And(filter, dateFilter);
                 var promotion = _mongoContext.Promotion.Find(combinedFilter).FirstOrDefault();
 
                 if (promotion == null) return BadRequest("promotion not found");
@@ -46,85 +46,87 @@ namespace RentingSystemMVC.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="Admin")]
-        public IActionResult Manage(){
+        [Authorize(Roles = "Admin")]
+        public IActionResult Manage() 
+        {
+            var singaporeTime = DateTime.UtcNow.AddHours(8);
 
-            var currentDate = DateTime.Now;
-            var filter = filterBuilder.Gte("ExpiryDate",currentDate);
+            var filter = filterBuilder.Gte("ExpiryDate", singaporeTime);
 
             var promotions = _mongoContext.Promotion.Find(filter).ToList();
             return View(promotions);
         }
 
-        [HttpPost]
-        [Authorize(Roles="Admin")]
-        public IActionResult postPromotions(string promotionCode, DateTime ExpiryDate, int discountRate){
-        try
-        {   
-          if (ModelState.IsValid)
-            {
-                var existingPromoCode = _mongoContext.Promotion.Find(filterBuilder.Eq("promotionCode",promotionCode)).FirstOrDefault();
-            
-                if (existingPromoCode != null) return BadRequest(ModelState);
-                
-                TimeZoneInfo sgTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
-                // Convert UTC to your local time zone (+8 hours)
-                ExpiryDate = TimeZoneInfo.ConvertTimeFromUtc(ExpiryDate, sgTimeZone);
-
-                Promotion promotion = new Promotion {
-                    promotionCode = promotionCode,
-                    ExpiryDate = ExpiryDate.ToUniversalTime(),
-                    discountRate = discountRate,
-                };
-                _mongoContext.Promotion.InsertOne(promotion);
-                return Json(new { Message = "Promotion added successfully." } );
-            }
-            else
-            {
-                return BadRequest(ModelState); // Return validation errors if ModelState is invalid
-            }
-            }
-            catch (Exception ex)
-            {
-                // Log the exception for debugging
-                _logger.LogError(ex, "Error occurred while adding promotion");
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public IActionResult deletePromotions(string promotionCode)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(promotionCode))
+            [HttpPost]
+            [Authorize(Roles = "Admin")]
+            public IActionResult postPromotions(string promotionCode, DateTime ExpiryDate, int discountRate) {
+                try
                 {
-                    return BadRequest(new { Message = "Promotion code is required." });
-                }
-                {
-                    var filter = Builders<Promotion>.Filter.Eq(p => p.promotionCode, promotionCode);
-                    var result = _mongoContext.Promotion.Find(filter).FirstOrDefault();
-
-                    if (result == null)
+                    if (ModelState.IsValid)
                     {
-                        return NotFound(new { Message = "Promotion code not found." });
+                        var existingPromoCode = _mongoContext.Promotion.Find(filterBuilder.Eq("promotionCode", promotionCode)).FirstOrDefault();
+
+                        if (existingPromoCode != null) return BadRequest(ModelState);
+
+                        TimeZoneInfo sgTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+                        // Convert UTC to your local time zone (+8 hours)
+                        ExpiryDate = TimeZoneInfo.ConvertTimeFromUtc(ExpiryDate, sgTimeZone);
+                        ExpiryDate = ExpiryDate.AddDays(1);
+
+                        Promotion promotion = new Promotion {
+                            promotionCode = promotionCode,
+                            ExpiryDate = ExpiryDate.ToUniversalTime(),
+                            discountRate = discountRate,
+                        };
+                        _mongoContext.Promotion.InsertOne(promotion);
+                        return Json(new { Message = "Promotion added successfully." });
+                    }
+                    else
+                    {
+                        return BadRequest(ModelState); // Return validation errors if ModelState is invalid
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception for debugging
+                    _logger.LogError(ex, "Error occurred while adding promotion");
+                    return StatusCode(500, "Internal Server Error");
+                }
+            }
+
+            [HttpPost]
+            [Authorize(Roles = "Admin")]
+            public IActionResult deletePromotions(string promotionCode)
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(promotionCode))
+                    {
+                        return BadRequest(new { Message = "Promotion code is required." });
+                    }
+                    {
+                        var filter = Builders<Promotion>.Filter.Eq(p => p.promotionCode, promotionCode);
+                        var result = _mongoContext.Promotion.Find(filter).FirstOrDefault();
+
+                        if (result == null)
+                        {
+                            return NotFound(new { Message = "Promotion code not found." });
+                        }
+
+                        _mongoContext.Promotion.DeleteOne(filter);
+                        return Json(new { Message = "Promotion deleted successfully." });
                     }
 
-                    _mongoContext.Promotion.DeleteOne(filter);
-                    return Json(new { Message = "Promotion deleted successfully." });
                 }
-                
+                catch (Exception ex)
+                {
+                    // Log the exception for debugging
+                    _logger.LogError(ex, "Error occurred while adding promotion");
+                    return StatusCode(500, "Internal Server Error");
+                }
             }
-            catch (Exception ex)
-            {
-                // Log the exception for debugging
-                _logger.LogError(ex, "Error occurred while adding promotion");
-                return StatusCode(500, "Internal Server Error");
-            }
+
+
         }
-       
 
     }
-
-}

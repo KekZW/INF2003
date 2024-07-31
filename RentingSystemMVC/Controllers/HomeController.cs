@@ -31,14 +31,14 @@ namespace RentingSystemMVC.Controllers
 
         public void DeleteExpiredPromotionCodes()
         {
-            var filter = Builders<Promotion>.Filter.Lt(pc => pc.ExpiryDate, DateTime.UtcNow);
+            var singaporeTime = DateTime.UtcNow.AddHours(8);
+            var filter = Builders<Promotion>.Filter.Lt(pc => pc.ExpiryDate, singaporeTime);
             _mongoContext.Promotion.DeleteMany(filter);
         }
 
         public IActionResult Index()
         {
             DeleteExpiredPromotionCodes();
-
 
             List<SimpleVehicleViewModel> vehicles = new List<SimpleVehicleViewModel>();
             List<RentalHistory> rentalHistories = new List<RentalHistory>();
