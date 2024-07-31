@@ -19,7 +19,7 @@
    <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">Promotion Code: @promotion.promotionCode</h5>
-            <h5 class="card-title">Expiry Date: @promotion.ExpiryDate.AddDays(-1).ToString("dd/MM/yyyy") </h5>
+                    <h5 class="card-title">Expiry Date: @promotion.ExpiryDate.AddMinutes(-1).ToString("dd/MM/yyyy HH:mm") </h5>
             <h5 class="card-title">Discount Rate: @promotion.discountRate%</h5>
             <form class="delete-promotion-form" data-promotion-code="@promotion.promotionCode">
                 <button type="button" class="btn btn-danger" onclick="deletePromotion(this)">Delete</button>
