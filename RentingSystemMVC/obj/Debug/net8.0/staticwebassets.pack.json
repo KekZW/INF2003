@@ -1,0 +1,1885 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RentingSystemMVC.bundle.scp.css",
+      "PackagePath": "staticwebassets\\RentingSystemMVC.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Amaze.png",
+      "PackagePath": "staticwebassets\\images\\Amaze.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Carens.png",
+      "PackagePath": "staticwebassets\\images\\Carens.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Carnival.png",
+      "PackagePath": "staticwebassets\\images\\Carnival.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\City 5th Gen.png",
+      "PackagePath": "staticwebassets\\images\\City 5th Gen.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\GT-R.png",
+      "PackagePath": "staticwebassets\\images\\GT-R.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Honda.png",
+      "PackagePath": "staticwebassets\\images\\Honda.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Hyundai.png",
+      "PackagePath": "staticwebassets\\images\\Hyundai.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Kia.png",
+      "PackagePath": "staticwebassets\\images\\Kia.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Kiger.jpeg",
+      "PackagePath": "staticwebassets\\images\\Kiger.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Kiger.png",
+      "PackagePath": "staticwebassets\\images\\Kiger.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Nissan.png",
+      "PackagePath": "staticwebassets\\images\\Nissan.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Renault.png",
+      "PackagePath": "staticwebassets\\images\\Renault.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Safari.png",
+      "PackagePath": "staticwebassets\\images\\Safari.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Seltos.png",
+      "PackagePath": "staticwebassets\\images\\Seltos.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Tata.png",
+      "PackagePath": "staticwebassets\\images\\Tata.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Toyota.png",
+      "PackagePath": "staticwebassets\\images\\Toyota.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Urban Cruiser.png",
+      "PackagePath": "staticwebassets\\images\\Urban Cruiser.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Venue N-Line.png",
+      "PackagePath": "staticwebassets\\images\\Venue N-Line.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Venue.png",
+      "PackagePath": "staticwebassets\\images\\Venue.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\Volkswagen.png",
+      "PackagePath": "staticwebassets\\images\\Volkswagen.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\indexcar.jpg",
+      "PackagePath": "staticwebassets\\images\\indexcar.jpg"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\9ff.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\9ff.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\abadal.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\abadal.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\abarth.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\abarth.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\abbott-detroit.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\abbott-detroit.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\abt.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\abt.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ac.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ac.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\acura.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\acura.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\aiways.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\aiways.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\aixam.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\aixam.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\alfa-romeo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\alfa-romeo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\alpina.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\alpina.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\alpine.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\alpine.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\alta.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\alta.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\alvis.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\alvis.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\amc.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\amc.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\apollo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\apollo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\arash.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\arash.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\arcfox.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\arcfox.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ariel.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ariel.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\aro.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\aro.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\arrinera.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\arrinera.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\arrival.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\arrival.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\artega.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\artega.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ascari.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ascari.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\askam.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\askam.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\aspark.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\aspark.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\aston-martin.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\aston-martin.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\atalanta.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\atalanta.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\auburn.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\auburn.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\audi-sport.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\audi-sport.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\audi.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\audi.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\austin.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\austin.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\autobacs.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\autobacs.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\autobianchi.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\autobianchi.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\axon.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\axon.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bac.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bac.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\baic-motor.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\baic-motor.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\baojun.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\baojun.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\beiben.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\beiben.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bentley.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bentley.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\berkeley.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\berkeley.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\berliet.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\berliet.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bertone.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bertone.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bestune.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bestune.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bharatbenz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bharatbenz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bitter.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bitter.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bizzarrini.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bizzarrini.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bmw-m.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bmw-m.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bmw.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bmw.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\borgward.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\borgward.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bowler.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bowler.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\brabus.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\brabus.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\brammo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\brammo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\brilliance.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\brilliance.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bristol.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bristol.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\brooke.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\brooke.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bufori.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bufori.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\bugatti.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\bugatti.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\buick.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\buick.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\byd.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\byd.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\byton.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\byton.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\cadillac.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\cadillac.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\camc.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\camc.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\canoo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\canoo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\caparo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\caparo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\carlsson.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\carlsson.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\caterham.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\caterham.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\changan.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\changan.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\changfeng.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\changfeng.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\chery.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\chery.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\chevrolet-corvette.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\chevrolet-corvette.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\chevrolet.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\chevrolet.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\chrysler.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\chrysler.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\cisitalia.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\cisitalia.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\citroen.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\citroen.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\cizeta.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\cizeta.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\cole.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\cole.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\corre-la-licorne.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\corre-la-licorne.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dacia.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dacia.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\daewoo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\daewoo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\daf.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\daf.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\daihatsu.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\daihatsu.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\daimler.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\daimler.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dartz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dartz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\datsun.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\datsun.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\david-brown.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\david-brown.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dayun.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dayun.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\de-tomaso.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\de-tomaso.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\delage.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\delage.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\desoto.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\desoto.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\detroit-electric.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\detroit-electric.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\devel-sixteen.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\devel-sixteen.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\diatto.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\diatto.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dina.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dina.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dkw.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dkw.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dmc.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dmc.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dodge-viper.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dodge-viper.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dodge.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dodge.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\dongfeng.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\dongfeng.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\donkervoort.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\donkervoort.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\drako.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\drako.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ds.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ds.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\duesenberg.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\duesenberg.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\eagle.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\eagle.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\edag.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\edag.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\edsel.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\edsel.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\eicher.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\eicher.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\elemental.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\elemental.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\elfin.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\elfin.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\elva.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\elva.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\englon.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\englon.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\erf.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\erf.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\eterniti.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\eterniti.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\exeed.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\exeed.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\facel-vega.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\facel-vega.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\faraday-future.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\faraday-future.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\faw-jiefang.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\faw-jiefang.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\faw.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\faw.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ferrari.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ferrari.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\fiat.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\fiat.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\fioravanti.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\fioravanti.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\fisker.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\fisker.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\foden.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\foden.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\force-motors.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\force-motors.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ford-mustang.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ford-mustang.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ford.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ford.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\foton.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\foton.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\fpv.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\fpv.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\franklin.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\franklin.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\freightliner.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\freightliner.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\fso.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\fso.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\gac-group.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\gac-group.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\gardner-douglas.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\gardner-douglas.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\gaz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\gaz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\geely.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\geely.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\general-motors.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\general-motors.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\genesis.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\genesis.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\geo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\geo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\geometry.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\geometry.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\gilbern.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\gilbern.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\gillet.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\gillet.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ginetta.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ginetta.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\gmc.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\gmc.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\golden-dragon.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\golden-dragon.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\gonow.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\gonow.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\great-wall.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\great-wall.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\grinnall.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\grinnall.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\gumpert.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\gumpert.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hafei.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hafei.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\haima.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\haima.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\haval.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\haval.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hawtai.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hawtai.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hennessey.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hennessey.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\higer.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\higer.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hillman.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hillman.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hindustan-motors.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hindustan-motors.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hino.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hino.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hiphi.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hiphi.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hispano-suiza.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hispano-suiza.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\holden.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\holden.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hommell.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hommell.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\honda.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\honda.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hongqi.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hongqi.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hongyan.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hongyan.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\horch.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\horch.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hsv.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hsv.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hudson.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hudson.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hummer.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hummer.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hupmobile.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hupmobile.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\hyundai.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\hyundai.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ic-bus.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ic-bus.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ih.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ih.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ikco.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ikco.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\infiniti.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\infiniti.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\innocenti.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\innocenti.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\intermeccanica.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\intermeccanica.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\international.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\international.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\irizar.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\irizar.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\isdera.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\isdera.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\iso.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\iso.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\isuzu.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\isuzu.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\iveco.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\iveco.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\jac.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\jac.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\jaguar.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\jaguar.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\jawa.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\jawa.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\jba-motors.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\jba-motors.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\jeep.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\jeep.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\jensen.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\jensen.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\jetta.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\jetta.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\jmc.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\jmc.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\kaiser.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\kaiser.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\kamaz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\kamaz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\karlmann-king.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\karlmann-king.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\karma.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\karma.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\keating.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\keating.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\kenworth.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\kenworth.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\kia.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\kia.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\king-long.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\king-long.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\koenigsegg.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\koenigsegg.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ktm.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ktm.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lada.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lada.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lagonda.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lagonda.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lamborghini.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lamborghini.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lancia.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lancia.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\land-rover.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\land-rover.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\landwind.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\landwind.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\laraki.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\laraki.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\leapmotor.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\leapmotor.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\levc.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\levc.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lexus.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lexus.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\leyland.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\leyland.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\li-auto.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\li-auto.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lifan.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lifan.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ligier.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ligier.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lincoln.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lincoln.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lister.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lister.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lloyd.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lloyd.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lobini.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lobini.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lordstown.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lordstown.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lotus.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lotus.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lucid.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lucid.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\luxgen.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\luxgen.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\lynk-and-co.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\lynk-and-co.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mack.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mack.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mahindra.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mahindra.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\man.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\man.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mansory.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mansory.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\marcos.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\marcos.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\marlin.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\marlin.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\maserati.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\maserati.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mastretta.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mastretta.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\maxus.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\maxus.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\maybach.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\maybach.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\maz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\maz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mazda.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mazda.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mazzanti.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mazzanti.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mclaren.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mclaren.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\melkus.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\melkus.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mercedes-amg.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mercedes-amg.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mercedes-benz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mercedes-benz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mercury.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mercury.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\merkur.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\merkur.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mev.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mev.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mg.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mg.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\microcar.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\microcar.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mini.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mini.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mitsubishi.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mitsubishi.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mitsuoka.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mitsuoka.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mk.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mk.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\morgan.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\morgan.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\morris.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\morris.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\mosler.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\mosler.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\navistar.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\navistar.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\nevs.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\nevs.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\nikola.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\nikola.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\nio.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\nio.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\nissan-gt-r.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\nissan-gt-r.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\nissan-nismo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\nissan-nismo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\nissan.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\nissan.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\noble.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\noble.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\oldsmobile.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\oldsmobile.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\oltcit.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\oltcit.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\opel.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\opel.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\osca.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\osca.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\paccar.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\paccar.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\packard.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\packard.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\pagani.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\pagani.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\panhard.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\panhard.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\panoz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\panoz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\pegaso.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\pegaso.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\perodua.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\perodua.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\peterbilt.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\peterbilt.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\peugeot.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\peugeot.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\pgo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\pgo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\pierce-arrow.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\pierce-arrow.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\pininfarina.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\pininfarina.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\plymouth.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\plymouth.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\polestar.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\polestar.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\pontiac.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\pontiac.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\porsche.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\porsche.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\praga.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\praga.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\premier.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\premier.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\prodrive.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\prodrive.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\proton.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\proton.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\qoros.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\qoros.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\radical.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\radical.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ram.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ram.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\rambler.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\rambler.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ranz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ranz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\renault-samsung.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\renault-samsung.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\renault.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\renault.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\rezvani.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\rezvani.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\riley.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\riley.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\rimac.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\rimac.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\rinspeed.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\rinspeed.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\rivian.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\rivian.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\roewe.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\roewe.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\rolls-royce.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\rolls-royce.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ronart.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ronart.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\rossion.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\rossion.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\rover.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\rover.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ruf.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ruf.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\saab.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\saab.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\saic-motor.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\saic-motor.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\saipa.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\saipa.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\saleen.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\saleen.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\saturn.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\saturn.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\scania.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\scania.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\scion.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\scion.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\seat.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\seat.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\setra.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\setra.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\shacman.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\shacman.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\simca.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\simca.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\singer.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\singer.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\singulato.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\singulato.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\sinotruk.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\sinotruk.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\sisu.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\sisu.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\skoda.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\skoda.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\smart.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\smart.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\soueast.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\soueast.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\spania-gta.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\spania-gta.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\spirra.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\spirra.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\spyker.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\spyker.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ssangyong.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ssangyong.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ssc.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ssc.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\sterling.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\sterling.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\studebaker.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\studebaker.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\stutz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\stutz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\subaru.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\subaru.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\suffolk.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\suffolk.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\suzuki.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\suzuki.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\talbot.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\talbot.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\tata.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\tata.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\tatra.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\tatra.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\tauro.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\tauro.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\techart.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\techart.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\tesla.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\tesla.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\toyota-alphard.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\toyota-alphard.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\toyota-century.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\toyota-century.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\toyota-crown.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\toyota-crown.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\toyota.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\toyota.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\tramontana.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\tramontana.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\trion.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\trion.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\triumph.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\triumph.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\troller.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\troller.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\tucker.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\tucker.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\tvr.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\tvr.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\uaz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\uaz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ud.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ud.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\ultima.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\ultima.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\vandenbrink.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\vandenbrink.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\vauxhall.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\vauxhall.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\vector.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\vector.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\vencer.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\vencer.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\venturi.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\venturi.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\venucia.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\venucia.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\vinfast.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\vinfast.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\vlf.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\vlf.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\volkswagen.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\volkswagen.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\volvo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\volvo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\w-motors.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\w-motors.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\wanderer.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\wanderer.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\wartburg.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\wartburg.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\weltmeister.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\weltmeister.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\western-star.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\western-star.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\westfield.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\westfield.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\wey.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\wey.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\wiesmann.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\wiesmann.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\willys-overland.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\willys-overland.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\workhorse.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\workhorse.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\wuling.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\wuling.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\xpeng.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\xpeng.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\yulon.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\yulon.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\yutong.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\yutong.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zarooq-motors.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zarooq-motors.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zastava.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zastava.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zaz.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zaz.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zeekr.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zeekr.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zenos.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zenos.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zenvo.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zenvo.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zhongtong.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zhongtong.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zinoro.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zinoro.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\optimized\\zotye.png",
+      "PackagePath": "staticwebassets\\images\\optimized\\zotye.png"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\images\\wheel.svg",
+      "PackagePath": "staticwebassets\\images\\wheel.svg"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\santa\\OneDrive\\Desktop\\SIT Stuffs\\INF2003\\Project\\INF2003\\RentingSystemMVC\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.RentingSystemMVC.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.RentingSystemMVC.props",
+      "PackagePath": "build\\RentingSystemMVC.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.RentingSystemMVC.props",
+      "PackagePath": "buildMultiTargeting\\RentingSystemMVC.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.RentingSystemMVC.props",
+      "PackagePath": "buildTransitive\\RentingSystemMVC.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
